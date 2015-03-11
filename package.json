@@ -30,7 +30,8 @@
   "homepage": "https://github.com/stefanwalther/qrs",
   "devDependencies": {
     "extend-shallow": "^1.1.2",
-    "mocha": "*",
+    "leche": "^2.1.1",
+    "mocha": "^2.2.1",
     "should": "*",
     "verb-readme-includes": "^0.2.4"
   },
@@ -41,7 +42,19 @@
     "node": ">=0.10.0"
   },
   "dependencies": {
+    "agentkeepalive": "^1.2.0",
+    "async": "^0.9.0",
     "chai": "^2.1.1",
-    "config-cache": "^1.2.0"
+    "config-cache": "^1.2.0",
+    "fs-utils": "^0.6.0",
+    "httpntlm": "^1.5.2",
+    "httpreq": "^0.4.6",
+    "lodash": "^3.5.0",
+    "ntlm": "^0.1.1",
+    "ntlm-auth": "git://github.com/ericleong/node-ntlm-auth.git#master",
+    "q": "^1.2.0",
+    "request": "^2.53.0",
+    "string": "^3.0.0",
+    "winston": "^0.9.0"
   }
 }
