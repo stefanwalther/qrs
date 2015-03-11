@@ -7,19 +7,32 @@
 
 'use strict';
 
-var assert = require('assert');
-var should = require('should');
-var qrs = require('./');
+var chai = require( 'chai' ),
+  assert = chai.assert,
+  should = chai.should(),
+  QRS = new require( './../lib/qrs' );
 
-describe('qrs', function () {
-  it('should:', function () {
-    qrs('a').should.equal({a: 'b'});
-    qrs('a').should.eql('a');
-  });
+var qrs = new QRS();
 
-  it('should throw an error:', function () {
-    (function () {
-      qrs();
-    }).should.throw('qrs expects valid arguments');
-  });
-});
+describe( 'qrs', function () {
+  it( 'should be properly set up', function ( done ) {
+    assert( typeof(qrs) === 'object' );
+    assert( typeof(qrs.set) === 'function' );
+    done();
+  } );
+
+  it( 'should receive startup params', function ( done ) {
+
+    var qrs2 = new QRS( {host: 'testhost'} );
+    qrs2.config.should.have.property( 'host', 'testhost' );
+    done();
+  } );
+
+  it( 'should allow to change params', function ( done ) {
+    var qrs2 = new QRS( {host: 'testhost'} );
+    qrs2.set( 'host', 'testhost2' );
+    qrs2.config.should.have.property( 'host', 'testhost2' );
+    done();
+  } );
+
+} );

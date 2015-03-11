@@ -1,0 +1,3 @@
+server:
+  host:
+  useSSL: false
