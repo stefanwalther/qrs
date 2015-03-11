@@ -1,4 +1,4 @@
-verb# qrs [![NPM version](https://badge.fury.io/js/qrs.svg)](http://badge.fury.io/js/qrs)
+# qrs [![NPM version](https://badge.fury.io/js/qrs.svg)](http://badge.fury.io/js/qrs)
 
 > Node.js library to talk to the Qlik Sense Repository Service API (qrs).
 
