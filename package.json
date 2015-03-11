@@ -1,0 +1,43 @@
+{
+  "name": "qrs",
+  "version": "0.0.1",
+  "description": "Node.js library to talk to the Qlik Sense Repository Service API (qrs).",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stefanwalther/qrs.git"
+  },
+  "keywords": [
+    "Qlik",
+    "Qlik",
+    "Sense",
+    "QRS",
+    "Qlik",
+    "Sense",
+    "Repository",
+    "Service",
+    "API",
+    "REST"
+  ],
+  "author": "Stefan Walther",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stefanwalther/qrs/issues"
+  },
+  "homepage": "https://github.com/stefanwalther/qrs",
+  "devDependencies": {
+    "mocha": "*",
+    "should": "*",
+    "verb-readme-includes": "^0.2.4"
+  },
+  "files": [
+    "index.js"
+  ],
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "dependencies": {}
+}
