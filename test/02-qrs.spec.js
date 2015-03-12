@@ -16,7 +16,8 @@ var chai = require( 'chai' ),
   extend = require( 'extend-shallow' ),
   fsUtils = require( 'fs-utils' ),
   path = require( 'path' ),
-  logger = require( './../lib/logger.js' );
+  logger = require( './../lib/logger.js' ),
+  setup = require( './testSetup' );
 ;
 
 var testConfig = fsUtils.readYAMLSync( path.join( __dirname, './test-config.yml' ) );
@@ -31,17 +32,7 @@ var qrs;
 
 describe( 'qrs', function () {
 
-  withData( {
-
-    'Header authentication': [{
-      authentication: 'header',
-      headerKey: testConfig.authentication.header.headerKey,
-      headerValue: testConfig.authentication.header.headerValue,
-      virtualProxy: testConfig.authentication.header.virtualProxy
-    }]
-    //,'NTLM authentication': [{authentication: 'ntlm'}]
-
-  }, function ( sessionInfo ) {
+  withData( setup.testLoop, function ( sessionInfo ) {
 
     logger.silly( 'sessionInfo', sessionInfo );
 
@@ -108,6 +99,7 @@ describe( 'qrs', function () {
           data.should.have.property( 'schemaPath', 'About' );
         } )
         .catch( function ( error ) {
+          logger.error( 'About error', error );
           logger.error( 'About error: ', error.response.statusMessage );
           assert( false );
         } )
@@ -133,4 +125,5 @@ describe( 'qrs', function () {
 
   } );
 
-} );
+} )
+;

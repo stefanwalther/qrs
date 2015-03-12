@@ -1,17 +1,18 @@
-host: 'qssingle'
-port: 4242
+host: DEMUC-SWR-VM01
+port: 4242 ## Leave the port blank or set it to 0 if you don't want to specify a port
 useSSL: false
-xrfkey: 'ABCDEFG123456789'
+xrfkey: ABCDEFG123456789
 fiddler: false
 authentication:
   header:
-    enabled: true
-    virtualProxy: 'exup'
-    headerKey: 'exup-name'
-    ## Note: use only a single backslash hare, not Javascript encoding is necessary in YML
-    headerValue: 'qsSingle\admin'
-  ntlm:
     enabled: false
+    virtualProxy: exup
+    headerKey: exup-name
+    ## Note: use only a single backslash hare, not Javascript encoding is necessary in YML
+    headerValue: qsSingle\admin
+  ntlm:
+    enabled: true
+    virtualProxy:
   certificates:
     enabled: false
 
