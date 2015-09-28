@@ -18,7 +18,6 @@ var chai = require( 'chai' ),
   path = require( 'path' ),
   logger = require( './../lib/logger.js' ),
   setup = require( './testSetup' );
-;
 
 var testConfig = fsUtils.readYAMLSync( path.join( __dirname, './test-config.yml' ) );
 

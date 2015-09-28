@@ -34,7 +34,6 @@
     "leche": "^2.1.1",
     "mocha": "^2.2.1",
     "should": "*",
-    "verb": "^0.6.2",
     "verb-readme-includes": "^0.2.4"
   },
   "files": [
