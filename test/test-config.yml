@@ -6,10 +6,9 @@ fiddler: false
 authentication:
   header:
     enabled: true
-    virtualProxy: exup
-    headerKey: exup-name
-    ## Note: use only a single backslash hare, not Javascript encoding is necessary in YML
-    headerValue: qsSingle\admin
+    virtualProxy: hdr
+    headerKey: hdr-usr
+    headerValue: qsSingle\swr ## Note: use only a single backslash hare, not Javascript encoding is necessary in YML
   ntlm:
     enabled: false
     virtualProxy:

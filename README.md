@@ -2,9 +2,7 @@
 
 > Node.js library to talk to the Qlik Sense Repository Service API (qrs).
 
-> !!!
-Nothing to show, yet
-!!!
+## Installation
 
 Install with [npm](https://www.npmjs.com/)
 
@@ -16,19 +14,22 @@ $ npm i qrs --save
 
 ```js
 var QRS = require('qrs');
-
 var qrs = new QRS( options );
 ```
 
 ## API
 
-<!-- add a path or glob pattern for files with code comments to use for docs  -->
-{%= apidocs("lib/qrs.js") %}
+## Prepare Qlik Sense server
 
-## Related projects
+There are several ways to ensure that communication between this node.js module and Qlik Sense server is working properly:
 
-<!-- add an array of related projects, then un-escape the helper -->
-{%= related([]) %}
+* 
+Authenticating with a server certificate
+See http://help.qlik.com/sense/2.1/en-us/developer/Subsystems/RepositoryServiceAPI/Content/RepositoryServiceAPI/RepositoryServiceAPI-Connect-API-Authenticate-Reqs-Certificate.htm
+
+* 
+Authenticating with HTTP headers
+See http://help.qlik.com/sense/2.1/en-us/developer/Subsystems/RepositoryServiceAPI/Content/RepositoryServiceAPI/RepositoryServiceAPI-Connect-API-Authenticate-Reqs-Http-Headers.htm
 
 ## Running tests
 

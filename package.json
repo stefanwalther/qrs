@@ -1,6 +1,6 @@
 {
   "name": "qrs",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Node.js library to talk to the Qlik Sense Repository Service API (qrs).",
   "main": "index.js",
   "scripts": {
@@ -11,16 +11,13 @@
     "url": "https://github.com/stefanwalther/qrs.git"
   },
   "keywords": [
-    "Qlik",
-    "Qlik",
-    "Sense",
-    "QRS",
-    "Qlik",
-    "Sense",
-    "Repository",
-    "Service",
-    "API",
-    "REST"
+    "qlik",
+    "sense",
+    "qrs",
+    "qlik-sense-repository",
+    "api",
+    "rest",
+    "automation"
   ],
   "author": "Stefan Walther",
   "license": "MIT",
@@ -33,6 +30,7 @@
     "helper-apidocs": "^0.4.1",
     "leche": "^2.1.1",
     "mocha": "^2.2.1",
+    "q": "^1.4.1",
     "should": "*",
     "verb-readme-includes": "^0.2.4"
   },
@@ -50,11 +48,10 @@
     "fs-utils": "^0.6.0",
     "httpntlm": "^1.5.2",
     "httpreq": "^0.4.6",
-    "lodash": "^3.5.0",
+    "lodash": "^3.10.1",
     "ntlm": "^0.1.1",
     "ntlm-auth": "git://github.com/ericleong/node-ntlm-auth.git#master",
-    "q": "^1.2.0",
-    "request": "^2.53.0",
+    "request": "^2.64.0",
     "string": "^3.0.0",
     "winston": "^0.9.0"
   }
