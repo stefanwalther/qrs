@@ -33,8 +33,6 @@ describe( 'qrs', function () {
 
 	withData( setup.testLoop, function ( sessionInfo ) {
 
-		//logger.silly( 'sessionInfo', sessionInfo );
-
 		/**
 		 * Reset the configuration before each test.
 		 */
