@@ -6,5 +6,4 @@
  */
 
 'use strict';
-
 module.exports = require( './lib/qrs.js' );
