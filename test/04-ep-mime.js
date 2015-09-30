@@ -116,7 +116,7 @@ describe( 'qrs.mime', function () {
 					"id": "05750907-1728-46a5-b763-14d348208bf3",
 					"createdDate": "2015-09-02T22:09:14.104Z",
 					"modifiedDate": "2015-09-02T22:09:14.104Z",
-					"modifiedByUserName": "INTERNAL\bootstrap",
+					"modifiedByUserName": "INTERNAL\\bootstrap",
 					"mime": "application/xhtml+xml",
 					"extensions": "xhtml,xht",
 					"additionalHeaders": null,
@@ -128,7 +128,7 @@ describe( 'qrs.mime', function () {
 					"id": "49974f33-31c2-4732-b057-7acb8f5303a0",
 					"createdDate": "2015-09-02T22:09:14.104Z",
 					"modifiedDate": "2015-09-02T22:09:14.104Z",
-					"modifiedByUserName": "INTERNAL\bootstrap",
+					"modifiedByUserName": "INTERNAL\\bootstrap",
 					"mime": "text/html;charset=utf-8",
 					"extensions": "html,htm",
 					"additionalHeaders": "X-UA-Compatible:IE=edge",
@@ -233,7 +233,7 @@ describe( 'qrs.mime', function () {
 					} )
 			} );
 
-			it( 'adds multiple entries from file (update)', function ( done ) {
+			it.only( 'adds multiple entries from file (update)', function ( done ) {
 
 				var sourceFile = path.resolve( './test/fixtures/foobar.txt' );
 				qrs.mime.addFromFile( sourceFile )
