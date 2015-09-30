@@ -1,5 +1,5 @@
 'use strict';
-
+/*jshint -W030,-W117*/
 var chai = require( 'chai' );
 var expect = chai.expect;
 var assert = chai.assert;
@@ -46,7 +46,7 @@ describe( 'qrs.mime', function () {
 					.then( function ( data ) {
 						idsToDelete.length = 0;
 						done();
-					} )
+					} );
 			} else {
 				done();
 			}
@@ -74,7 +74,9 @@ describe( 'qrs.mime', function () {
 		} );
 
 		it( 'should filter for mime types', function ( done ) {
+			/*jshint -W109 */
 			qrs.mime.get( "extensions so 'html'" )
+				/*jshint +W109 */
 				.then( function ( data ) {
 					expect( data ).to.exist;
 					expect( data ).to.not.be.empy;
@@ -87,7 +89,9 @@ describe( 'qrs.mime', function () {
 		} );
 
 		it( 'filter for unknown should return nothing', function ( done ) {
+			/*jshint -W109 */
 			qrs.mime.get( "extensions so 'abcdefg'" )
+				/*jshint +W109 */
 				.then( function ( data ) {
 					expect( data ).to.exist;
 					expect( data ).to.not.be.empy;
@@ -111,6 +115,7 @@ describe( 'qrs.mime', function () {
 
 		describe( 'returns either objects to be updated or added', function () {
 
+			/*jshint -W109*/
 			var existingTypes = [
 				{
 					"id": "05750907-1728-46a5-b763-14d348208bf3",
@@ -137,12 +142,13 @@ describe( 'qrs.mime', function () {
 					"schemaPath": "MimeType"
 				}
 			];
+			/*jshint +W109*/
 
 			it( 'returns the object to be updated', function () {
 				var r = qrs.mime.getUpdateOrInsert( {
-					"extensions": "foo",
-					"mime": "text/html;charset=utf-8",
-					"binary": false
+					'extensions': 'foo',
+					'mime': 'text/html;charset=utf-8',
+					'binary': false
 				}, existingTypes );
 				expect( r.isUpdate ).to.equal( true );
 				expect( r.def ).to.be.an.object;
@@ -152,12 +158,11 @@ describe( 'qrs.mime', function () {
 			} );
 
 			it( 'adds a new entry', function ( done ) {
-
 				qrs.mime.add( {
-					"extensions": "foo",
-					"mime": "text/foo",
-					"additionalHeaders": null,
-					"binary": false
+					'extensions': 'foo',
+					'mime': 'text/foo',
+					'additionalHeaders': null,
+					'binary': false
 				} )
 					.then( function ( data ) {
 						expect( data ).to.exist;
@@ -168,20 +173,54 @@ describe( 'qrs.mime', function () {
 					})
 					.done( function () {
 						done();
-					} )
+					} );
+			} );
+
+			it( 'should reject to add entries if mime is empty', function ( done ) {
+				qrs.mime.add( {
+					'extensions': 'foo',
+					'mime': '',
+					'additionalHeaders': null,
+					'binary': false
+				} )
+					.then( function ( /*data*/ ) {
+					} , function ( err ) {
+						expect( err ).to.exist;
+						expect( err ).to.be.equal('Mime type cannot be empty');
+					})
+					.done( function () {
+						done();
+					} );
+			} );
+
+			it( 'should reject to add entries if extensions is empty', function ( done ) {
+				qrs.mime.add( {
+					'extensions': '',
+					'mime': 'foo/bar',
+					'additionalHeaders': null,
+					'binary': false
+				} )
+					.then( function ( /*data*/ ) {
+					} , function ( err ) {
+						expect( err ).to.exist;
+						expect( err ).to.be.equal('Extensions cannot be empty');
+					})
+					.done( function () {
+						done();
+					} );
 			} );
 
 			it( 'adds multiple entries', function ( done ) {
 				qrs.mime.addMultiple( [{
-					"extensions": "foo",
-					"mime": "text/foo",
-					"additionalHeaders": null,
-					"binary": false
+					'extensions': 'foo',
+					'mime': 'text/foo',
+					'additionalHeaders': null,
+					'binary': false
 				}, {
-					"extensions": "bar",
-					"mime": "text/bar",
-					"additionalHeaders": null,
-					"binary": false
+					'extensions': 'bar',
+					'mime': 'text/bar',
+					'additionalHeaders': null,
+					'binary': false
 				}] )
 					.then( function ( data ) {
 						expect( data ).to.exist;
@@ -194,20 +233,20 @@ describe( 'qrs.mime', function () {
 					})
 					.done( function () {
 						done();
-					} )
+					} );
 			} );
 
 			it( 'updates existing entries', function ( done ) {
 				qrs.mime.addMultiple( [{
-					"extensions": "foo",
-					"mime": "text/foobar",
-					"additionalHeaders": null,
-					"binary": false
+					'extensions': 'foo',
+					'mime': 'text/foobar',
+					'additionalHeaders': null,
+					'binary': false
 				}, {
-					"extensions": "bar",
-					"mime": "text/foobar",
-					"additionalHeaders": null,
-					"binary": false
+					'extensions': 'bar',
+					'mime': 'text/foobar',
+					'additionalHeaders': null,
+					'binary': false
 				}] )
 					.then( function ( data ) {
 						expect( data ).to.exist;
@@ -230,10 +269,10 @@ describe( 'qrs.mime', function () {
 					})
 					.done( function () {
 						done();
-					} )
+					} );
 			} );
 
-			it.only( 'adds multiple entries from file (update)', function ( done ) {
+			it( 'adds multiple entries from file (update)', function ( done ) {
 
 				var sourceFile = path.resolve( './test/fixtures/foobar.txt' );
 				qrs.mime.addFromFile( sourceFile )
@@ -258,7 +297,7 @@ describe( 'qrs.mime', function () {
 					})
 					.done( function () {
 						done();
-					} )
+					} );
 			} );
 
 			it( 'adds multiple entries from file (update + insert)', function ( done ) {
@@ -284,7 +323,7 @@ describe( 'qrs.mime', function () {
 					})
 					.done( function () {
 						done();
-					} )
+					} );
 			} );
 		} );
 
