@@ -28,9 +28,10 @@ describe( 'qrs.mime', function () {
 
 	withData( setup.testLoop, function ( sessionInfo ) {
 
+		var testConfig = extend( globalConfig, sessionInfo );
+
 		var idsToDelete = [];
 		beforeEach( function ( done ) {
-			var testConfig = extend( globalConfig, sessionInfo );
 			qrs = new QRS( testConfig );
 			done();
 		} );
@@ -40,7 +41,7 @@ describe( 'qrs.mime', function () {
 			if ( idsToDelete && idsToDelete.length > 0 ) {
 				var promises = [];
 				_.each( idsToDelete, function ( id ) {
-					promises.push( qrs.mime.deleteById.bind(null,  id ) );
+					promises.push( qrs.mime.deleteById.bind( null, id ) );
 				} );
 				Q.all( promises )
 					.then( function ( data ) {
@@ -168,9 +169,9 @@ describe( 'qrs.mime', function () {
 						expect( data ).to.exist;
 						expect( data ).to.have.property( 'id' );
 						idsToDelete.push( data.id );
-					} , function ( err ) {
-						expect(err ).to.not.exist;
-					})
+					}, function ( err ) {
+						expect( err ).to.not.exist;
+					} )
 					.done( function () {
 						done();
 					} );
@@ -184,10 +185,10 @@ describe( 'qrs.mime', function () {
 					'binary': false
 				} )
 					.then( function ( /*data*/ ) {
-					} , function ( err ) {
+					}, function ( err ) {
 						expect( err ).to.exist;
-						expect( err ).to.be.equal('Mime type cannot be empty');
-					})
+						expect( err ).to.be.equal( 'Mime type cannot be empty' );
+					} )
 					.done( function () {
 						done();
 					} );
@@ -201,10 +202,10 @@ describe( 'qrs.mime', function () {
 					'binary': false
 				} )
 					.then( function ( /*data*/ ) {
-					} , function ( err ) {
+					}, function ( err ) {
 						expect( err ).to.exist;
-						expect( err ).to.be.equal('Extensions cannot be empty');
-					})
+						expect( err ).to.be.equal( 'Extensions cannot be empty' );
+					} )
 					.done( function () {
 						done();
 					} );
@@ -228,9 +229,37 @@ describe( 'qrs.mime', function () {
 						data.forEach( function ( item ) {
 							idsToDelete.push( item.id );
 						} );
-					} , function ( err ) {
-						assert(true, err);
-					})
+					}, function ( err ) {
+						assert( true, err );
+					} )
+					.done( function () {
+						done();
+					} );
+			} );
+
+			//Todo: Test should be done once, and not for all authentication scenarios
+			it( 'add multiple entries should throw an error if server is not available', function ( done ) {
+				var config = JSON.parse( JSON.stringify( testConfig ) ); // clone the object
+				config.host = 'not_a_server';
+				var qrs2 = new QRS( config );
+				qrs2.mime.addMultiple( [{
+					'extensions': 'foo',
+					'mime': 'text/foo',
+					'additionalHeaders': null,
+					'binary': false
+				}, {
+					'extensions': 'bar',
+					'mime': 'text/bar',
+					'additionalHeaders': null,
+					'binary': false
+				}] )
+					.then( function ( data ) {
+						expect( data ).to.not.exist;
+					}, function ( err ) {
+						expect( err ).to.exist;
+						expect( err.error ).to.exist;
+						expect( err.error.code ).to.be.equal( 'ENOTFOUND' );
+					} )
 					.done( function () {
 						done();
 					} );
@@ -251,7 +280,7 @@ describe( 'qrs.mime', function () {
 					.then( function ( data ) {
 						expect( data ).to.exist;
 						expect( data ).to.be.an.array;
-						_.each(data,  function ( item ) {
+						_.each( data, function ( item ) {
 							expect( item ).to.have.property( 'extensions' );
 							expect( item ).to.have.property( 'mime' );
 							expect( item ).to.have.property( 'additionalHeaders' );
@@ -260,13 +289,13 @@ describe( 'qrs.mime', function () {
 							expect( item.additionalHeaders ).to.be.null;
 							expect( item.binary ).to.be.equal( false );
 							idsToDelete.push( data.id );
-						});
+						} );
 						//Todo: We have a cleanup error here, check this out
 						//expect(data[0].extensions ).to.be.equal('foo');
 						//expect(data[1].extensions ).to.be.equal('foo,bar');
-					} , function ( err ) {
-						expect(err ).to.not.exist;
-					})
+					}, function ( err ) {
+						expect( err ).to.not.exist;
+					} )
 					.done( function () {
 						done();
 					} );
@@ -279,7 +308,7 @@ describe( 'qrs.mime', function () {
 					.then( function ( data ) {
 						expect( data ).to.exist;
 						expect( data ).to.be.an.array;
-						expect( data ).to.have.length(2);
+						expect( data ).to.have.length( 2 );
 						_.each( data, function ( item ) {
 							expect( item ).to.have.property( 'extensions' );
 							expect( item ).to.have.property( 'mime' );
@@ -289,12 +318,12 @@ describe( 'qrs.mime', function () {
 							expect( item.additionalHeaders ).to.be.null;
 							expect( item.binary ).to.be.equal( false );
 							idsToDelete.push( data.id );
-						});
+						} );
 						//expect(data[0].extensions ).to.be.equal('foo');
 						//expect(data[1].extensions ).to.be.equal('foo,bar');
-					} , function ( err ) {
+					}, function ( err ) {
 						expect( err ).to.not.exist;
-					})
+					} )
 					.done( function () {
 						done();
 					} );
@@ -307,7 +336,7 @@ describe( 'qrs.mime', function () {
 					.then( function ( data ) {
 						expect( data ).to.exist;
 						expect( data ).to.be.an.array;
-						expect( data ).to.have.length(3);
+						expect( data ).to.have.length( 3 );
 						_.each( data, function ( item ) {
 							expect( item ).to.have.property( 'extensions' );
 							expect( item ).to.have.property( 'mime' );
@@ -316,11 +345,41 @@ describe( 'qrs.mime', function () {
 							expect( item.additionalHeaders ).to.be.null;
 							expect( item.binary ).to.be.equal( false );
 							idsToDelete.push( data.id );
-						});
+						} );
 						idsToDelete.push( data.id );
-					} , function ( err ) {
+					}, function ( err ) {
 						expect( err ).to.not.exist;
-					})
+					} )
+					.done( function () {
+						done();
+					} );
+			} );
+
+			it( 'adding multiple entries from file should be able to fail (wrong entries)', function ( done ) {
+				var sourceFile = path.resolve( './test/fixtures/error.txt' );
+				qrs.mime.addFromFile( sourceFile )
+					.then( function ( /*data*/ ) {
+					}, function ( err ) {
+						expect( err ).to.exist;
+						expect( err ).to.be.equal('Mime type cannot be empty');
+					} )
+					.done( function () {
+						done();
+					} );
+			} );
+
+			it( 'adding multiple entries from file should be able to fail (server unavailable)', function ( done ) {
+				var config = JSON.parse( JSON.stringify( testConfig ) ); // clone the object
+				config.host = 'not_a_server';
+				var qrs2 = new QRS( config );
+				var sourceFile = path.resolve( './test/fixtures/foobarbaz.txt' );
+				qrs2.mime.addFromFile( sourceFile )
+					.then( function ( /*data*/ ) {
+					}, function ( err ) {
+						expect( err ).to.exist;
+						expect( err.error ).to.exist;
+						expect( err.error.code ).to.be.equal('ENOTFOUND');
+					} )
 					.done( function () {
 						done();
 					} );
