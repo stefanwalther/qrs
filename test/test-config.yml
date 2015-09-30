@@ -15,9 +15,9 @@ authentication:
   certificates:
     enabled: true
     virtualProxy:
-    cert: D:\CertStore\192.0.2.1\client.pem			# Do not escape backslash in yml !
-    key: D:\CertStore\192.0.2.1\client_key.pem		# Do not escape backslash in yml !
-    ca: D:\CertStore\192.0.2.1\root.pem				# Do not escape backslash in yml !
+    cert: D:\CertStore\qrs-test\client.pem			# Do not escape backslash in yml !
+    key: D:\CertStore\qrs-test\client_key.pem		# Do not escape backslash in yml !
+    ca: D:\CertStore\qrs-test\root.pem				# Do not escape backslash in yml !
     #passphrase: "Test1234"
     port: 4242
     useSSL: true
