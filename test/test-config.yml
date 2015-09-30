@@ -1,4 +1,4 @@
-host: qssingle
+host: qsSingle
 port: 0 ## Leave the port blank or set it to 0 if you don't want to specify a port
 useSSL: false
 xrfkey: ABCDEFG123456789
@@ -13,5 +13,15 @@ authentication:
     enabled: false
     virtualProxy:
   certificates:
-    enabled: false
+    enabled: true
+    virtualProxy:
+    cert: D:\CertStore\192.0.2.1\client.pem			# Do not escape backslash in yml !
+    key: D:\CertStore\192.0.2.1\client_key.pem		# Do not escape backslash in yml !
+    ca: D:\CertStore\192.0.2.1\root.pem				# Do not escape backslash in yml !
+    #passphrase: "Test1234"
+    port: 4242
+    useSSL: true
+    headerKey: X-Qlik-User
+    headerValue: "UserDirectory= Internal; UserId= sa_repository"
+
 

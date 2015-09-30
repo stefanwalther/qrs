@@ -8,6 +8,7 @@
 'use strict';
 
 var chai = require( 'chai' );
+var expect = chai.expect;
 var assert = chai.assert;
 var should = chai.should();
 var QRS = new require( './../lib/qrs' );
@@ -31,6 +32,7 @@ var qrs;
 
 describe( 'qrs', function () {
 
+	var testConfig = null;
 	withData( setup.testLoop, function ( sessionInfo ) {
 
 		/**
@@ -38,7 +40,7 @@ describe( 'qrs', function () {
 		 */
 		beforeEach( function ( done ) {
 
-			var testConfig = extend( globalConfig, sessionInfo );
+			testConfig = extend( globalConfig, sessionInfo );
 			qrs = new QRS( testConfig );
 			done();
 
@@ -67,34 +69,37 @@ describe( 'qrs', function () {
 			done();
 		} );
 
-		it( 'should properly create URLs', function ( done ) {
+		it( 'should properly create URLs', function ( ) {
+
+			var qrs2 = new QRS(); // Create a new QRS to be independent from any config
 
 			// Default
-			qrs.setConfig( {useSSL: false, host: 'myHost', xrfkey: '123456789ABCDEFG', virtualProxy: ''} );
-			qrs.getUrl( 'ssl/ping' ).should.equal( 'http://myHost/qrs/ssl/ping/?xrfkey=123456789ABCDEFG' );
+			qrs2.setConfig( {useSSL: false, host: 'myHost', xrfkey: '123456789ABCDEFG', virtualProxy: ''} );
+			qrs2.getUrl( 'ssl/ping' ).should.equal( 'http://myHost/qrs/ssl/ping/?xrfkey=123456789ABCDEFG' );
 
 			// SSL
-			qrs.setConfig( {useSSL: true, host: 'myHost', xrfkey: '123456789ABCDEFG', virtualProxy: ''} );
-			qrs.getUrl( 'ssl/ping' ).should.equal( 'https://myHost/qrs/ssl/ping/?xrfkey=123456789ABCDEFG' );
+			qrs2.setConfig( {useSSL: true, host: 'myHost', xrfkey: '123456789ABCDEFG', virtualProxy: ''} );
+			qrs2.getUrl( 'ssl/ping' ).should.equal( 'https://myHost/qrs/ssl/ping/?xrfkey=123456789ABCDEFG' );
 
 			// Virtual Proxy
-			qrs.setConfig( {useSSL: false, host: 'myHost', xrfkey: '123456789ABCDEFG', virtualProxy: 'sso'} );
-			qrs.getUrl( 'ssl/ping' ).should.equal( 'http://myHost/sso/qrs/ssl/ping/?xrfkey=123456789ABCDEFG' );
+			qrs2.setConfig( {useSSL: false, host: 'myHost', xrfkey: '123456789ABCDEFG', virtualProxy: 'sso'} );
+			qrs2.getUrl( 'ssl/ping' ).should.equal( 'http://myHost/sso/qrs/ssl/ping/?xrfkey=123456789ABCDEFG' );
 
-			done();
+			// Port
+			qrs2.setConfig( {useSSL: false, port: 4242, host: 'myHost', xrfkey: '123456789ABCDEFG', virtualProxy: 'sso'} );
+			qrs2.getUrl( 'ssl/ping' ).should.equal( 'http://myHost:4242/sso/qrs/ssl/ping/?xrfkey=123456789ABCDEFG' );
 		} );
 
 		it( 'should return something for /about', function ( done ) {
 
 			qrs.get( 'about' )
 				.then( function ( data ) {
-					data.should.not.be.empty;
-					data.should.have.property( 'schemaPath', 'About' );
-				} )
-				.catch( function ( error ) {
-					console.error( error || {} );
-					assert( false );
-				} )
+					expect(data ).to.exist;
+					expect( data ).to.be.an.object;
+					expect( data ).to.have.a.property('schemaPath', 'About');
+				} , function ( err ) {
+					expect( err ).to.not.exist;
+				})
 				.done( function () {
 					done()
 				} );

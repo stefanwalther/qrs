@@ -2,6 +2,7 @@
 
 var chai = require( 'chai' );
 var expect = chai.expect;
+var assert = chai.assert;
 var QRS = new require( './../lib/qrs' );
 var leche = require( 'leche' );
 var withData = leche.withData;
@@ -162,18 +163,15 @@ describe( 'qrs.mime', function () {
 						expect( data ).to.exist;
 						expect( data ).to.have.property( 'id' );
 						idsToDelete.push( data.id );
-					} )
-					.catch( function ( err ) {
-						console.error( err );
-						expect( true ).to.equal( false );
-						done( err );
-					} )
+					} , function ( err ) {
+						expect(err ).to.not.exist;
+					})
 					.done( function () {
 						done();
 					} )
 			} );
 
-			it.only( 'adds multiple entries', function ( done ) {
+			it( 'adds multiple entries', function ( done ) {
 				qrs.mime.addMultiple( [{
 					"extensions": "foo",
 					"mime": "text/foo",
@@ -191,7 +189,9 @@ describe( 'qrs.mime', function () {
 						data.forEach( function ( item ) {
 							idsToDelete.push( item.id );
 						} );
-					} )
+					} , function ( err ) {
+						assert(true, err);
+					})
 					.done( function () {
 						done();
 					} )
@@ -225,7 +225,9 @@ describe( 'qrs.mime', function () {
 						//Todo: We have a cleanup error here, check this out
 						//expect(data[0].extensions ).to.be.equal('foo');
 						//expect(data[1].extensions ).to.be.equal('foo,bar');
-					} )
+					} , function ( err ) {
+						expect(err ).to.not.exist;
+					})
 					.done( function () {
 						done();
 					} )
@@ -251,7 +253,9 @@ describe( 'qrs.mime', function () {
 						});
 						//expect(data[0].extensions ).to.be.equal('foo');
 						//expect(data[1].extensions ).to.be.equal('foo,bar');
-					} )
+					} , function ( err ) {
+						expect( err ).to.not.exist;
+					})
 					.done( function () {
 						done();
 					} )
@@ -275,7 +279,9 @@ describe( 'qrs.mime', function () {
 							idsToDelete.push( data.id );
 						});
 						idsToDelete.push( data.id );
-					} )
+					} , function ( err ) {
+						expect( err ).to.not.exist;
+					})
 					.done( function () {
 						done();
 					} )
