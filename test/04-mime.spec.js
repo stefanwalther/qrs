@@ -173,7 +173,7 @@ describe( 'qrs.mime', function () {
 					} )
 			} );
 
-			it( 'adds multiple entries', function ( done ) {
+			it.only( 'adds multiple entries', function ( done ) {
 				qrs.mime.addMultiple( [{
 					"extensions": "foo",
 					"mime": "text/foo",
