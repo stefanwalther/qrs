@@ -1,3 +1,4 @@
+/*global describe,before,beforeEach,it*/
 /*!
  * qrs <https://github.com/stefanwalther/qrs>
  *
@@ -79,6 +80,10 @@ describe( 'qrs object', function () {
 		qrs.setConfig( {useSSL: false, host: 'myHost', xrfkey: '123456789ABCDEFG', virtualProxy: 'sso'} );
 		qrs.getUrl( 'ssl/ping' ).should.equal( 'http://myHost/sso/qrs/ssl/ping/?xrfkey=123456789ABCDEFG' );
 
+		// Empty Virtual Proxy
+		qrs.setConfig( {useSSL: false, host: 'myHost', xrfkey: '123456789ABCDEFG', virtualProxy: ''} );
+		qrs.getUrl( 'ssl/ping' ).should.equal( 'http://myHost/qrs/ssl/ping/?xrfkey=123456789ABCDEFG' );
+
 		// Port
 		qrs.setConfig( {useSSL: false, port: 4242, host: 'myHost', xrfkey: '123456789ABCDEFG', virtualProxy: 'sso'} );
 		qrs.getUrl( 'ssl/ping' ).should.equal( 'http://myHost:4242/sso/qrs/ssl/ping/?xrfkey=123456789ABCDEFG' );
@@ -88,7 +93,7 @@ describe( 'qrs object', function () {
 	it( 'should handle URL params when creating the URL', function () {
 
 		qrs.setConfig( {useSSL: false, host: 'myHost', xrfkey: '123456789ABCDEFG', virtualProxy: 'sso'} );
-		expect(qrs.getUrl('about', [{"key": "myFilter", "value": "filtervalue"}, {"key": "param", "value": "paramValue"}]) ).to.be.equal('http://myHost/sso/qrs/about/?myFilter=filtervalue&param=paramValue&xrfkey=123456789ABCDEFG');
+		expect(qrs.getUrl('about', [{'key': 'myFilter', 'value': 'filtervalue'}, {'key': 'param', 'value': 'paramValue'}]) ).to.be.equal('http://myHost/sso/qrs/about/?myFilter=filtervalue&param=paramValue&xrfkey=123456789ABCDEFG');
 
 
 	} );
