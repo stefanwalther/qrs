@@ -5,7 +5,7 @@ xrfkey: ABCDEFG123456789
 fiddler: false
 authentication:
   header:
-    enabled: false
+    enabled: true
     virtualProxy: hdr
     headerKey: hdr-usr
     headerValue: QTSEL\swr                          ## Note: use only a single backslash hare, not Javascript encoding is necessary in YML
