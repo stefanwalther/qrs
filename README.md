@@ -90,11 +90,9 @@ var config = {
 };
 ```
 
-**Example using windows authentication**
-
 ### All options
 
-* **`server`** - Fully qualified name or IP-address of the server where the Qlik Sense Repository server is running on, defaults to "`127.0.0.1`"
+* **`server`** - Qualified / fully qualified name or IP-address of the server where the Qlik Sense Repository server is running on, defaults to "`127.0.0.1`"
 * **`isSSL`** - Whether to use SSL or not, defaults to `false`.
 * **`authentication`** - Authentication method, can be "`windows`", "`certificates`" or "`header`", defaults to "`windows`".
 * **`headerKey`** -
