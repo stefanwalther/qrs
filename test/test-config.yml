@@ -13,7 +13,7 @@ authentication:
     enabled: false
     virtualProxy:
   certificates:
-    enabled: true
+    enabled: false
     virtualProxy:
     cert: D:\CertStore\rd-swr-ms13\client.pem			  # Do not escape backslash in yml !
     key: D:\CertStore\rd-swr-ms13\client_key.pem		# Do not escape backslash in yml !

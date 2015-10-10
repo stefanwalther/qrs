@@ -355,7 +355,7 @@ describe( 'qrs.mime', function () {
 					} );
 			} );
 
-			it( 'adding multiple entries from file should be able to fail (wrong entries)', function ( done ) {
+			it.only( 'adding multiple entries from file should be able to fail (wrong entries)', function ( done ) {
 				var sourceFile = path.resolve( './test/fixtures/error.txt' );
 				qrs.mime.addFromFile( sourceFile )
 					.then( function ( /*data*/ ) {
