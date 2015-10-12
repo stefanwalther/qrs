@@ -4,6 +4,7 @@
  * Copyright (c) 2015 .
  * Licensed under the MIT license.
  */
+/*global it, beforeEach*/
 
 'use strict';
 
@@ -17,7 +18,6 @@ var withData = leche.withData;
 var extend = require( 'extend-shallow' );
 var fsUtils = require( 'fs-utils' );
 var path = require( 'path' );
-var logger = require( './../lib/logger.js' );
 var setup = require( './testSetup' );
 
 var testConfig = fsUtils.readYAMLSync( path.join( __dirname, './test-config.yml' ) );
@@ -69,7 +69,7 @@ describe( 'qrs', function () {
 			done();
 		} );
 
-		it( 'should properly create URLs', function ( ) {
+		it( 'should properly create URLs', function () {
 
 			var qrs2 = new QRS(); // Create a new QRS to be independent from any config
 
@@ -86,7 +86,13 @@ describe( 'qrs', function () {
 			qrs2.getUrl( 'ssl/ping' ).should.equal( 'http://myHost/sso/qrs/ssl/ping/?xrfkey=123456789ABCDEFG' );
 
 			// Port
-			qrs2.setConfig( {useSSL: false, port: 4242, host: 'myHost', xrfkey: '123456789ABCDEFG', virtualProxy: 'sso'} );
+			qrs2.setConfig( {
+				useSSL: false,
+				port: 4242,
+				host: 'myHost',
+				xrfkey: '123456789ABCDEFG',
+				virtualProxy: 'sso'
+			} );
 			qrs2.getUrl( 'ssl/ping' ).should.equal( 'http://myHost:4242/sso/qrs/ssl/ping/?xrfkey=123456789ABCDEFG' );
 		} );
 
@@ -94,14 +100,14 @@ describe( 'qrs', function () {
 
 			qrs.get( 'about' )
 				.then( function ( data ) {
-					expect(data ).to.exist;
+					expect( data ).to.exist;
 					expect( data ).to.be.an.object;
-					expect( data ).to.have.a.property('schemaPath', 'About');
-				} , function ( err ) {
+					expect( data ).to.have.a.property( 'schemaPath', 'About' );
+				}, function ( err ) {
 					expect( err ).to.not.exist;
-				})
+				} )
 				.done( function () {
-					done()
+					done();
 				} );
 		} );
 
@@ -111,11 +117,11 @@ describe( 'qrs', function () {
 					console.log( 'ping => result', data );
 					data.should.not.be.empty;
 				} )
-				.catch( function ( data ) {
+				.catch( function ( /*data*/ ) {
 					assert( false, 'ping does not work' );
 				} )
 				.done( function () {
-					done()
+					done();
 				} );
 		} );
 

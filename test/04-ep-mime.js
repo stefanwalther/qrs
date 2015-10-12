@@ -9,7 +9,6 @@ var withData = leche.withData;
 var extend = require( 'extend-shallow' );
 var fsUtils = require( 'fs-utils' );
 var path = require( 'path' );
-var logger = require( './../lib/logger.js' );
 var setup = require( './testSetup' );
 var _ = require( 'lodash' );
 var Q = require( 'q' );

@@ -9,3 +9,12 @@
 
 ### Using `put`
 (TBD)
+
+### Retrieving all endpoints
+(TBD)
+
+### Get a list of all extensions
+(TBD)
+
+### Upload an extension
+(TBD)
