@@ -50,8 +50,20 @@ describe( 'qrs object', function () {
 		done();
 	} );
 
-	it( 'should receive startup params', function ( done ) {
+	it( 'should have default options', function () {
+		var qrsDefault = new QRS( {} );
+		var c = qrsDefault.getConfig();
+		expect( c ).to.not.be.empty;
+		expect( c ).to.have.property( 'host', '127.0.0.1' );
+		expect( c ).to.have.property( 'useSSL', false );
+		expect( c ).to.have.property( 'xrfkey', 'ABCDEFG123456789' );
+		expect( c ).to.have.property( 'authentication', 'windows' );
+		expect( c ).to.have.property( 'headerKey', '' );
+		expect( c ).to.have.property( 'headerValue', '' );
+		expect( c ).to.have.property( 'virtualProxy', '' );
+	} );
 
+	it( 'should receive startup params', function ( done ) {
 		var qrs2 = new QRS( {host: 'testhost'} );
 		var cfg = qrs2.getConfig();
 		should.exist( cfg );
@@ -93,8 +105,10 @@ describe( 'qrs object', function () {
 	it( 'should handle URL params when creating the URL', function () {
 
 		qrs.setConfig( {useSSL: false, host: 'myHost', xrfkey: '123456789ABCDEFG', virtualProxy: 'sso'} );
-		expect(qrs.getUrl('about', [{'key': 'myFilter', 'value': 'filtervalue'}, {'key': 'param', 'value': 'paramValue'}]) ).to.be.equal('http://myHost/sso/qrs/about/?myFilter=filtervalue&param=paramValue&xrfkey=123456789ABCDEFG');
-
+		expect( qrs.getUrl( 'about', [{'key': 'myFilter', 'value': 'filtervalue'}, {
+			'key': 'param',
+			'value': 'paramValue'
+		}] ) ).to.be.equal( 'http://myHost/sso/qrs/about/?myFilter=filtervalue&param=paramValue&xrfkey=123456789ABCDEFG' );
 
 	} );
 
