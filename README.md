@@ -18,7 +18,6 @@ $ npm i qrs --save
 * [Configuration Options](#configuration-options)
 * [Prepare Qlik Sense server](#prepare-qlik-sense-server)
 * [API](#api)
-* [Examples](#examples)
 * [Running tests](#running-tests)
 * [Contributing](#contributing)
 * [Author](#author)
@@ -66,9 +65,9 @@ The configuration passed to the constructor of _qrs_ drives how authentication i
 
 ```javascript
 var config = {
+    authentication: 'header',
     host: 'server.mydomain.com',
     useSSL: true,
-    authentication: 'header',
     virtualProxy: 'hdr',
     headerKey: 'hdr-usr',
     headerValue: 'mydomain\\justme'
@@ -79,9 +78,9 @@ var config = {
 
 ```js
 var config = {
+    authentication: 'certificates',
     host: 'server.mydomain.com',
     useSSL: true,
-    authentication: 'certificates',
     cert: 'C:\\CertStore\\client.pem',
     key: 'C:\\CertStore\\client_key.pem',
     ca: 'C:\\CertStore\\root.pem',
@@ -96,8 +95,8 @@ var config = {
 * **`host`** - Qualified / fully qualified name or IP-address of the server where the Qlik Sense Repository server is running on, defaults to "`127.0.0.1`"
 * **`useSSL`** - Whether to use SSL or not, defaults to `false`.
 * **`authentication`** - Authentication method, can be "`windows`", "`certificates`" or "`header`", defaults to "`windows`".
-* **`headerKey`** -
-* **`headerValue`** -
+* **`headerKey`** - Header key.
+* **`headerValue`** - Header value.
 * **`virtualProxy`** - Name of the virtual proxy.
 * **`port`** - Port to be used.
 
@@ -143,7 +142,7 @@ Set global configurations options for qrs. Can be used to change the configurati
 
 Return the current configuration options.
 
-* `returns` **{qrsConfig}**: qrsConfig Configuration object.
+* `returns` **{qrsConfig}** `qrsConfig`: Configuration object.
 
 ### [.set](lib%5Cqrs.js#L86)
 
@@ -216,8 +215,8 @@ Same as `request()` but with `method: 'POST'`.
 **Params**
 
 * `endpoint` **{String}**: QRS endpoint to be used.
-* **{String[]}**: urlParams Additional URL parameters, defined as key/value array.
-* **{Object}**: body Body to be posted, defined as JSON object.
+* `urlParams` **{String[]}**: Additional URL parameters, defined as key/value array.
+* `body` **{Object}**: Body to be posted, defined as JSON object.
 * `returns` __{_|promise}_*
 
 ### [.delete](lib%5Cqrs.js#L265)
@@ -231,51 +230,16 @@ Same as `request()` but with `method: 'DELETE'`.
 * **{}**: urlParams
 * `returns` __{_|promise}_*
 
-### [.put](lib%5Cqrs.js#L280)
+### [.put](lib%5Cqrs.js#L274)
 
 Same as `request()` but with `method: 'PUT'`.
 
-**Params**
-
-* **{}**: endpoint
-* **{}**: id
-* **{}**: urlParams
-* **{}**: body
-* `returns` __{_|promise}_*
-
-### [.plugins](lib%5Cqrs.js#L295)
+### [.plugins](lib%5Cqrs.js#L289)
 
 Returns an array of loaded plugins. Use `registerPlugin()` to load a plugin.
 
-## Examples
-
-### Using the generic `query`
-
-(TBD)
-
-### Using `get`
-
-(TBD)
-
-### Using `delete`
-
-(TBD)
-
-### Using `put`
-
-(TBD)
-
-### Retrieving all endpoints
-
-(TBD)
-
-### Get a list of all extensions
-
-(TBD)
-
-### Upload an extension
-
-(TBD)
+<!--## Examples-->
+{%= docs('examples') %}
 
 ## Running tests
 
