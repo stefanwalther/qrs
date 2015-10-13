@@ -3,7 +3,7 @@
 var QRS = require('{%= name %}');
 var config = {
 	"host": 'qsSingle',
-	"isSSL": false,	
+	"useSSL": false,	
 	"xrfkey": 'ABCDEFG123456789',
 	"authentication": "header",
 	"headerKey": 'hdr-usr',
