@@ -1,4 +1,4 @@
-host: rd-swr-ms13.rdlund.qliktech.com
+host: qssingle
 port: 0                                             ## Leave the port blank or set it to 0 if you don't want to specify a port
 useSSL: true
 xrfkey: ABCDEFG123456789
@@ -6,9 +6,10 @@ fiddler: false
 authentication:
   header:
     enabled: true
+    useSSL: false
     virtualProxy: hdr
     headerKey: hdr-usr
-    headerValue: QTSEL\swr                          ## Note: use only a single backslash hare, not Javascript encoding is necessary in YML
+    headerValue: QSSINGLE\swr                          ## Note: use only a single backslash hare, not Javascript encoding is necessary in YML
   ntlm:
     enabled: false
     virtualProxy:

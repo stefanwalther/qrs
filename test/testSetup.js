@@ -1,6 +1,7 @@
 'use strict';
-var fsUtils = require( 'fs-utils' ),
-	path = require( 'path' );
+var fsUtils = require( 'fs-utils' );
+var path = require( 'path' );
+var _ = require( 'lodash' );
 
 var TestSetup = function () {
 	var testConfig = fsUtils.readYAMLSync( path.join( __dirname, './test-config.yml' ) );
@@ -15,15 +16,16 @@ var TestSetup = function () {
 				headerKey: testConfig.authentication.header.headerKey,
 				headerValue: testConfig.authentication.header.headerValue,
 				virtualProxy: testConfig.authentication.header.virtualProxy,
-				port: testConfig.authentication.header.port || testConfig.port
-			}]
+				port: testConfig.authentication.header.port || testConfig.port,
+				useSSL: _.isEmpty( testConfig.authentication.header.useSSL ) ? testConfig.useSSL : testConfig.authentication.header.useSSL
+			}];
 		}
 		if ( testConfig.authentication.ntlm.enabled ) {
 			r['Ntlm authentication'] = [{
 				authentication: 'ntlm',
 				virtualProxy: testConfig.authentication.ntlm.virtualProxy,
 				port: testConfig.authentication.ntlm.port || testConfig.port
-			}]
+			}];
 		}
 
 		if ( testConfig.authentication.certificates.enabled ) {
@@ -38,7 +40,7 @@ var TestSetup = function () {
 				passphrase: testConfig.authentication.certificates.passphrase,
 				virtualProxy: testConfig.authentication.certificates.virtualProxy,
 				port: testConfig.authentication.certificates.port || testConfig.port
-			}]
+			}];
 		}
 
 		return r;

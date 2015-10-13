@@ -24,7 +24,6 @@ var testConfig = fsUtils.readYAMLSync( path.join( __dirname, './test-config.yml'
 
 var globalConfig = {
 	host: testConfig.host,
-	useSSL: testConfig.useSSL,
 	xrfkey: testConfig.xrfkey,
 	fiddler: testConfig.fiddler
 };
@@ -96,7 +95,7 @@ describe( 'qrs', function () {
 			qrs2.getUrl( 'ssl/ping' ).should.equal( 'http://myHost:4242/sso/qrs/ssl/ping/?xrfkey=123456789ABCDEFG' );
 		} );
 
-		it( 'should return something for /about', function ( done ) {
+		it.only( 'should return something for /about', function ( done ) {
 
 			qrs.get( 'about' )
 				.then( function ( data ) {
