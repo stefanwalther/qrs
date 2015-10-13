@@ -209,7 +209,7 @@ qrs.request( 'GET', 'about', null, null)
         });
 ```
 
-### [.post](lib%5Cqrs.js#L243)
+### [.post](lib%5Cqrs.js#L252)
 
 Same as `request()` but with `method: 'POST'`.
 
@@ -220,7 +220,7 @@ Same as `request()` but with `method: 'POST'`.
 * **{Object}**: body Body to be posted, defined as JSON object.
 * `returns` __{_|promise}_*
 
-### [.delete](lib%5Cqrs.js#L256)
+### [.delete](lib%5Cqrs.js#L265)
 
 Same as `request()` but with `method: 'DELETE'`.
 
@@ -231,7 +231,7 @@ Same as `request()` but with `method: 'DELETE'`.
 * **{}**: urlParams
 * `returns` __{_|promise}_*
 
-### [.put](lib%5Cqrs.js#L271)
+### [.put](lib%5Cqrs.js#L280)
 
 Same as `request()` but with `method: 'PUT'`.
 
@@ -243,7 +243,7 @@ Same as `request()` but with `method: 'PUT'`.
 * **{}**: body
 * `returns` __{_|promise}_*
 
-### [.plugins](lib%5Cqrs.js#L286)
+### [.plugins](lib%5Cqrs.js#L295)
 
 Returns an array of loaded plugins. Use `registerPlugin()` to load a plugin.
 
