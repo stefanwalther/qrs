@@ -23,7 +23,7 @@ var globalConfig = {
 };
 var qrs;
 
-describe( 'qrs.mime', function () {
+describe( 'sugar-plugin: ep-mime', function () {
 
 	withData( setup.testLoop, function ( sessionInfo ) {
 
@@ -354,7 +354,7 @@ describe( 'qrs.mime', function () {
 					} );
 			} );
 
-			it.only( 'adding multiple entries from file should be able to fail (wrong entries)', function ( done ) {
+			it( 'adding multiple entries from file should be able to fail (wrong entries)', function ( done ) {
 				var sourceFile = path.resolve( './test/fixtures/error.txt' );
 				qrs.mime.addFromFile( sourceFile )
 					.then( function ( /*data*/ ) {
