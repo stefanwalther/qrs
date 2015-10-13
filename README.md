@@ -188,7 +188,7 @@ Return the Url for the REST call considering the given configuration options
 
 * `method` **{String}**: Http method, can be `GET`, `POST`, `PUT` or `DELETE` (defaults to `GET`).
 * `endpoint` **{String}**: Endpoint to be used. Check the online documentation of the Qlik Sense Repository API to get a list of all endpoints available.
-* `urlParams` **{String[]}**: Additional URL parameters, defined as key/value array.
+* `urlParams` **{Array<string,object>}**: Additional URL parameters, defined as key/value array.
 * `body` **{Object}**: JSON object to be used as the body for the Http request.
 * `returns` **{promise}**: Returns a promise.
 
@@ -215,7 +215,7 @@ Same as `request()` but with `method: 'POST'`.
 **Params**
 
 * `endpoint` **{String}**: QRS endpoint to be used.
-* `urlParams` **{String[]}**: Additional URL parameters, defined as key/value array.
+* `urlParams` **{Object}**: Additional URL parameters, defined as key/value array.
 * `body` **{Object}**: Body to be posted, defined as JSON object.
 * `returns` __{_|promise}_*
 
