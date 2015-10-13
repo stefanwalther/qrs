@@ -168,7 +168,7 @@ Retrieve a single configuration property.
 **Params**
 
 * `key` **{String}**: Key of the property
-* `returns` **{<string,object>}**: Value of the requested property, otherwise undefined.
+* `returns` **{Object}**: Value of the requested property, otherwise undefined.
 
 ### [.getUrl](lib%5Cqrs.js#L109)
 
@@ -177,7 +177,7 @@ Return the Url for the REST call considering the given configuration options
 **Params**
 
 * `endpoint` **{string}**: Endpoint for the qrs call.
-* `params` **{<String,String>[]}**: Additional URL parameters as key/value array.
+* `urlParams` **{Array<string,object>}**: Additional URL parameters as key/value array.
 * `returns` **{String}**: The constructed Url.
 
 ### [.request](lib%5Cqrs.js#L177)
@@ -215,7 +215,7 @@ Same as `request()` but with `method: 'POST'`.
 **Params**
 
 * `endpoint` **{String}**: QRS endpoint to be used.
-* `urlParams` **{Object}**: Additional URL parameters, defined as key/value array.
+* `urlParams` **{Array<string,object>}**: Additional URL parameters, defined as key/value array.
 * `body` **{Object}**: Body to be posted, defined as JSON object.
 * `returns` __{_|promise}_*
 
