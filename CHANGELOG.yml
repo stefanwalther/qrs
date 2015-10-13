@@ -1,0 +1,4 @@
+v0.2.0:
+  date: "2015-10-12"
+  changes:
+    - "Changed qrs.query to qrs.request"
