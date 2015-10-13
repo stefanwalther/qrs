@@ -17,7 +17,7 @@ var TestSetup = function () {
 				headerValue: testConfig.authentication.header.headerValue,
 				virtualProxy: testConfig.authentication.header.virtualProxy,
 				port: testConfig.authentication.header.port || testConfig.port,
-				useSSL: _.isEmpty( testConfig.authentication.header.useSSL ) ? testConfig.useSSL : testConfig.authentication.header.useSSL
+				useSSL: _.isBoolean( testConfig.authentication.header.useSSL ) ? testConfig.authentication.header.useSSL : testConfig.useSSL
 			}];
 		}
 		if ( testConfig.authentication.ntlm.enabled ) {
@@ -33,7 +33,7 @@ var TestSetup = function () {
 				authentication: 'certificates',
 				headerKey: testConfig.authentication.certificates.headerKey,
 				headerValue: testConfig.authentication.certificates.headerValue,
-				useSSL: testConfig.authentication.certificates.cert || testConfig.useSSL,
+				useSSL: _.isBoolean(testConfig.authentication.certificates.useSSL) ? testConfig.authentication.certificates.useSSL : testConfig.useSSL,
 				cert: testConfig.authentication.certificates.cert,
 				key: testConfig.authentication.certificates.key,
 				ca: testConfig.authentication.certificates.ca,
@@ -42,15 +42,13 @@ var TestSetup = function () {
 				port: testConfig.authentication.certificates.port || testConfig.port
 			}];
 		}
-
 		return r;
-
 	}
 
 	return {
 		testLoop: getTestLoop()
-	}
+	};
 
 };
 
-module.exports = new TestSetup;
+module.exports = new TestSetup();

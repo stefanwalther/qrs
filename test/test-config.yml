@@ -14,11 +14,11 @@ authentication:
     enabled: false
     virtualProxy:
   certificates:
-    enabled: false
+    enabled: true
     virtualProxy:
-    cert: D:\CertStore\rd-swr-ms13\client.pem			  # Do not escape backslash in yml !
-    key: D:\CertStore\rd-swr-ms13\client_key.pem		# Do not escape backslash in yml !
-    ca: D:\CertStore\rd-swr-ms13\root.pem				    # Do not escape backslash in yml !
+    cert: D:\CertStore\qrs-test\client.pem			  # Do not escape backslash in yml !
+    key: D:\CertStore\qrs-test\client_key.pem		  # Do not escape backslash in yml !
+    ca: D:\CertStore\qrs-test\root.pem				    # Do not escape backslash in yml !
     passphrase:
     port: 4242
     useSSL: true

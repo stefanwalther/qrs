@@ -95,7 +95,7 @@ describe( 'qrs', function () {
 			qrs2.getUrl( 'ssl/ping' ).should.equal( 'http://myHost:4242/sso/qrs/ssl/ping/?xrfkey=123456789ABCDEFG' );
 		} );
 
-		it.only( 'should return something for /about', function ( done ) {
+		it( 'should return something for /about', function ( done ) {
 
 			qrs.get( 'about' )
 				.then( function ( data ) {
