@@ -161,26 +161,26 @@ Change a single configuration property.
 qrs.set('host', 'myhost.domain.com');
 ```
 
-### [.getConfigValue](lib%5Cqrs.js#L96)
+### [.getConfigValue](lib%5Cqrs.js#L97)
 
 Retrieve a single configuration property.
 
 **Params**
 
-* **{}**: key {String}  Key of the property
-* `returns` **{*}**: Value of the requested property, otherwise undefined.
+* `key` **{String}**: Key of the property
+* `returns` **{<string,object>}**: Value of the requested property, otherwise undefined.
 
-### [.getUrl](lib%5Cqrs.js#L108)
+### [.getUrl](lib%5Cqrs.js#L109)
 
 Return the Url for the REST call considering the given configuration options
 
 **Params**
 
-* **{}**: endpoint {string} Endpoint for the qrs call.
-* **{}**: {{String,String}[]} params Additional URL parameters as key/value array.
+* `endpoint` **{string}**: Endpoint for the qrs call.
+* `params` **{<String,String>[]}**: Additional URL parameters as key/value array.
 * `returns` **{String}**: The constructed Url.
 
-### [.request](lib%5Cqrs.js#L176)
+### [.request](lib%5Cqrs.js#L177)
 
 (Internal) generic method to send requests to QRS. Typically this method is only used internally, use `get`, `post`, `put` or `delete`.
 
@@ -208,7 +208,7 @@ qrs.request( 'GET', 'about', null, null)
         });
 ```
 
-### [.post](lib%5Cqrs.js#L252)
+### [.post](lib%5Cqrs.js#L253)
 
 Same as `request()` but with `method: 'POST'`.
 
@@ -219,27 +219,19 @@ Same as `request()` but with `method: 'POST'`.
 * `body` **{Object}**: Body to be posted, defined as JSON object.
 * `returns` __{_|promise}_*
 
-### [.delete](lib%5Cqrs.js#L265)
+### [.delete](lib%5Cqrs.js#L262)
 
 Same as `request()` but with `method: 'DELETE'`.
 
-**Params**
-
-* **{}**: endpoint
-* **{}**: id
-* **{}**: urlParams
-* `returns` __{_|promise}_*
-
-### [.put](lib%5Cqrs.js#L274)
+### [.put](lib%5Cqrs.js#L271)
 
 Same as `request()` but with `method: 'PUT'`.
 
-### [.plugins](lib%5Cqrs.js#L289)
+### [.plugins](lib%5Cqrs.js#L286)
 
 Returns an array of loaded plugins. Use `registerPlugin()` to load a plugin.
 
 <!--## Examples-->
-{%= docs('examples') %}
 
 ## Running tests
 
