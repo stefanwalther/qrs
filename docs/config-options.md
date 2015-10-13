@@ -9,9 +9,9 @@ The configuration passed to the constructor of *qrs* drives how authentication i
 
 ```javascript
 var config = {
+	authentication: 'header',
 	host: 'server.mydomain.com',
 	useSSL: true,
-	authentication: 'header',
 	virtualProxy: 'hdr',
 	headerKey: 'hdr-usr',
 	headerValue: 'mydomain\\justme'
@@ -22,9 +22,9 @@ var config = {
 
 ```js
 var config = {
+	authentication: 'certificates',
 	host: 'server.mydomain.com',
 	useSSL: true,
-	authentication: 'certificates',
 	cert: 'C:\\CertStore\\client.pem',
 	key: 'C:\\CertStore\\client_key.pem',
 	ca: 'C:\\CertStore\\root.pem',
@@ -39,8 +39,8 @@ var config = {
 * **`host`** - Qualified / fully qualified name or IP-address of the server where the Qlik Sense Repository server is running on, defaults to "`127.0.0.1`"
 * **`useSSL`** - Whether to use SSL or not, defaults to `false`. 
 * **`authentication`** - Authentication method, can be "`windows`", "`certificates`" or "`header`", defaults to "`windows`".
-* **`headerKey`** - 
-* **`headerValue`** - 
+* **`headerKey`** - Header key.
+* **`headerValue`** - Header value.
 * **`virtualProxy`** - Name of the virtual proxy.
 * **`port`** - Port to be used.
 
