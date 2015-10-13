@@ -1,4 +1,6 @@
-v0.2.0:
-  date: "2015-10-12"
+v1.0.0:
+  date: "2015-10-13"
   changes:
-    - "Changed qrs.query to qrs.request"
+    - "Breaking change: Changed qrs.query to qrs.request"
+  fixes:
+    - "Merge PR: Adding missing require and typechecking certs (#1)"
