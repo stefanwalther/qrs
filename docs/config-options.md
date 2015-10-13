@@ -14,7 +14,7 @@ var config = {
 	authentication: 'header',
 	virtualProxy: 'hdr',
 	headerKey: 'hdr-usr',
-	headerValue: 'mydomain\justme'
+	headerValue: 'mydomain\\justme'
 }; 
 ```
 
