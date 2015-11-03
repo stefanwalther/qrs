@@ -6,4 +6,5 @@ There are several options to ensure that communication between this node.js modu
 
 
 **Authenticating with a server certificate**
+* [Authenticating with Certificates: Setup and Configuration](https://github.com/stefanwalther/articles/tree/master/authentication-certificates)
 * [Authenticating with the server certificate](http://help.qlik.com/sense/2.1/en-us/developer/Subsystems/RepositoryServiceAPI/Content/RepositoryServiceAPI/RepositoryServiceAPI-Connect-API-Authenticate-Reqs-Certificate.htm) in Qlik Sense Help for Developer 2.1.1
