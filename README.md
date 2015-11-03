@@ -20,6 +20,9 @@ $ npm i qrs --save
 * [Configuration Options](#configuration-options)
 * [Server Setup](#server-setup)
 * [API](#api)
+* [Plugins](#plugins)
+  - [Mime types (mime)](#mime-types--mime-)
+
 * [Running tests](#running-tests)
 * [Contributing](#contributing)
 * [Author](#author)
@@ -290,7 +293,7 @@ Same as `request()` but with `method: 'PUT'`.
 
 Returns an array of loaded plugins. Use `registerPlugin()` to load a plugin.
 
-### [.registerPlugin](lib%5Cqrs.js#L388)
+### [.registerPlugin](lib%5Cqrs.js#L386)
 
 Register a plugin to work with the base class of `qrs`. Have a look at some of the already existing plugins like `./lib/sugar/ep-mime.js`
 
@@ -307,8 +310,6 @@ Register a plugin to work with the base class of `qrs`. Have a look at some of t
 // Purpose: Do something great with extensions.
 // Filename: ep-extension.js
 // -----------------------------------------------------------
-'use strict';
-_ = require( 'lodash' );
 
 function Extension ( base ) {
 
@@ -342,6 +343,152 @@ qrs.extension.upload( myFile, function( result ) {
         // The file has been uploaded
 });
 ```
+
+## Plugins
+
+Think of plugins as some kind of sugar layer with additional business logic on top of `qrs`.
+It is easy to either add new plugins to the `qrs` repository or just to load some external code/plugin.
+The list of built-in plugins is probably and hopefully a growing one (and hopefully not only created by the author of this document).
+
+The following plugins are available with the current version of `qrs`:
+
+### Mime types (mime)
+
+Mime type definition
+
+### [Mime](lib%5Csugar%5Cep-mime.js#L25)
+
+Handle Mime types in QRS.
+
+**Params**
+
+* **{}**: base
+
+### [add](lib%5Csugar%5Cep-mime.js#L95)
+
+Adds a mime type.
+
+When adding the mime type, the following validation logic will be performed:
+
+* All existing mime types will be grouped by mime, additionalHeaders and binary.
+* If there is already a mime type with the same information compared to the given one, the field extension will be updated.
+An example is listed below.
+
+**Params**
+
+* **{Object}**: mimeTypeDef
+* **{string}**: mimeTypeDef.mime - Mime type, e.g. "application/markdown".
+* **{string}**: mimeTypeDef.extensions - Comma delimited string of supported file extensions, e.g. "md,markdown".
+* **{boolean}**: mimeTypeDef.additionalHeaders - Additional headers, defaults to null.
+* **{boolean}**: mimeTypeDef.binary - Whether this is a binary file type or not.
+* `returns` **{promise}**
+
+**Example**
+
+```js
+// -----------------------------------------------------------------
+// Inserting logic
+// -----------------------------------------------------------------     *
+
+// Assuming that the following mime type is already stored:
+{
+    extensions: "md"
+    mime: "application/markdown",
+    additionalHeaders: null,
+    binary: false
+}
+// If you add the following mime type
+{
+    extensions: "markdown"
+    mime: "application/markdown",
+    additionalHeaders: null,
+    binary: false
+}
+//this would then result into:
+{
+    extensions: "md,markdown"
+    mime: "application/markdown",
+    additionalHeaders: null,
+    binary: false
+}
+
+// -----------------------------------------------------------------
+// Adding a mime type:
+// -----------------------------------------------------------------
+
+var mimeType = {
+    extensions: "md"
+    mime: "application/markdown",
+    additionalHeaders: null,
+    binary: false
+}
+
+qrs.mime.add( mimeType )
+        .then( function (result ) {
+            // work with the result
+        }, function (err) {
+            // error handling
+});
+```
+
+### [get](lib%5Csugar%5Cep-mime.js#L148)
+
+Returns a list of existing mime types.
+
+The list can be filtered by the file-extensions as shown in the example.
+
+**Params**
+
+* **{string}**: filter
+* `returns` **{promise}**
+
+**Example**
+
+```js
+getMimeTypes( 'html')
+   .then( function (data) {
+
+        // data now contains an array of mime types where the field extensions contains "html"
+        // Results: html, xhtml, etc.
+
+    })
+```
+
+### [addMultiple](lib%5Csugar%5Cep-mime.js#L165)
+
+Adds an array of mime types
+(See `add` for more information about `mimeTypeDef`).
+
+**Params**
+
+* **{mimeTypeDef[]}**: mimeTypeDefs - Array of mime type definitions.
+* `returns` **{promise}**
+
+### [addFromFile](lib%5Csugar%5Cep-mime.js#L210)
+
+Add mime types defined in a file. Every line in the file is defined by the following entries, delimited by a semi-colon (;): - extensions - {string} file extension, multiple values separated by a comma, e.g. "md,markdown" - mime - {string} Mime type - additionalHeaders - {boolean} Additional defined headers, leave blank if unsure - binary - {boolean} Whether this is a binary format or not.
+
+**Params**
+* **{String}**: filePath - Absolute file path.
+* `returns` **{promise}**
+
+**Example**
+
+```bash
+md;application/markdown;;false
+yml;text/yml;;false
+woff2;application/font-woff2;;true
+```
+
+### [getUpdateOrInsert](lib%5Csugar%5Cep-mime.js#L306)
+
+Returns whether the mime type already exists or not.
+
+**Params**
+
+* **{mimeTypeDef}**: mimeTypeDef
+* `returns` **{object}**: result - Returned result.
+* `returns` **{boolean}**: result.isUpdate - Whether to update or add.
 
 <!--## Examples-->
 
