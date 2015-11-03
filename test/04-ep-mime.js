@@ -104,7 +104,17 @@ describe( 'sugar-plugin: ep-mime', function () {
 		} );
 
 		it( 'can create an export', function ( done ) {
-			qrs.mime.createExport( path.resolve( './test/mimetypes.txt' ) )
+			qrs.mime.createExport( path.resolve( './test/mimetypes.text' ) )
+				.then( function ( path ) {
+					expect( path ).to.exist;
+				} )
+				.done( function () {
+					done();
+				} );
+		} );
+
+		it.only( 'can create an export (per file extension)', function ( done ) {
+			qrs.mime.createExportPerFileExt( path.resolve( './test/mimetypes_single.json' ) )
 				.then( function ( path ) {
 					expect( path ).to.exist;
 				} )
