@@ -480,7 +480,7 @@ yml;text/yml;;false
 woff2;application/font-woff2;;true
 ```
 
-### [getUpdateOrInsert](lib%5Csugar%5Cep-mime.js#L306)
+### [getUpdateOrInsert](lib%5Csugar%5Cep-mime.js#L311)
 
 Returns whether the mime type already exists or not.
 

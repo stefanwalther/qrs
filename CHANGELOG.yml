@@ -1,3 +1,7 @@
+v1.1.0:
+  data: "2015-11-03"
+  enhancements:
+    - "Finish documentation."
 v1.0.0:
   date: "2015-10-13"
   changes:
