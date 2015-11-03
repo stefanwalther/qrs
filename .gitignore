@@ -13,3 +13,4 @@ vendor
 .idea
 /scratches
 /test/mimetypes.txt
+/test/mimetypes_single.json
