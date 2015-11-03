@@ -2,9 +2,6 @@ The configuration passed to the constructor of *qrs* drives how authentication i
 
 ### Typical configurations
 
-**Example using Windows authentication**
-(TBD)
-
 **Example using header authentication**
 
 ```javascript
@@ -36,13 +33,16 @@ var config = {
 
 ### All options
 
+* **`authentication`** - Authentication method, can be "`windows`", "`certificates`" or "`header`", defaults to "`windows`".
 * **`host`** - Qualified / fully qualified name or IP-address of the server where the Qlik Sense Repository server is running on, defaults to "`127.0.0.1`"
 * **`useSSL`** - Whether to use SSL or not, defaults to `false`. 
-* **`authentication`** - Authentication method, can be "`windows`", "`certificates`" or "`header`", defaults to "`windows`".
 * **`headerKey`** - Header key.
 * **`headerValue`** - Header value.
 * **`virtualProxy`** - Name of the virtual proxy.
 * **`port`** - Port to be used.
+* **`cert`** - Path to client certificate file (client.pem).
+* **`key`** - Path to client key file (client_key.pem).
+* **`ca`** - Path to ca file (root.pem)
 
 
 

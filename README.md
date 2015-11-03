@@ -12,11 +12,13 @@ $ npm i qrs --save
 
 ***
 
+## Table of Contents
+
 <!-- toc -->
 
 * [Usage](#usage)
 * [Configuration Options](#configuration-options)
-* [Prepare Qlik Sense server](#prepare-qlik-sense-server)
+* [Server Setup](#server-setup)
 * [API](#api)
 * [Running tests](#running-tests)
 * [Contributing](#contributing)
@@ -57,10 +59,6 @@ The configuration passed to the constructor of _qrs_ drives how authentication i
 
 ### Typical configurations
 
-**Example using Windows authentication**
-
-(TBD)
-
 **Example using header authentication**
 
 ```javascript
@@ -92,22 +90,29 @@ var config = {
 
 ### All options
 
+* **`authentication`** - Authentication method, can be "`windows`", "`certificates`" or "`header`", defaults to "`windows`".
 * **`host`** - Qualified / fully qualified name or IP-address of the server where the Qlik Sense Repository server is running on, defaults to "`127.0.0.1`"
 * **`useSSL`** - Whether to use SSL or not, defaults to `false`.
-* **`authentication`** - Authentication method, can be "`windows`", "`certificates`" or "`header`", defaults to "`windows`".
 * **`headerKey`** - Header key.
 * **`headerValue`** - Header value.
 * **`virtualProxy`** - Name of the virtual proxy.
 * **`port`** - Port to be used.
+* **`cert`** - Path to client certificate file (client.pem).
+* **`key`** - Path to client key file (client_key.pem).
+* **`ca`** - Path to ca file (root.pem)
 
-## Prepare Qlik Sense server
+## Server Setup
 
 There are several options to ensure that communication between this node.js module and Qlik Sense server is working properly:
 
-* 
-**Authenticating with a server certificate** - See http://help.qlik.com/sense/2.1/en-us/developer/Subsystems/RepositoryServiceAPI/Content/RepositoryServiceAPI/RepositoryServiceAPI-Connect-API-Authenticate-Reqs-Certificate.htm
-* 
-**Authenticating with HTTP headers** - See http://help.qlik.com/sense/2.1/en-us/developer/Subsystems/RepositoryServiceAPI/Content/RepositoryServiceAPI/RepositoryServiceAPI-Connect-API-Authenticate-Reqs-Http-Headers.htm
+**Authenticating with HTTP headers**
+
+* [Using Header Authentication in Qlik Sense: Setup and Configuration](https://github.com/stefanwalther/articles/tree/master/header-authentication-configuration)
+* [Authenticating with HTTP headers](http://help.qlik.com/sense/2.1/en-us/developer/Subsystems/RepositoryServiceAPI/Content/RepositoryServiceAPI/RepositoryServiceAPI-Connect-API-Authenticate-Reqs-Http-Headers.htm) in Qlik Sense Help for Developers 2.1.1
+
+**Authenticating with a server certificate**
+
+* [Authenticating with the server certificate](http://help.qlik.com/sense/2.1/en-us/developer/Subsystems/RepositoryServiceAPI/Content/RepositoryServiceAPI/RepositoryServiceAPI-Connect-API-Authenticate-Reqs-Certificate.htm) in Qlik Sense Help for Developer 2.1.1
 
 ## API
 
@@ -130,7 +135,7 @@ var config =  {
 var qrs = new QRS( config );
 ```
 
-### [.setConfig](lib%5Cqrs.js#L56)
+### [.setConfig](lib%5Cqrs.js#L83)
 
 Set global configurations options for qrs. Can be used to change the configuration options after `qrs` has been initialized.
 
@@ -138,17 +143,56 @@ Set global configurations options for qrs. Can be used to change the configurati
 
 * `qrsConfig` **{Object}**: Global configuration options
 
-### [.getConfig](lib%5Cqrs.js#L69)
+**Example**
+
+```js
+var QRS = require('qrs');
+var configCert = {
+    authentication: 'certificates',
+    ...
+};
+var qrs = new QRS( configCert );
+
+// Talking to the server using certificates
+qrs.get('/about', function( result ) {
+    // ...
+});
+
+// Change configuration options, e.g.
+var configHeader = {
+    authentication: 'header',
+    ...
+};
+
+qrs.setConfig( configHeader);
+
+// Talking to the server, now using header authentication.
+qrs.get('/about', function( result ) {
+ // ...
+});
+```
+
+### [.getConfig](lib%5Cqrs.js#L106)
 
 Return the current configuration options.
 
 * `returns` **{qrsConfig}** `qrsConfig`: Configuration object.
 
-### [.set](lib%5Cqrs.js#L86)
+**Example**
+
+```js
+var QRS = require('qrs');
+var config = {
+    host: 'myserver.domain.com';
+};
+var qrs = new QRS( config );
+var host = qrs.getConfig( 'host' );
+console.log(host); //<== 'myserver.domain.com'
+```
+
+### [.set](lib%5Cqrs.js#L134)
 
 Change a single configuration property.
-
-**Example:**
 
 **Params**
 
@@ -158,10 +202,23 @@ Change a single configuration property.
 **Example**
 
 ```js
-qrs.set('host', 'myhost.domain.com');
+var QRS = require('qrs');
+var config = {
+    host: 'myserver.domain.com';
+};
+var qrs = new QRS( config );
+
+qrs.get('/about', function( result ) {
+    // about from myserver.domain.com
+});
+
+qrs.set('host', 'mysecondserver.domain.com');
+qrs.get('/about', function( result ) {
+ // about from mysecondserver.domain.com
+});
 ```
 
-### [.getConfigValue](lib%5Cqrs.js#L97)
+### [.getConfigValue](lib%5Cqrs.js#L145)
 
 Retrieve a single configuration property.
 
@@ -170,7 +227,7 @@ Retrieve a single configuration property.
 * `key` **{String}**: Key of the property
 * `returns` **{Object}**: Value of the requested property, otherwise undefined.
 
-### [.getUrl](lib%5Cqrs.js#L111)
+### [.getUrl](lib%5Cqrs.js#L159)
 
 Return the Url for the REST call considering the given configuration options
 
@@ -182,7 +239,7 @@ Return the Url for the REST call considering the given configuration options
 * `urlParam.value` **{Object}**: Value.
 * `returns` **{String}**: The constructed Url.
 
-### [.request](lib%5Cqrs.js#L179)
+### [.request](lib%5Cqrs.js#L224)
 
 (Internal) generic method to send requests to QRS. Typically this method is only used internally, use `get`, `post`, `put` or `delete`.
 
@@ -210,7 +267,7 @@ qrs.request( 'GET', 'about', null, null)
         });
 ```
 
-### [.post](lib%5Cqrs.js#L255)
+### [.post](lib%5Cqrs.js#L300)
 
 Same as `request()` but with `method: 'POST'`.
 
@@ -221,17 +278,70 @@ Same as `request()` but with `method: 'POST'`.
 * `body` **{Object}**: Body to be posted, defined as JSON object.
 * `returns` __{_|promise}_*
 
-### [.delete](lib%5Cqrs.js#L264)
+### [.delete](lib%5Cqrs.js#L309)
 
 Same as `request()` but with `method: 'DELETE'`.
 
-### [.put](lib%5Cqrs.js#L273)
+### [.put](lib%5Cqrs.js#L318)
 
 Same as `request()` but with `method: 'PUT'`.
 
-### [.plugins](lib%5Cqrs.js#L288)
+### [.plugins](lib%5Cqrs.js#L333)
 
 Returns an array of loaded plugins. Use `registerPlugin()` to load a plugin.
+
+### [.registerPlugin](lib%5Cqrs.js#L388)
+
+Register a plugin to work with the base class of `qrs`. Have a look at some of the already existing plugins like `./lib/sugar/ep-mime.js`
+
+**Params**
+
+* **{Object}**: plugin
+
+**Example**
+
+```js
+// -----------------------------------------------------------
+// Define the plugin.
+// ~~
+// Purpose: Do something great with extensions.
+// Filename: ep-extension.js
+// -----------------------------------------------------------
+'use strict';
+_ = require( 'lodash' );
+
+function Extension ( base ) {
+
+    var that = this;
+    that.baseClass = base;
+
+    function doSomething() {
+        this.query( 'extension/schema')
+            .then( function( result ) {
+                // result now holding the result from the server
+            }, function (err) {
+                // error handling
+            });
+
+        return {
+            doSomething: doSomething
+        };
+}
+
+module.exports = Extension;
+
+// -----------------------------------------------------------
+// Register and use it
+// -----------------------------------------------------------
+
+var qrs = new QRS( config );
+qrs.registerPlugin('./ep-extension.js');
+
+// Use the plugin
+qrs.extension.upload( myFile, function( result ) {
+        // The file has been uploaded
+});
+```
 
 <!--## Examples-->
 
