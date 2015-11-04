@@ -142,7 +142,66 @@ var config =  {
 var qrs = new QRS( config );
 ```
 
-### [.setConfig](lib%5Cqrs.js#L83)
+### [.request](lib%5Cqrs.js#L76)
+
+(Internal) generic method to send requests to QRS. Typically this method is only used internally, use `get`, `post`, `put` or `delete`.
+
+**Params**
+
+* `method` **{String}**: Http method, can be `GET`, `POST`, `PUT` or `DELETE` (defaults to `GET`).
+* `endpoint` **{String}**: Endpoint to be used. Check the online documentation of the Qlik Sense Repository API to get a list of all endpoints available.
+* `urlParams` **{Array<string,object>}**: Additional URL parameters, defined as key/value array.
+* `body` **{Object}**: JSON object to be used as the body for the Http request.
+* `returns` **{promise}**: Returns a promise.
+
+**Example**
+
+```js
+var QRS = require('qrs');
+
+var qrsConfig = ...; // Set configuration options
+var qrs = new QRS( qrsConfig );
+
+qrs.request( 'GET', 'about', null, null)
+   .then( function( data ) {
+            console.log( 'about', data );
+        }, function ( err ) {
+            console.error( 'An error occurred: ', err);
+        });
+```
+
+### [.post](lib%5Cqrs.js#L171)
+
+Same as `request()` but with `method: 'POST'`.
+
+**Params**
+
+* `endpoint` **{String}**: QRS endpoint to be used.
+* `urlParams` **{Array<string,object>}**: Additional URL parameters, defined as key/value array.
+* `body` **{Object}**: Body to be posted, defined as JSON object.
+* `returns` __{_|promise}_*
+
+### [.put](lib%5Cqrs.js#L179)
+
+Same as `request()` but with `method: 'PUT'`.
+
+### [.delete](lib%5Cqrs.js#L189)
+
+Same as `request()` but with `method: 'DELETE'`.
+
+### [.getUrl](lib%5Cqrs.js#L204)
+
+Return the Url for the REST call considering the given configuration options
+
+**Params**
+
+* `endpoint` **{string}**: Endpoint for the qrs call.
+* `urlParams` **{Object[]}**: Additional URL parameters as key/value array.
+* `urlParam.key` **{String}**: Key.
+* `urlParam.value` **{Object}**: Value.
+* `returns` **{String}**: The constructed Url.
+
+### [.setConfig](lib%5Cqrs.js#L257)
 
 Set global configurations options for qrs. Can be used to change the configuration options after `qrs` has been initialized.
 
@@ -179,7 +238,7 @@ qrs.get('/about', function( result ) {
 });
 ```
 
-### [.getConfig](lib%5Cqrs.js#L106)
+### [.getConfig](lib%5Cqrs.js#L280)
 
 Return the current configuration options.
 
@@ -197,7 +256,7 @@ var host = qrs.getConfig( 'host' );
 console.log(host); //<== 'myserver.domain.com'
 ```
 
-### [.set](lib%5Cqrs.js#L134)
+### [.set](lib%5Cqrs.js#L308)
 
 Change a single configuration property.
 
@@ -225,7 +284,7 @@ qrs.get('/about', function( result ) {
 });
 ```
 
-### [.getConfigValue](lib%5Cqrs.js#L145)
+### [.getConfigValue](lib%5Cqrs.js#L319)
 
 Retrieve a single configuration property.
 
@@ -233,65 +292,6 @@ Retrieve a single configuration property.
 
 * `key` **{String}**: Key of the property
 * `returns` **{Object}**: Value of the requested property, otherwise undefined.
-
-### [.getUrl](lib%5Cqrs.js#L159)
-
-Return the Url for the REST call considering the given configuration options
-
-**Params**
-
-* `endpoint` **{string}**: Endpoint for the qrs call.
-* `urlParams` **{Object[]}**: Additional URL parameters as key/value array.
-* `urlParam.key` **{String}**: Key.
-* `urlParam.value` **{Object}**: Value.
-* `returns` **{String}**: The constructed Url.
-
-### [.request](lib%5Cqrs.js#L224)
-
-(Internal) generic method to send requests to QRS. Typically this method is only used internally, use `get`, `post`, `put` or `delete`.
-
-**Params**
-
-* `method` **{String}**: Http method, can be `GET`, `POST`, `PUT` or `DELETE` (defaults to `GET`).
-* `endpoint` **{String}**: Endpoint to be used. Check the online documentation of the Qlik Sense Repository API to get a list of all endpoints available.
-* `urlParams` **{Array<string,object>}**: Additional URL parameters, defined as key/value array.
-* `body` **{Object}**: JSON object to be used as the body for the Http request.
-* `returns` **{promise}**: Returns a promise.
-
-**Example**
-
-```js
-var QRS = require('qrs');
-
-var qrsConfig = ...; // Set configuration options
-var qrs = new QRS( qrsConfig );
-
-qrs.request( 'GET', 'about', null, null)
-   .then( function( data ) {
-            console.log( 'about', data );
-        }, function ( err ) {
-            console.error( 'An error occurred: ', err);
-        });
-```
-
-### [.post](lib%5Cqrs.js#L300)
-
-Same as `request()` but with `method: 'POST'`.
-
-**Params**
-
-* `endpoint` **{String}**: QRS endpoint to be used.
-* `urlParams` **{Array<string,object>}**: Additional URL parameters, defined as key/value array.
-* `body` **{Object}**: Body to be posted, defined as JSON object.
-* `returns` __{_|promise}_*
-
-### [.delete](lib%5Cqrs.js#L309)
-
-Same as `request()` but with `method: 'DELETE'`.
-
-### [.put](lib%5Cqrs.js#L318)
-
-Same as `request()` but with `method: 'PUT'`.
 
 ### [.plugins](lib%5Cqrs.js#L333)
 
