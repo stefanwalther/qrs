@@ -23,7 +23,7 @@ var globalConfig = {
 };
 var qrs;
 
-describe( 'sugar-plugin: ep-mime', function () {
+describe.only( 'sugar-plugin: ep-mime', function () {
 
 	withData( setup.testLoop, function ( sessionInfo ) {
 
@@ -51,6 +51,12 @@ describe( 'sugar-plugin: ep-mime', function () {
 				done();
 			}
 		} );
+
+		after( function ( done ) {
+			fsUtils.del(['./test/mimetypes.text', './test/mimetypes_single.json'], function () {
+				done();
+			});
+		});
 
 		it( 'mime should be an object', function () {
 			expect( qrs.mime ).to.exist;
@@ -247,7 +253,7 @@ describe( 'sugar-plugin: ep-mime', function () {
 			} );
 
 			//Todo: Test should be done once, and not for all authentication scenarios
-			it( 'add multiple entries should throw an error if server is not available', function ( done ) {
+			it.only( 'add multiple entries should throw an error if server is not available', function ( done ) {
 				var config = JSON.parse( JSON.stringify( testConfig ) ); // clone the object
 				config.host = 'not_a_server';
 				var qrs2 = new QRS( config );
@@ -266,8 +272,6 @@ describe( 'sugar-plugin: ep-mime', function () {
 						expect( data ).to.not.exist;
 					}, function ( err ) {
 						expect( err ).to.exist;
-						expect( err.error ).to.exist;
-						expect( err.error.code ).to.be.equal( 'ENOTFOUND' );
 					} )
 					.done( function () {
 						done();
@@ -386,8 +390,6 @@ describe( 'sugar-plugin: ep-mime', function () {
 					.then( function ( /*data*/ ) {
 					}, function ( err ) {
 						expect( err ).to.exist;
-						expect( err.error ).to.exist;
-						expect( err.error.code ).to.be.equal('ENOTFOUND');
 					} )
 					.done( function () {
 						done();
