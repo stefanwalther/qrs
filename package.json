@@ -25,6 +25,19 @@
     "url": "https://github.com/stefanwalther/qrs/issues"
   },
   "homepage": "https://github.com/stefanwalther/qrs",
+  "dependencies": {
+    "async": "^0.9.0",
+    "camelcase": "^1.2.1",
+    "extend-shallow": "^2.0.1",
+    "fs-utils": "^0.6.0",
+    "glob": "^5.0.15",
+    "httpreq": "^0.4.6",
+    "lodash": "^3.10.1",
+    "q": "^1.4.1",
+    "request": "^2.64.0",
+    "string": "^3.0.0",
+    "winston": "^0.9.0"
+  },
   "devDependencies": {
     "chai": "^3.3.0",
     "gulp": "git://github.com/gulpjs/gulp#4.0",
@@ -47,18 +60,6 @@
   ],
   "engines": {
     "node": ">=0.10.0"
-  },
-  "dependencies": {
-    "async": "^0.9.0",
-    "extend-shallow": "^2.0.1",
-    "fs-utils": "^0.6.0",
-    "glob": "^5.0.15",
-    "httpreq": "^0.4.6",
-    "lodash": "^3.10.1",
-    "q": "^1.4.1",
-    "request": "^2.64.0",
-    "string": "^3.0.0",
-    "winston": "^0.9.0"
   },
   "verb": {
     "baseUrl": "https://github.com/stefanwalther/qrs/blob/master/",
