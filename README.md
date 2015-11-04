@@ -297,7 +297,7 @@ Same as `request()` but with `method: 'PUT'`.
 
 Returns an array of loaded plugins. Use `registerPlugin()` to load a plugin.
 
-### [.registerPlugin](lib%5Cqrs.js#L386)
+### [.registerPlugin](lib%5Cqrs.js#L383)
 
 Register a plugin to work with the base class of `qrs`. Have a look at some of the already existing plugins like `./lib/sugar/ep-mime.js`
 
@@ -317,11 +317,8 @@ Register a plugin to work with the base class of `qrs`. Have a look at some of t
 
 function Extension ( base ) {
 
-    var that = this;
-    that.baseClass = base;
-
     function doSomething() {
-        this.query( 'extension/schema')
+        base.get( 'extension/schema')
             .then( function( result ) {
                 // result now holding the result from the server
             }, function (err) {
@@ -368,7 +365,7 @@ Handle Mime types in QRS.
 
 * **{}**: [qrs} base - Base class, instance of `qrs`.
 
-### [add](lib%5Csugar%5Cep-mime.js#L94)
+### [add](lib%5Csugar%5Cep-mime.js#L91)
 
 Adds a mime type.
 
@@ -435,7 +432,7 @@ qrs.mime.add( mimeType )
 });
 ```
 
-### [get](lib%5Csugar%5Cep-mime.js#L147)
+### [get](lib%5Csugar%5Cep-mime.js#L144)
 
 Returns a list of existing mime types.
 
@@ -458,7 +455,7 @@ getMimeTypes( 'html')
     })
 ```
 
-### [addMultiple](lib%5Csugar%5Cep-mime.js#L164)
+### [addMultiple](lib%5Csugar%5Cep-mime.js#L161)
 
 Adds an array of mime types
 (See `add` for more information about `mimeTypeDef`).
@@ -468,7 +465,7 @@ Adds an array of mime types
 * **{mimeTypeDef[]}**: mimeTypeDefs - Array of mime type definitions.
 * `returns` **{promise}**
 
-### [addFromFile](lib%5Csugar%5Cep-mime.js#L209)
+### [addFromFile](lib%5Csugar%5Cep-mime.js#L206)
 
 Add mime types defined in a file. Every line in the file is defined by the following entries, delimited by a semi-colon (;): - extensions - {string} file extension, multiple values separated by a comma, e.g. "md,markdown" - mime - {string} Mime type - additionalHeaders - {boolean} Additional defined headers, leave blank if unsure - binary - {boolean} Whether this is a binary format or not.
 
@@ -484,7 +481,7 @@ yml;text/yml;;false
 woff2;application/font-woff2;;true
 ```
 
-### [getUpdateOrInsert](lib%5Csugar%5Cep-mime.js#L310)
+### [getUpdateOrInsert](lib%5Csugar%5Cep-mime.js#L307)
 
 Returns whether the mime type already exists or not.
 
