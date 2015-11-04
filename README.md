@@ -363,7 +363,7 @@ Handle Mime types in QRS.
 
 **Params**
 
-* **{}**: [qrs} base - Base class, instance of `qrs`.
+* **{qrs}**: base - Base class, instance of `qrs`.
 
 ### [add](lib%5Csugar%5Cep-mime.js#L91)
 
