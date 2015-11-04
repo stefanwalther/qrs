@@ -360,15 +360,15 @@ The following plugins are available with the current version of `qrs`:
 
 Mime type definition
 
-### [Mime](lib%5Csugar%5Cep-mime.js#L25)
+### [Mime](lib%5Csugar%5Cep-mime.js#L24)
 
 Handle Mime types in QRS.
 
 **Params**
 
-* **{}**: base
+* **{}**: [qrs} base - Base class, instance of `qrs`.
 
-### [add](lib%5Csugar%5Cep-mime.js#L95)
+### [add](lib%5Csugar%5Cep-mime.js#L94)
 
 Adds a mime type.
 
@@ -435,7 +435,7 @@ qrs.mime.add( mimeType )
 });
 ```
 
-### [get](lib%5Csugar%5Cep-mime.js#L148)
+### [get](lib%5Csugar%5Cep-mime.js#L147)
 
 Returns a list of existing mime types.
 
@@ -458,7 +458,7 @@ getMimeTypes( 'html')
     })
 ```
 
-### [addMultiple](lib%5Csugar%5Cep-mime.js#L165)
+### [addMultiple](lib%5Csugar%5Cep-mime.js#L164)
 
 Adds an array of mime types
 (See `add` for more information about `mimeTypeDef`).
@@ -468,7 +468,7 @@ Adds an array of mime types
 * **{mimeTypeDef[]}**: mimeTypeDefs - Array of mime type definitions.
 * `returns` **{promise}**
 
-### [addFromFile](lib%5Csugar%5Cep-mime.js#L210)
+### [addFromFile](lib%5Csugar%5Cep-mime.js#L209)
 
 Add mime types defined in a file. Every line in the file is defined by the following entries, delimited by a semi-colon (;): - extensions - {string} file extension, multiple values separated by a comma, e.g. "md,markdown" - mime - {string} Mime type - additionalHeaders - {boolean} Additional defined headers, leave blank if unsure - binary - {boolean} Whether this is a binary format or not.
 
@@ -484,7 +484,7 @@ yml;text/yml;;false
 woff2;application/font-woff2;;true
 ```
 
-### [getUpdateOrInsert](lib%5Csugar%5Cep-mime.js#L311)
+### [getUpdateOrInsert](lib%5Csugar%5Cep-mime.js#L310)
 
 Returns whether the mime type already exists or not.
 
