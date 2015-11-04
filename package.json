@@ -58,5 +58,9 @@
     "request": "^2.64.0",
     "string": "^3.0.0",
     "winston": "^0.9.0"
+  },
+  "verb": {
+    "baseUrl": "https://github.com/stefanwalther/qrs/blob/master/",
+    "baseImgUrl": "https://raw.githubusercontent.com/stefanwalther/qrs/master/"
   }
 }
