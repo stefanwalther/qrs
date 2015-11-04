@@ -58,11 +58,11 @@ describe( 'sugar-plugin: ep-mime', function () {
 			});
 		});
 
-		it( 'mime should be an object', function () {
+		it( 'should be an object', function () {
 			expect( qrs.mime ).to.exist;
 		} );
 
-		it( 'mime should contain methods', function ( done ) {
+		it( 'should contain methods', function ( done ) {
 			expect( qrs.mime.get ).to.exist;
 			done();
 		} );
