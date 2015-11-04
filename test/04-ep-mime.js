@@ -23,7 +23,7 @@ var globalConfig = {
 };
 var qrs;
 
-describe.only( 'sugar-plugin: ep-mime', function () {
+describe( 'sugar-plugin: ep-mime', function () {
 
 	withData( setup.testLoop, function ( sessionInfo ) {
 
@@ -253,7 +253,7 @@ describe.only( 'sugar-plugin: ep-mime', function () {
 			} );
 
 			//Todo: Test should be done once, and not for all authentication scenarios
-			it.only( 'add multiple entries should throw an error if server is not available', function ( done ) {
+			it( 'add multiple entries should throw an error if server is not available', function ( done ) {
 				var config = JSON.parse( JSON.stringify( testConfig ) ); // clone the object
 				config.host = 'not_a_server';
 				var qrs2 = new QRS( config );
