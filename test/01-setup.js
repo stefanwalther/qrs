@@ -1,11 +1,4 @@
 /*global describe,before,beforeEach,it*/
-/*!
- * qrs <https://github.com/stefanwalther/qrs>
- *
- * Copyright (c) 2015 .
- * Licensed under the MIT license.
- */
-
 'use strict';
 
 var chai = require( 'chai' );
@@ -100,6 +93,19 @@ describe( 'qrs object', function () {
 		qrs.setConfig( {useSSL: false, port: 4242, host: 'myHost', xrfkey: '123456789ABCDEFG', virtualProxy: 'sso'} );
 		qrs.getUrl( 'ssl/ping' ).should.equal( 'http://myHost:4242/sso/qrs/ssl/ping/?xrfkey=123456789ABCDEFG' );
 
+	} );
+
+	it( 'should allow to pass in port a string or as number', function (  ) {
+		qrs.setConfig( {useSSL: false, port: 4242, host: 'myHost', xrfkey: '123456789ABCDEFG', virtualProxy: 'sso'} );
+		qrs.getUrl( 'ssl/ping' ).should.equal( 'http://myHost:4242/sso/qrs/ssl/ping/?xrfkey=123456789ABCDEFG' );
+
+		qrs.setConfig( {useSSL: false, port: '4242', host: 'myHost', xrfkey: '123456789ABCDEFG', virtualProxy: 'sso'} );
+		qrs.getUrl( 'ssl/ping' ).should.equal( 'http://myHost:4242/sso/qrs/ssl/ping/?xrfkey=123456789ABCDEFG' );
+	} );
+
+	it( 'should revert to default values if port is not a number', function (  ) {
+		qrs.setConfig( {useSSL: false, port: 'abc', host: 'myHost', xrfkey: '123456789ABCDEFG', virtualProxy: 'sso'} );
+		qrs.getUrl( 'ssl/ping' ).should.equal( 'http://myHost/sso/qrs/ssl/ping/?xrfkey=123456789ABCDEFG' );
 	} );
 
 	it( 'should handle URL params when creating the URL', function () {
