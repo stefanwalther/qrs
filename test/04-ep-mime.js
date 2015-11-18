@@ -53,10 +53,10 @@ describe( 'sugar-plugin: ep-mime', function () {
 		} );
 
 		after( function ( done ) {
-			fsUtils.del(['./test/mimetypes.text', './test/mimetypes_single.json'], function () {
+			fsUtils.del( ['./test/mimetypes.text', './test/mimetypes_single.json'], function () {
 				done();
-			});
-		});
+			} );
+		} );
 
 		it( 'should be an object', function () {
 			expect( qrs.mime ).to.exist;
@@ -173,14 +173,13 @@ describe( 'sugar-plugin: ep-mime', function () {
 				expect( r.def.mime ).to.be.equal( 'text/html;charset=utf-8' );
 			} );
 
-			it( 'adds a new entry', function ( done ) {
+			it.only( 'adds a new entry', function ( done ) {
 				qrs.mime.add( {
 					'extensions': 'foo',
 					'mime': 'text/foo',
 					'additionalHeaders': null,
 					'binary': false
-				} )
-					.then( function ( data ) {
+				} ).then( function ( data ) {
 						expect( data ).to.exist;
 						expect( data ).to.have.property( 'id' );
 						idsToDelete.push( data.id );
@@ -194,11 +193,11 @@ describe( 'sugar-plugin: ep-mime', function () {
 
 			it( 'should reject to add entries if mime is empty', function ( done ) {
 				qrs.mime.add( {
-					'extensions': 'foo',
-					'mime': '',
-					'additionalHeaders': null,
-					'binary': false
-				} )
+						'extensions': 'foo',
+						'mime': '',
+						'additionalHeaders': null,
+						'binary': false
+					} )
 					.then( function ( /*data*/ ) {
 					}, function ( err ) {
 						expect( err ).to.exist;
@@ -211,11 +210,11 @@ describe( 'sugar-plugin: ep-mime', function () {
 
 			it( 'should reject to add entries if extensions is empty', function ( done ) {
 				qrs.mime.add( {
-					'extensions': '',
-					'mime': 'foo/bar',
-					'additionalHeaders': null,
-					'binary': false
-				} )
+						'extensions': '',
+						'mime': 'foo/bar',
+						'additionalHeaders': null,
+						'binary': false
+					} )
 					.then( function ( /*data*/ ) {
 					}, function ( err ) {
 						expect( err ).to.exist;
@@ -228,16 +227,16 @@ describe( 'sugar-plugin: ep-mime', function () {
 
 			it( 'adds multiple entries', function ( done ) {
 				qrs.mime.addMultiple( [{
-					'extensions': 'foo',
-					'mime': 'text/foo',
-					'additionalHeaders': null,
-					'binary': false
-				}, {
-					'extensions': 'bar',
-					'mime': 'text/bar',
-					'additionalHeaders': null,
-					'binary': false
-				}] )
+						'extensions': 'foo',
+						'mime': 'text/foo',
+						'additionalHeaders': null,
+						'binary': false
+					}, {
+						'extensions': 'bar',
+						'mime': 'text/bar',
+						'additionalHeaders': null,
+						'binary': false
+					}] )
 					.then( function ( data ) {
 						expect( data ).to.exist;
 						expect( data ).to.be.an.array;
@@ -258,16 +257,16 @@ describe( 'sugar-plugin: ep-mime', function () {
 				config.host = 'not_a_server';
 				var qrs2 = new QRS( config );
 				qrs2.mime.addMultiple( [{
-					'extensions': 'foo',
-					'mime': 'text/foo',
-					'additionalHeaders': null,
-					'binary': false
-				}, {
-					'extensions': 'bar',
-					'mime': 'text/bar',
-					'additionalHeaders': null,
-					'binary': false
-				}] )
+						'extensions': 'foo',
+						'mime': 'text/foo',
+						'additionalHeaders': null,
+						'binary': false
+					}, {
+						'extensions': 'bar',
+						'mime': 'text/bar',
+						'additionalHeaders': null,
+						'binary': false
+					}] )
 					.then( function ( data ) {
 						expect( data ).to.not.exist;
 					}, function ( err ) {
@@ -280,16 +279,16 @@ describe( 'sugar-plugin: ep-mime', function () {
 
 			it( 'updates existing entries', function ( done ) {
 				qrs.mime.addMultiple( [{
-					'extensions': 'foo',
-					'mime': 'text/foobar',
-					'additionalHeaders': null,
-					'binary': false
-				}, {
-					'extensions': 'bar',
-					'mime': 'text/foobar',
-					'additionalHeaders': null,
-					'binary': false
-				}] )
+						'extensions': 'foo',
+						'mime': 'text/foobar',
+						'additionalHeaders': null,
+						'binary': false
+					}, {
+						'extensions': 'bar',
+						'mime': 'text/foobar',
+						'additionalHeaders': null,
+						'binary': false
+					}] )
 					.then( function ( data ) {
 						expect( data ).to.exist;
 						expect( data ).to.be.an.array;
@@ -374,7 +373,7 @@ describe( 'sugar-plugin: ep-mime', function () {
 					.then( function ( /*data*/ ) {
 					}, function ( err ) {
 						expect( err ).to.exist;
-						expect( err ).to.be.equal('Mime type cannot be empty');
+						expect( err ).to.be.equal( 'Mime type cannot be empty' );
 					} )
 					.done( function () {
 						done();

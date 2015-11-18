@@ -25,7 +25,8 @@ $ npm i qrs --save
 * [Server Setup](#server-setup)
 * [API](#api)
 * [Plugins](#plugins)
-  - [Plugin "Mime types"](#plugin--mime-types-)
+  - [Plugin "Extension"](#plugin--extension-)
+  - [Plugin "Mime"](#plugin--mime-)
 * [Running tests](#running-tests)
 * [Contributing](#contributing)
 * [Author](#author)
@@ -123,7 +124,7 @@ There are several options to ensure that communication between this node.js modu
 
 ## API
 
-### [qrs](lib%5Cqrs.js#L34)
+### [qrs](lib%5Cqrs.js#L36)
 
 Work with Qlik Sense's REST based Repository API (qrs) from within node.js.
 
@@ -142,7 +143,7 @@ var config =  {
 var qrs = new QRS( config );
 ```
 
-### [.request](lib%5Cqrs.js#L76)
+### [.request](lib%5Cqrs.js#L78)
 
 (Internal) generic method to send requests to QRS. Typically this method is only used internally, use `get`, `post`, `put` or `delete`.
 
@@ -170,7 +171,7 @@ qrs.request( 'GET', 'about', null, null)
         });
 ```
 
-### [.post](lib%5Cqrs.js#L171)
+### [.post](lib%5Cqrs.js#L173)
 
 Same as `request()` but with `method: 'POST'`.
 
@@ -181,15 +182,15 @@ Same as `request()` but with `method: 'POST'`.
 * `body` **{Object}**: Body to be posted, defined as JSON object.
 * `returns` __{_|promise}_*
 
-### [.put](lib%5Cqrs.js#L179)
+### [.put](lib%5Cqrs.js#L181)
 
 Same as `request()` but with `method: 'PUT'`.
 
-### [.delete](lib%5Cqrs.js#L189)
+### [.delete](lib%5Cqrs.js#L191)
 
 Same as `request()` but with `method: 'DELETE'`.
 
-### [.getUrl](lib%5Cqrs.js#L204)
+### [.getUrl](lib%5Cqrs.js#L206)
 
 Return the Url for the REST call considering the given configuration options
 
@@ -201,7 +202,7 @@ Return the Url for the REST call considering the given configuration options
 * `urlParam.value` **{Object}**: Value.
 * `returns` **{String}**: The constructed Url.
 
-### [.setConfig](lib%5Cqrs.js#L257)
+### [.setConfig](lib%5Cqrs.js#L259)
 
 Set global configurations options for qrs. Can be used to change the configuration options after `qrs` has been initialized.
 
@@ -238,7 +239,7 @@ qrs.get('/about', function( result ) {
 });
 ```
 
-### [.getConfig](lib%5Cqrs.js#L280)
+### [.getConfig](lib%5Cqrs.js#L282)
 
 Return the current configuration options.
 
@@ -256,7 +257,7 @@ var host = qrs.getConfig( 'host' );
 console.log(host); //<== 'myserver.domain.com'
 ```
 
-### [.set](lib%5Cqrs.js#L308)
+### [.set](lib%5Cqrs.js#L310)
 
 Change a single configuration property.
 
@@ -284,7 +285,7 @@ qrs.get('/about', function( result ) {
 });
 ```
 
-### [.getConfigValue](lib%5Cqrs.js#L319)
+### [.getConfigValue](lib%5Cqrs.js#L321)
 
 Retrieve a single configuration property.
 
@@ -293,11 +294,11 @@ Retrieve a single configuration property.
 * `key` **{String}**: Key of the property
 * `returns` **{Object}**: Value of the requested property, otherwise undefined.
 
-### [.plugins](lib%5Cqrs.js#L333)
+### [.plugins](lib%5Cqrs.js#L335)
 
 Returns an array of loaded plugins. Use `registerPlugin()` to load a plugin.
 
-### [.registerPlugin](lib%5Cqrs.js#L383)
+### [.registerPlugin](lib%5Cqrs.js#L385)
 
 Register a plugin to work with the base class of `qrs`. Have a look at some of the already existing plugins like `./lib/sugar/ep-mime.js`
 
@@ -353,7 +354,52 @@ The list of built-in plugins is probably and hopefully a growing one (and hopefu
 
 The following plugins are available with the current version of `qrs`:
 
-### Plugin "Mime types"
+### Plugin "Extension"
+
+### [Extension](lib%5Csugar%5Cep-extension.js#L12)
+
+Extension plugin.
+
+**Params**
+
+* **{qrs}**: base - Base class, instance of `qrs`.
+
+### [.getInstalled](lib%5Csugar%5Cep-extension.js#L39)
+
+Return all installed extensions. Optionally pass in a filter, to get only returned those extensions matching the given filter.
+
+**Params**
+
+* **{String[]}**: Optional. Filter installed extensions by `type`. Example: filter = `['visualization', 'visualization-type']` will only return visualization extensions and visualization extension templates.
+* `returns` **{promise}**
+
+### [.getInstalledVis](lib%5Csugar%5Cep-extension.js#L62)
+
+Same as getInstalled but only returns visualization extensions (type `visualization`).
+
+* `returns` **{promise}**
+
+### [.getInstalledVisTemplates](lib%5Csugar%5Cep-extension.js#L71)
+
+Same as `getInstalled` but only returns extensions of type `visualization-template`, which are the templates for the Extension editor in Dev Hub.
+
+* `returns` **{promise}**
+
+### [.getInstalledMashups](lib%5Csugar%5Cep-extension.js#L80)
+
+Same as `getInstalled` but only returns extensions of type `mashup`.
+
+* `returns` **{promise}**
+
+### [.getInstalledMashupTemplates](lib%5Csugar%5Cep-extension.js#L89)
+
+Same as `getInstalled` but only returns extensions of type `mashup`.
+
+* `returns` **{promise}**
+
+***
+
+### Plugin "Mime"
 
 Mime type definition
 
@@ -481,7 +527,16 @@ yml;text/yml;;false
 woff2;application/font-woff2;;true
 ```
 
-### [getUpdateOrInsert](lib%5Csugar%5Cep-mime.js#L307)
+### [deleteById](lib%5Csugar%5Cep-mime.js#L240)
+
+Delete a mime entry from the Qlik Sense Repository by its given Id.
+
+**Params**
+
+* **{String}**: id
+* `returns` **{promise}**
+
+### [getUpdateOrInsert](lib%5Csugar%5Cep-mime.js#L308)
 
 Returns whether the mime type already exists or not.
 
@@ -490,6 +545,8 @@ Returns whether the mime type already exists or not.
 * **{mimeTypeDef}**: mimeTypeDef
 * `returns` **{object}**: result - Returned result.
 * `returns` **{boolean}**: result.isUpdate - Whether to update or add.
+
+***
 
 ## Running tests
 
@@ -518,4 +575,4 @@ Released under the MIT license.
 
 ***
 
-_This file was generated by [verb-cli](https://github.com/assemble/verb-cli) on November 04, 2015._
+_This file was generated by [verb-cli](https://github.com/assemble/verb-cli) on November 05, 2015._
