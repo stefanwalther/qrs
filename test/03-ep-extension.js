@@ -21,7 +21,7 @@ var globalConfig = {
 };
 var qrs;
 
-describe.only( 'qrs.extension', function () {
+describe( 'qrs.extension', function () {
 	withData( setup.testLoop, function ( sessionInfo ) {
 
 		var testConfig = extend( globalConfig, sessionInfo );
