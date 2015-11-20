@@ -1,4 +1,4 @@
-/*global describe,it,beforeEach*/
+/*global describe,it,beforeEach,before,after,afterEach*/
 /* jshint -W030 */
 'use strict';
 
@@ -48,11 +48,104 @@ describe( 'qrs.extension', function () {
 				});
 		} );
 
-		it.skip( 'should return all installed extensions, reduced by a filter', function ( done ) {
-
-
-
+		// Todo: To make the test repeatable & reliebable we have to upload first, then we can check the test.
+		it( 'should allow a filter to only return specific types', function ( done ) {
+			qrs.extension.getInstalled( ['visualization-template'])
+				.then( function ( data ) {
+					expect( data ).to.exist;
+					expect( data ).to.be.an.array;
+				}, function ( err ) {
+					expect( err ).to.not.exist;
+				} )
+				.done( function (  ) {
+					done();
+				});
 		} );
+
+		//Todo: Improve the test
+		it( 'should return only extensions of type <visualization>', function ( done ) {
+			qrs.extension.getInstalledVis( )
+				.then( function ( data ) {
+					expect( data ).to.exist;
+					expect( data ).to.be.an.array;
+				}, function ( err ) {
+					expect( err ).to.not.exist;
+				} )
+				.done( function (  ) {
+					done();
+				});
+		} );
+
+		//Todo: Improve the test
+		it( 'should return only extensions of type <visualization-template>', function ( done ) {
+			qrs.extension.getInstalledVisTemplates( )
+				.then( function ( data ) {
+					expect( data ).to.exist;
+					expect( data ).to.be.an.array;
+				}, function ( err ) {
+					expect( err ).to.not.exist;
+				} )
+				.done( function (  ) {
+					done();
+				});
+		} );
+
+		//Todo: Improve the test
+		it( 'should return only extensions of type <mashup>', function ( done ) {
+			qrs.extension.getInstalledMashups( )
+				.then( function ( data ) {
+					expect( data ).to.exist;
+					expect( data ).to.be.an.array;
+				}, function ( err ) {
+					expect( err ).to.not.exist;
+				} )
+				.done( function (  ) {
+					done();
+				});
+		} );
+
+		//Todo: Improve the test
+		it( 'should return only extensions of type <mashup-template>', function ( done ) {
+			qrs.extension.getInstalledMashupTemplates( )
+				.then( function ( data ) {
+					expect( data ).to.exist;
+					expect( data ).to.be.an.array;
+				}, function ( err ) {
+					expect( err ).to.not.exist;
+				} )
+				.done( function (  ) {
+					done();
+				});
+		} );
+
+		it.skip( 'doesn\'t allow upload of extension with a different type than .zip', function ( done ) {
+			expect( true ).to.equal( false );
+			done();
+		} );
+
+		it.skip( 'doesn\'t allow upload of non existing files', function ( done ) {
+			expect( true ).to.equal( false );
+			done();
+		} );
+
+		describe( 'should allow deletion of an extension', function () {
+
+			before( '', function( done) {
+				qrs.extension.upload
+				done();
+			});
+			after( '', function(done) {
+
+
+				done();
+			});
+
+			it('...', function( done) {
+				expect( true ).to.equal( true );
+				done();
+			});
+		} );
+
 
 	} );
 

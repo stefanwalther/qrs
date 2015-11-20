@@ -14,7 +14,7 @@ authentication:
     enabled: false
     virtualProxy:
   certificates:
-    enabled: true
+    enabled: false
     virtualProxy:
     cert: D:\CertStore\qrs-test\client.pem			  # Do not escape backslash in yml !
     key: D:\CertStore\qrs-test\client_key.pem		  # Do not escape backslash in yml !
