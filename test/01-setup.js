@@ -118,9 +118,9 @@ describe( 'qrs object', function () {
 
 	} );
 
-	it.skip( 'should throw an exception if urlParams is not an array', function (  ) {
+	it( 'should throw an exception if urlParams is not an array', function (  ) {
 		qrs.setConfig( {useSSL: false, host: 'myHost', xrfkey: '123456789ABCDEFG', virtualProxy: 'sso'} );
-		expect( qrs.getUrl( 'about', { 'key': 'myFilter', 'value': 'filterValue'}) ).to.throw('xx');
+		expect( qrs.getUrl.bind( null, 'about', { 'key': 'myFilter', 'value': 'filterValue'}) ).to.throw( 'Parameter urlParams needs to be an array' );
 	} );
 
 } );
