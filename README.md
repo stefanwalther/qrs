@@ -154,9 +154,9 @@ var qrs = new QRS( config );
 * `urlParams` **{Array<string,object>}**: Additional URL parameters, defined as key/value array, for example  `[{"key": "foo", "value": valueObj}]`.
 * `jsonBody` **{Object}**: JSON object to be used as the body for the Http request.
 * `body` **{body}**: Body, if not defined as Json object, e.g. to be used to pass a buffer.
-* **{Object}**: additionalRequestOptions Additional request options.
-* **{Object}**: additionalHeaders Additional headers.
-* `returns` __{_|promise}_*: Returns a promise.
+* `additionalRequestOptions` **{Object}**: Additional request options.
+* `additionalHeaders` **{Object}**: Additional headers.
+* `returns` **{promise}**: Returns a promise.
 
 **Example**
 
@@ -180,9 +180,9 @@ Same as `request()` but with `method: 'GET'`.
 
 **Params**
 
-* **{}**: endpoint
-* **{}**: urlParams
-* `returns` __{_|promise}_*
+* `endpoint` **{String}**: QRS endpoint to be used.
+* `urlParams` **{Array<string,object>}**: Additional URL parameters, defined as key/value array, for example  `[{"key": "foo", "value": valueObj}]`.
+* `returns` **{promise}**: Returns a promise.
 
 **Example**
 
@@ -204,7 +204,7 @@ Same as `request()` but with `method: 'POST'`.
 * `endpoint` **{String}**: QRS endpoint to be used.
 * `urlParams` **{Array<string,object>}**: Additional URL parameters, defined as key/value array, for example  `[{"key": "foo", "value": valueObj}]`.
 * `jsonBody` **{Object}**: Body to be posted, defined as JSON object.
-* `returns` __{_|promise}_*
+* `returns` **{promise}**: Returns a promise.
 
 ### [.postFile](lib%5Cqrs.js#L197)
 
@@ -215,7 +215,7 @@ Post a file, actually same as `post()`, instead of posting a JSON body, posts a 
 * `endpoint` **{String}**: QRS endpoint to be used.
 * `urlParams` **{Array<string,object>}**: Additional URL parameters, defined as key/value array, for example  `[{"key": "foo", "value": valueObj}]`
 * **{String}**: filePath Absolute or relative file path.
-* `returns` __{_|promise}_*
+* `returns` **{promise}**: Returns a promise.
 
 ### [.put](lib%5Cqrs.js#L212)
 
