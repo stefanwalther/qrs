@@ -151,8 +151,8 @@ var qrs = new QRS( config );
 
 * `method` **{String}**: Http method, can be `GET`, `POST`, `PUT` or `DELETE` (defaults to `GET`).
 * `endpoint` **{String}**: Endpoint to be used. Check the online documentation of the Qlik Sense Repository API to get a list of all endpoints available.
-* `urlParams` **{Array<string,object>}**: Additional URL parameters, defined as key/value array.
-* `body` **{Object}**: JSON object to be used as the body for the Http request.
+* `urlParams` **{Array<string,object>}**: Additional URL parameters, defined as key/value array, for example  `[{"key": "foo", "value": valueObj}]`.
+* `jsonBody` **{Object}**: JSON object to be used as the body for the Http request.
 * `returns` **{promise}**: Returns a promise.
 
 **Example**
@@ -171,26 +171,26 @@ qrs.request( 'GET', 'about', null, null)
         });
 ```
 
-### [.post](lib%5Cqrs.js#L173)
+### [.post](lib%5Cqrs.js#L181)
 
 Same as `request()` but with `method: 'POST'`.
 
 **Params**
 
 * `endpoint` **{String}**: QRS endpoint to be used.
-* `urlParams` **{Array<string,object>}**: Additional URL parameters, defined as key/value array.
+* `urlParams` **{Array<string,object>}**: Additional URL parameters, defined as key/value array, for example  `[{"key": "foo", "value": valueObj}]`.
 * `body` **{Object}**: Body to be posted, defined as JSON object.
 * `returns` __{_|promise}_*
 
-### [.put](lib%5Cqrs.js#L181)
+### [.put](lib%5Cqrs.js#L200)
 
 Same as `request()` but with `method: 'PUT'`.
 
-### [.delete](lib%5Cqrs.js#L191)
+### [.delete](lib%5Cqrs.js#L210)
 
 Same as `request()` but with `method: 'DELETE'`.
 
-### [.getUrl](lib%5Cqrs.js#L206)
+### [.getUrl](lib%5Cqrs.js#L225)
 
 Return the Url for the REST call considering the given configuration options
 
@@ -202,7 +202,7 @@ Return the Url for the REST call considering the given configuration options
 * `urlParam.value` **{Object}**: Value.
 * `returns` **{String}**: The constructed Url.
 
-### [.setConfig](lib%5Cqrs.js#L259)
+### [.setConfig](lib%5Cqrs.js#L283)
 
 Set global configurations options for qrs. Can be used to change the configuration options after `qrs` has been initialized.
 
@@ -239,7 +239,7 @@ qrs.get('/about', function( result ) {
 });
 ```
 
-### [.getConfig](lib%5Cqrs.js#L282)
+### [.getConfig](lib%5Cqrs.js#L306)
 
 Return the current configuration options.
 
@@ -257,7 +257,7 @@ var host = qrs.getConfig( 'host' );
 console.log(host); //<== 'myserver.domain.com'
 ```
 
-### [.set](lib%5Cqrs.js#L310)
+### [.set](lib%5Cqrs.js#L334)
 
 Change a single configuration property.
 
@@ -285,7 +285,7 @@ qrs.get('/about', function( result ) {
 });
 ```
 
-### [.getConfigValue](lib%5Cqrs.js#L321)
+### [.getConfigValue](lib%5Cqrs.js#L345)
 
 Retrieve a single configuration property.
 
@@ -294,11 +294,11 @@ Retrieve a single configuration property.
 * `key` **{String}**: Key of the property
 * `returns` **{Object}**: Value of the requested property, otherwise undefined.
 
-### [.plugins](lib%5Cqrs.js#L335)
+### [.plugins](lib%5Cqrs.js#L359)
 
 Returns an array of loaded plugins. Use `registerPlugin()` to load a plugin.
 
-### [.registerPlugin](lib%5Cqrs.js#L385)
+### [.registerPlugin](lib%5Cqrs.js#L409)
 
 Register a plugin to work with the base class of `qrs`. Have a look at some of the already existing plugins like `./lib/sugar/ep-mime.js`
 
@@ -364,7 +364,7 @@ Extension plugin.
 
 * **{qrs}**: base - Base class, instance of `qrs`.
 
-### [.getInstalled](lib%5Csugar%5Cep-extension.js#L39)
+### [.getInstalled](lib%5Csugar%5Cep-extension.js#L37)
 
 Return all installed extensions. Optionally pass in a filter, to get only returned those extensions matching the given filter.
 
@@ -373,25 +373,25 @@ Return all installed extensions. Optionally pass in a filter, to get only return
 * **{String[]}**: Optional. Filter installed extensions by `type`. Example: filter = `['visualization', 'visualization-type']` will only return visualization extensions and visualization extension templates.
 * `returns` **{promise}**
 
-### [.getInstalledVis](lib%5Csugar%5Cep-extension.js#L62)
+### [.getInstalledVis](lib%5Csugar%5Cep-extension.js#L58)
 
 Same as getInstalled but only returns visualization extensions (type `visualization`).
 
 * `returns` **{promise}**
 
-### [.getInstalledVisTemplates](lib%5Csugar%5Cep-extension.js#L71)
+### [.getInstalledVisTemplates](lib%5Csugar%5Cep-extension.js#L67)
 
 Same as `getInstalled` but only returns extensions of type `visualization-template`, which are the templates for the Extension editor in Dev Hub.
 
 * `returns` **{promise}**
 
-### [.getInstalledMashups](lib%5Csugar%5Cep-extension.js#L80)
+### [.getInstalledMashups](lib%5Csugar%5Cep-extension.js#L76)
 
 Same as `getInstalled` but only returns extensions of type `mashup`.
 
 * `returns` **{promise}**
 
-### [.getInstalledMashupTemplates](lib%5Csugar%5Cep-extension.js#L89)
+### [.getInstalledMashupTemplates](lib%5Csugar%5Cep-extension.js#L85)
 
 Same as `getInstalled` but only returns extensions of type `mashup`.
 
@@ -575,4 +575,4 @@ Released under the MIT license.
 
 ***
 
-_This file was generated by [verb-cli](https://github.com/assemble/verb-cli) on November 05, 2015._
+_This file was generated by [verb-cli](https://github.com/assemble/verb-cli) on November 21, 2015._
