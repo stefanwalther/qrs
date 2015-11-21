@@ -143,7 +143,7 @@ var config =  {
 var qrs = new QRS( config );
 ```
 
-### [.request](lib%5Cqrs.js#L78)
+### [.request](lib%5Cqrs.js#L80)
 
 (Internal) generic method to send requests to QRS. Typically this method is only used internally, use `get`, `post`, `put` or `delete`.
 
@@ -153,7 +153,10 @@ var qrs = new QRS( config );
 * `endpoint` **{String}**: Endpoint to be used. Check the online documentation of the Qlik Sense Repository API to get a list of all endpoints available.
 * `urlParams` **{Array<string,object>}**: Additional URL parameters, defined as key/value array, for example  `[{"key": "foo", "value": valueObj}]`.
 * `jsonBody` **{Object}**: JSON object to be used as the body for the Http request.
-* `returns` **{promise}**: Returns a promise.
+* `body` **{body}**: Body, if not defined as Json object, e.g. to be used to pass a buffer.
+* **{Object}**: additionalRequestOptions Additional request options.
+* **{Object}**: additionalHeaders Additional headers.
+* `returns` __{_|promise}_*: Returns a promise.
 
 **Example**
 
@@ -171,7 +174,28 @@ qrs.request( 'GET', 'about', null, null)
         });
 ```
 
-### [.post](lib%5Cqrs.js#L181)
+### [.get](lib%5Cqrs.js#L171)
+
+Same as `request()` but with `method: 'GET'`.
+
+**Params**
+
+* **{}**: endpoint
+* **{}**: urlParams
+* `returns` __{_|promise}_*
+
+**Example**
+
+```js
+qrs.get( 'about')
+       .then( function ( data) {
+            console.log('about: ', data );
+        }, function ( err ) {
+            console.error( err );
+        });
+```
+
+### [.post](lib%5Cqrs.js#L184)
 
 Same as `request()` but with `method: 'POST'`.
 
@@ -179,18 +203,29 @@ Same as `request()` but with `method: 'POST'`.
 
 * `endpoint` **{String}**: QRS endpoint to be used.
 * `urlParams` **{Array<string,object>}**: Additional URL parameters, defined as key/value array, for example  `[{"key": "foo", "value": valueObj}]`.
-* `body` **{Object}**: Body to be posted, defined as JSON object.
+* `jsonBody` **{Object}**: Body to be posted, defined as JSON object.
 * `returns` __{_|promise}_*
 
-### [.put](lib%5Cqrs.js#L200)
+### [.postFile](lib%5Cqrs.js#L197)
+
+Post a file, actually same as `post()`, instead of posting a JSON body, posts a file buffer.
+
+**Params**
+
+* `endpoint` **{String}**: QRS endpoint to be used.
+* `urlParams` **{Array<string,object>}**: Additional URL parameters, defined as key/value array, for example  `[{"key": "foo", "value": valueObj}]`
+* **{String}**: filePath Absolute or relative file path.
+* `returns` __{_|promise}_*
+
+### [.put](lib%5Cqrs.js#L212)
 
 Same as `request()` but with `method: 'PUT'`.
 
-### [.delete](lib%5Cqrs.js#L210)
+### [.delete](lib%5Cqrs.js#L222)
 
 Same as `request()` but with `method: 'DELETE'`.
 
-### [.getUrl](lib%5Cqrs.js#L225)
+### [.getUrl](lib%5Cqrs.js#L237)
 
 Return the Url for the REST call considering the given configuration options
 
@@ -202,7 +237,7 @@ Return the Url for the REST call considering the given configuration options
 * `urlParam.value` **{Object}**: Value.
 * `returns` **{String}**: The constructed Url.
 
-### [.setConfig](lib%5Cqrs.js#L283)
+### [.setConfig](lib%5Cqrs.js#L295)
 
 Set global configurations options for qrs. Can be used to change the configuration options after `qrs` has been initialized.
 
@@ -239,7 +274,7 @@ qrs.get('/about', function( result ) {
 });
 ```
 
-### [.getConfig](lib%5Cqrs.js#L306)
+### [.getConfig](lib%5Cqrs.js#L318)
 
 Return the current configuration options.
 
@@ -257,7 +292,7 @@ var host = qrs.getConfig( 'host' );
 console.log(host); //<== 'myserver.domain.com'
 ```
 
-### [.set](lib%5Cqrs.js#L334)
+### [.set](lib%5Cqrs.js#L346)
 
 Change a single configuration property.
 
@@ -285,7 +320,7 @@ qrs.get('/about', function( result ) {
 });
 ```
 
-### [.getConfigValue](lib%5Cqrs.js#L345)
+### [.getConfigValue](lib%5Cqrs.js#L357)
 
 Retrieve a single configuration property.
 
@@ -294,11 +329,11 @@ Retrieve a single configuration property.
 * `key` **{String}**: Key of the property
 * `returns` **{Object}**: Value of the requested property, otherwise undefined.
 
-### [.plugins](lib%5Cqrs.js#L359)
+### [.plugins](lib%5Cqrs.js#L371)
 
 Returns an array of loaded plugins. Use `registerPlugin()` to load a plugin.
 
-### [.registerPlugin](lib%5Cqrs.js#L409)
+### [.registerPlugin](lib%5Cqrs.js#L421)
 
 Register a plugin to work with the base class of `qrs`. Have a look at some of the already existing plugins like `./lib/sugar/ep-mime.js`
 
