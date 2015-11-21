@@ -28,8 +28,28 @@ describe( 'qrs.extension', function () {
 
 		beforeEach( function ( done ) {
 			qrs = new QRS( testConfig );
-			done();
+			qrs.extension.delete('sample')
+					.then( function ( data ) {
+
+					}, function ( err ) {
+
+					})
+					.done( function (  ) {
+						done();
+					});
 		} );
+
+		after( function ( done ) {
+			qrs.extension.delete('sample')
+					.then( function ( data ) {
+
+					}, function ( err ) {
+
+					})
+					.done( function (  ) {
+						done();
+					});
+		});
 
 		it( 'should be an object', function () {
 			expect( qrs.extension ).to.exist;
@@ -43,79 +63,79 @@ describe( 'qrs.extension', function () {
 				}, function ( err ) {
 					expect( err ).to.not.exist;
 				} )
-				.done( function (  ) {
+				.done( function () {
 					done();
-				});
+				} );
 		} );
 
 		// Todo: To make the test repeatable & reliebable we have to upload first, then we can check the test.
 		it( 'should allow a filter to only return specific types', function ( done ) {
-			qrs.extension.getInstalled( ['visualization-template'])
+			qrs.extension.getInstalled( ['visualization-template'] )
 				.then( function ( data ) {
 					expect( data ).to.exist;
 					expect( data ).to.be.an.array;
 				}, function ( err ) {
 					expect( err ).to.not.exist;
 				} )
-				.done( function (  ) {
+				.done( function () {
 					done();
-				});
+				} );
 		} );
 
 		//Todo: Improve the test
 		it( 'should return only extensions of type <visualization>', function ( done ) {
-			qrs.extension.getInstalledVis( )
+			qrs.extension.getInstalledVis()
 				.then( function ( data ) {
 					expect( data ).to.exist;
 					expect( data ).to.be.an.array;
 				}, function ( err ) {
 					expect( err ).to.not.exist;
 				} )
-				.done( function (  ) {
+				.done( function () {
 					done();
-				});
+				} );
 		} );
 
 		//Todo: Improve the test
 		it( 'should return only extensions of type <visualization-template>', function ( done ) {
-			qrs.extension.getInstalledVisTemplates( )
+			qrs.extension.getInstalledVisTemplates()
 				.then( function ( data ) {
 					expect( data ).to.exist;
 					expect( data ).to.be.an.array;
 				}, function ( err ) {
 					expect( err ).to.not.exist;
 				} )
-				.done( function (  ) {
+				.done( function () {
 					done();
-				});
+				} );
 		} );
 
 		//Todo: Improve the test
 		it( 'should return only extensions of type <mashup>', function ( done ) {
-			qrs.extension.getInstalledMashups( )
+			qrs.extension.getInstalledMashups()
 				.then( function ( data ) {
 					expect( data ).to.exist;
 					expect( data ).to.be.an.array;
 				}, function ( err ) {
 					expect( err ).to.not.exist;
 				} )
-				.done( function (  ) {
+				.done( function () {
 					done();
-				});
+				} );
 		} );
 
 		//Todo: Improve the test
 		it( 'should return only extensions of type <mashup-template>', function ( done ) {
-			qrs.extension.getInstalledMashupTemplates( )
+			qrs.extension.getInstalledMashupTemplates()
 				.then( function ( data ) {
 					expect( data ).to.exist;
 					expect( data ).to.be.an.array;
 				}, function ( err ) {
 					expect( err ).to.not.exist;
 				} )
-				.done( function (  ) {
+				.done( function () {
 					done();
-				});
+				} );
 		} );
 
 		it.skip( 'doesn\'t allow upload of extension with a different type than .zip', function ( done ) {
@@ -128,24 +148,35 @@ describe( 'qrs.extension', function () {
 			done();
 		} );
 
-		describe( 'should allow deletion of an extension', function () {
-
-			before( '', function( done) {
-				qrs.extension.upload
-				done();
-			});
-			after( '', function(done) {
-
-
-				done();
-			});
-
-			it('...', function( done) {
-				expect( true ).to.equal( true );
-				done();
-			});
+		it( 'should allow upload of an extension with absolute path', function ( done ) {
+			var extFilePath = path.join( __dirname, './fixtures/extensions/sample.zip' );
+			qrs.extension.upload( extFilePath )
+				.then( function ( data ) {
+					expect( data ).to.exist;
+				}, function ( err ) {
+					expect( err ).to.not.exist;
+				} )
+				.done( function () {
+					done();
+				} );
 		} );
 
+		describe( 'should allow deletion of an extension', function () {
+
+			before( '', function ( done ) {
+				//qrs.extension.upload
+				done();
+			} );
+			after( '', function ( done ) {
+
+				done();
+			} );
+
+			it( '...', function ( done ) {
+				expect( true ).to.equal( true );
+				done();
+			} );
+		} );
 
 	} );
 

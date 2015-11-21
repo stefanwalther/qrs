@@ -173,7 +173,7 @@ describe( 'sugar-plugin: ep-mime', function () {
 				expect( r.def.mime ).to.be.equal( 'text/html;charset=utf-8' );
 			} );
 
-			it.only( 'adds a new entry', function ( done ) {
+			it( 'adds a new entry', function ( done ) {
 				qrs.mime.add( {
 					'extensions': 'foo',
 					'mime': 'text/foo',
