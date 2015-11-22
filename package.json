@@ -42,7 +42,6 @@
     "chai": "^3.4.1",
     "gulp": "git://github.com/gulpjs/gulp#4.0",
     "gulp-verb": "^0.3.0",
-    "leche": "^2.1.1",
     "mocha": "^2.2.1",
     "sense-go": "^0.5.10",
     "template": "^0.17.4",
