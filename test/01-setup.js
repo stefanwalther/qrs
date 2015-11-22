@@ -18,7 +18,7 @@ var globalConfig = {
 };
 var qrs;
 
-describe( 'qrs object', function () {
+describe.only( 'qrs object', function () {
 
 	/**
 	 * Reset the configuration before each test.
