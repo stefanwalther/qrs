@@ -11,7 +11,8 @@ var extend = require( 'extend-shallow' );
 var fsUtils = require( 'fs-utils' );
 var path = require( 'path' );
 var setup = require( './testSetup' );
-var extensionSetup = require('./03-ep-extension.setup')();
+var async = require( 'async' );
+var extensionSetup = require( './03-ep-extension.setup' )();
 
 var testConfig = fsUtils.readYAMLSync( path.join( __dirname, './test-config.yml' ) );
 var globalConfig = {
@@ -22,39 +23,47 @@ var globalConfig = {
 };
 var qrs;
 
-describe.only( 'qrs.extension', function () {
+describe( 'qrs.extension', function () {
+
+
 	withData( setup.testLoop, function ( sessionInfo ) {
 
 		var testConfig = extend( globalConfig, sessionInfo );
 
-		before( function ( done ) {
-			extensionSetup.init( done );
-		});
-
-		beforeEach( function ( done ) {
-			qrs = new QRS( testConfig );
-			qrs.extension.delete('qrs-sample')
-					.then( function ( data ) {
-
-					}, function ( err ) {
-
-					})
-					.done( function (  ) {
-						done();
-					});
-		} );
 
 		after( function ( done ) {
-			qrs.extension.delete('qrs-sample')
-					.then( function ( data ) {
+			console.log('after \n');
+			//extensionSetup.cleanExtZipFiles( function ( /*err, extensions*/ ) {
+			//	done();
+			//} );
+			done();
+		} );
 
-					}, function ( err ) {
+		before( function ( done ) {
+			console.log('before\n');
+			extensionSetup.init( done );
+		} );
 
-					})
-					.done( function (  ) {
-						done();
-					});
-		});
+
+		beforeEach( function ( done ) {
+			console.log('beforeEach\n');
+			qrs = new QRS( testConfig );
+			async.map( extensionSetup.extensions, function ( ext, cb ) {
+				console.log('delete ' + ext.name);
+				qrs.extension.delete( ext.name )
+						.then( function ( data ) {
+							//cb( null );
+						}, function ( err ) {
+							cb( err );
+						});
+			}, function ( err /*, results */ ) {
+				if (err) {
+					throw err;
+				}
+				done( );
+			});
+		} );
+
 
 		it( 'should be an object', function () {
 			expect( qrs.extension ).to.exist;
@@ -153,7 +162,7 @@ describe.only( 'qrs.extension', function () {
 			done();
 		} );
 
-		it( 'should allow upload of an extension with absolute path', function ( done ) {
+		it.only( 'should allow upload of an extension with absolute path', function ( done ) {
 			var extFilePath = path.join( __dirname, './fixtures/extensions/qrs-sample.zip' );
 			qrs.extension.upload( extFilePath )
 				.then( function ( data ) {

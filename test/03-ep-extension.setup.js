@@ -8,6 +8,8 @@ var async = require( 'async' );
 
 var ExtensionSetup = function () {
 
+	var extensions = [];
+
 	var init = function ( callback ) {
 
 		var dirToScan = path.join( __dirname, './fixtures/extensions' );
@@ -23,19 +25,38 @@ var ExtensionSetup = function () {
 				var zipSource = path.normalize( file );
 				var fi = path.parse( file );
 				var zipDest = path.normalize( path.join( fi.dir, fi.base + '.zip' ));
-				rimraf( zipDest, function ( err ) {
+				rimraf( zipDest, function ( /* err */ ) {
 					zipper.sync.zip( zipSource ).compress().save( zipDest );
-					cb( null, zipDest );
+					var ext = {
+						'name': fi.base,
+						'file': zipDest
+					};
+					cb( null, ext );
 				} );
 			}, function ( err, results ) {
+				extensions = results;
 				callback( err, results );
 			} );
 		} );
 
 	};
 
+	var cleanExtZipFiles = function ( callback ) {
+
+		async.map( extensions, function ( ext, cb ) {
+			rimraf( ext.file, function ( err ) {
+				cb( null, ext);
+			});
+		}, function ( err, results ) {
+			callback( null, results);
+		});
+
+	};
+
 	return {
-		init: init
+		init: init,
+		extensions: extensions,
+		cleanExtZipFiles: cleanExtZipFiles
 	}
 
 };
