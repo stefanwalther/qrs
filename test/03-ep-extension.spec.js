@@ -11,6 +11,7 @@ var extend = require( 'extend-shallow' );
 var fsUtils = require( 'fs-utils' );
 var path = require( 'path' );
 var setup = require( './testSetup' );
+var extensionSetup = require('./03-ep-extension.setup')();
 
 var testConfig = fsUtils.readYAMLSync( path.join( __dirname, './test-config.yml' ) );
 var globalConfig = {
@@ -21,14 +22,18 @@ var globalConfig = {
 };
 var qrs;
 
-describe( 'qrs.extension', function () {
+describe.only( 'qrs.extension', function () {
 	withData( setup.testLoop, function ( sessionInfo ) {
 
 		var testConfig = extend( globalConfig, sessionInfo );
 
+		before( function ( done ) {
+			extensionSetup.init( done );
+		});
+
 		beforeEach( function ( done ) {
 			qrs = new QRS( testConfig );
-			qrs.extension.delete('sample')
+			qrs.extension.delete('qrs-sample')
 					.then( function ( data ) {
 
 					}, function ( err ) {
@@ -40,7 +45,7 @@ describe( 'qrs.extension', function () {
 		} );
 
 		after( function ( done ) {
-			qrs.extension.delete('sample')
+			qrs.extension.delete('qrs-sample')
 					.then( function ( data ) {
 
 					}, function ( err ) {
@@ -149,7 +154,7 @@ describe( 'qrs.extension', function () {
 		} );
 
 		it( 'should allow upload of an extension with absolute path', function ( done ) {
-			var extFilePath = path.join( __dirname, './fixtures/extensions/sample.zip' );
+			var extFilePath = path.join( __dirname, './fixtures/extensions/qrs-sample.zip' );
 			qrs.extension.upload( extFilePath )
 				.then( function ( data ) {
 					expect( data ).to.exist;
