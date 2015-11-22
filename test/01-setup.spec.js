@@ -8,15 +8,10 @@ var expect = chai.expect;
 var QRS = new require( './../lib/qrs' );
 var fsUtils = require( 'fs-utils' );
 var path = require( 'path' );
-var testConfig = fsUtils.readYAMLSync( path.join( __dirname, './test-config.yml' ) );
+var testSetup = require( './testSetup' );
 
-var globalConfig = {
-	host: testConfig.host,
-	useSSL: testConfig.useSSL,
-	xrfkey: testConfig.xrfkey,
-	fiddler: testConfig.fiddler
-};
 var qrs;
+var globalConfig = testSetup.globalConfig;
 
 describe( 'qrs object', function () {
 
@@ -86,21 +81,45 @@ describe( 'qrs object', function () {
 			qrs.getUrl( 'ssl/ping' ).should.equal( 'http://myHost/qrs/ssl/ping/?xrfkey=123456789ABCDEFG' );
 
 			// Port
-			qrs.setConfig( {useSSL: false, port: 4242, host: 'myHost', xrfkey: '123456789ABCDEFG', virtualProxy: 'sso'} );
+			qrs.setConfig( {
+				useSSL: false,
+				port: 4242,
+				host: 'myHost',
+				xrfkey: '123456789ABCDEFG',
+				virtualProxy: 'sso'
+			} );
 			qrs.getUrl( 'ssl/ping' ).should.equal( 'http://myHost:4242/sso/qrs/ssl/ping/?xrfkey=123456789ABCDEFG' );
 
 		} );
 
-		it( 'should allow to pass in port a string or as number', function (  ) {
-			qrs.setConfig( {useSSL: false, port: 4242, host: 'myHost', xrfkey: '123456789ABCDEFG', virtualProxy: 'sso'} );
+		it( 'should allow to pass in port a string or as number', function () {
+			qrs.setConfig( {
+				useSSL: false,
+				port: 4242,
+				host: 'myHost',
+				xrfkey: '123456789ABCDEFG',
+				virtualProxy: 'sso'
+			} );
 			qrs.getUrl( 'ssl/ping' ).should.equal( 'http://myHost:4242/sso/qrs/ssl/ping/?xrfkey=123456789ABCDEFG' );
 
-			qrs.setConfig( {useSSL: false, port: '4242', host: 'myHost', xrfkey: '123456789ABCDEFG', virtualProxy: 'sso'} );
+			qrs.setConfig( {
+				useSSL: false,
+				port: '4242',
+				host: 'myHost',
+				xrfkey: '123456789ABCDEFG',
+				virtualProxy: 'sso'
+			} );
 			qrs.getUrl( 'ssl/ping' ).should.equal( 'http://myHost:4242/sso/qrs/ssl/ping/?xrfkey=123456789ABCDEFG' );
 		} );
 
-		it( 'should revert to default values if port is not a number', function (  ) {
-			qrs.setConfig( {useSSL: false, port: 'abc', host: 'myHost', xrfkey: '123456789ABCDEFG', virtualProxy: 'sso'} );
+		it( 'should revert to default values if port is not a number', function () {
+			qrs.setConfig( {
+				useSSL: false,
+				port: 'abc',
+				host: 'myHost',
+				xrfkey: '123456789ABCDEFG',
+				virtualProxy: 'sso'
+			} );
 			qrs.getUrl( 'ssl/ping' ).should.equal( 'http://myHost/sso/qrs/ssl/ping/?xrfkey=123456789ABCDEFG' );
 		} );
 
@@ -114,9 +133,12 @@ describe( 'qrs object', function () {
 
 		} );
 
-		it( 'should throw an exception if urlParams is not an array', function (  ) {
+		it( 'should throw an exception if urlParams is not an array', function () {
 			qrs.setConfig( {useSSL: false, host: 'myHost', xrfkey: '123456789ABCDEFG', virtualProxy: 'sso'} );
-			expect( qrs.getUrl.bind( null, 'about', { 'key': 'myFilter', 'value': 'filterValue'}) ).to.throw( 'Parameter urlParams needs to be an array' );
+			expect( qrs.getUrl.bind( null, 'about', {
+				'key': 'myFilter',
+				'value': 'filterValue'
+			} ) ).to.throw( 'Parameter urlParams needs to be an array' );
 		} );
 
 	} );
