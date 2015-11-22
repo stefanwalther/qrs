@@ -15,7 +15,7 @@ var extensionSetup = require( './03-ep-extension.setup' )();
 var qrs;
 
 var globalConfig = testSetup.globalConfig;
-describe.only( 'qrs.extension', function () {
+describe( 'qrs.extension', function () {
 
 	it( 'should be an object', function () {
 		qrs = new QRS( globalConfig );
@@ -59,7 +59,6 @@ describe.only( 'qrs.extension', function () {
 					done( );
 				});
 			} );
-
 
 			it( 'should return all installed extensions', function ( done ) {
 				qrs.extension.getInstalled()
@@ -144,17 +143,44 @@ describe.only( 'qrs.extension', function () {
 						} );
 			} );
 
-			it.skip( 'doesn\'t allow upload of extension with a different type than .zip', function ( done ) {
-				expect( true ).to.equal( false );
-				done();
-			} );
+			describe( 'qrs.extension.upload', function () {
 
-			it.skip( 'doesn\'t allow upload of non existing files', function ( done ) {
-				expect( true ).to.equal( false );
-				done();
-			} );
 
-			it.only( 'should allow upload of an extension with absolute path', function ( done ) {
+				it.only( 'doesn\'t allow upload of non existing files', function ( done ) {
+					qrs.extension.upload( path.join(__dirname, './fixtures/extensions/qrs-ABCDEFGHIJKLMNOPQ.zip'))
+							.then( function ( data ) {
+								expect( data ).to.not.exist;
+							}, function ( err ) {
+								expect( err ).to.exist;
+								expect(err ).contains('File does not exist.');
+							})
+							.done( function (  ) {
+								done();
+							});
+
+				} );
+
+				it( 'doesn\'t allow upload of an extension with a different type than .zip', function ( done ) {
+
+					qrs.extension.upload( path.join(__dirname, './fixtures/extensions/qrs-sample.7z'))
+							.then( function ( data ) {
+								expect( data ).to.not.exist;
+							}, function ( err ) {
+								expect( err ).to.exist;
+								expect( err ).contains('Only .zip files can be uploaded.')
+							})
+							.done( function () {
+								done();
+							});
+				} );
+			});
+
+
+
+			/**
+			 * @todo: Returns "bad request" if extension is already existing.
+			 */
+			it( 'should allow upload of an extension with absolute path', function ( done ) {
 				var extFilePath = path.join( __dirname, './fixtures/extensions/qrs-sample.zip' );
 				qrs.extension.upload( extFilePath )
 						.then( function ( data ) {
@@ -182,6 +208,11 @@ describe.only( 'qrs.extension', function () {
 					expect( true ).to.equal( true );
 					done();
 				} );
+			} );
+
+			it.skip( 'should refuse to upload an exetension if already existing, even with another type', function ( done ) {
+				expect( true ).to.equal( false );
+				done();
 			} );
 
 		});

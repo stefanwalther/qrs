@@ -27,7 +27,7 @@ describe( 'qrs', function () {
 			 */
 			beforeEach( function ( done ) {
 
-				testConfig = extend( globalConfig, sessionInfo );
+				testConfig = extend( globalConfig, testLoopConfig.config );
 				qrs = new QRS( testConfig );
 				done();
 
