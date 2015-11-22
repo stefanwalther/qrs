@@ -6,14 +6,8 @@ var assert = chai.assert;
 var should = chai.should();
 var expect = chai.expect;
 var QRS = new require( './../lib/qrs' );
-var leche = require( 'leche' );
-var withData = leche.withData;
-var extend = require( 'extend-shallow' );
 var fsUtils = require( 'fs-utils' );
 var path = require( 'path' );
-var logger = require( './../lib/logger.js' );
-var setup = require( './testSetup' );
-
 var testConfig = fsUtils.readYAMLSync( path.join( __dirname, './test-config.yml' ) );
 
 var globalConfig = {
