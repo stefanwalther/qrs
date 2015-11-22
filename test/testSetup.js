@@ -50,7 +50,18 @@ var TestSetup = function () {
 		return configs;
 	}
 
+	var getGlobalConfig = function (  ) {
+
+		return {
+			host: testConfig.host,
+			useSSL: testConfig.useSSL,
+			xrfkey: testConfig.xrfkey,
+			fiddler: testConfig.fiddler
+		};
+	};
+
 	return {
+		globalConfig: getGlobalConfig(),
 		testLoop: getTestLoop(),
 		testConfig: testConfig
 	};

@@ -5,8 +5,6 @@
 var chai = require( 'chai' );
 var expect = chai.expect;
 var QRS = new require( './../lib/qrs' );
-var leche = require( 'leche' );
-var withData = leche.withData;
 var extend = require( 'extend-shallow' );
 var fsUtils = require( 'fs-utils' );
 var path = require( 'path' );
@@ -14,15 +12,9 @@ var testSetup = require( './testSetup' );
 var async = require( 'async' );
 var extensionSetup = require( './03-ep-extension.setup' )();
 
-var testConfig = fsUtils.readYAMLSync( path.join( __dirname, './test-config.yml' ) );
-var globalConfig = {
-	host: testConfig.host,
-	useSSL: testConfig.useSSL,
-	xrfkey: testConfig.xrfkey,
-	fiddler: testConfig.fiddler
-};
 var qrs;
 
+var globalConfig = testSetup.globalConfig;
 describe.only( 'qrs.extension', function () {
 
 	it( 'should be an object', function () {
