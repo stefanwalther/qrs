@@ -24,28 +24,35 @@ var TestSetup = function () {
 			});
 		}
 
-		//if ( testConfig.authentication.ntlm.enabled ) {
-		//	r['Ntlm authentication'] = [{
-		//		authentication: 'ntlm',
-		//		virtualProxy: testConfig.authentication.ntlm.virtualProxy,
-		//		port: testConfig.authentication.ntlm.port || testConfig.port
-		//	}];
-		//}
-		//
-		//if ( testConfig.authentication.certificates.enabled ) {
-		//	r['Certificates based authentication'] = [{
-		//		authentication: 'certificates',
-		//		headerKey: testConfig.authentication.certificates.headerKey,
-		//		headerValue: testConfig.authentication.certificates.headerValue,
-		//		useSSL: _.isBoolean(testConfig.authentication.certificates.useSSL) ? testConfig.authentication.certificates.useSSL : testConfig.useSSL,
-		//		cert: testConfig.authentication.certificates.cert,
-		//		key: testConfig.authentication.certificates.key,
-		//		ca: testConfig.authentication.certificates.ca,
-		//		passphrase: testConfig.authentication.certificates.passphrase,
-		//		virtualProxy: testConfig.authentication.certificates.virtualProxy,
-		//		port: testConfig.authentication.certificates.port || testConfig.port
-		//	}];
-		//}
+		if (testConfig.authentication.ntlm.enabled) {
+
+			configs.push({
+				'name': 'Ntlm authentication',
+				'config': {
+					virtualProxy: testConfig.authentication.ntlm.virtualProxy,
+					port: testConfig.authentication.ntlm.port || testConfig.port
+				}
+			});
+		}
+
+		if ( testConfig.authentication.certificates.enabled ) {
+			configs.push({
+				'name': 'Certificates based authentication',
+				'config': {
+					authentication: 'certificates',
+					headerKey: testConfig.authentication.certificates.headerKey,
+					headerValue: testConfig.authentication.certificates.headerValue,
+					useSSL: _.isBoolean(testConfig.authentication.certificates.useSSL) ? testConfig.authentication.certificates.useSSL : testConfig.useSSL,
+					cert: testConfig.authentication.certificates.cert,
+					key: testConfig.authentication.certificates.key,
+					ca: testConfig.authentication.certificates.ca,
+					passphrase: testConfig.authentication.certificates.passphrase,
+					virtualProxy: testConfig.authentication.certificates.virtualProxy,
+					port: testConfig.authentication.certificates.port || testConfig.port
+
+				}
+			});
+		}
 
 		return configs;
 	}
