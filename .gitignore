@@ -14,3 +14,4 @@ vendor
 /scratches
 /test/mimetypes.txt
 /test/mimetypes_single.json
+/test/fixtures/extensions/*.zip
