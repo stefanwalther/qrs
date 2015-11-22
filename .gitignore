@@ -1,3 +1,5 @@
+.idea/
+.vscode/
 *.DS_Store
 *.sublime-*
 _gh_pages
@@ -10,7 +12,6 @@ temp
 tmp
 todos.md
 vendor
-.idea
 /scratches
 /test/mimetypes.txt
 /test/mimetypes_single.json
