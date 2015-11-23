@@ -1,0 +1,13 @@
+sudo: false
+language: node_js
+node_js:
+  - "0.12"
+  - "4.00"
+  - "5.00"
+  - "iojs"
+git:
+  depth: 10
+install: npm install
+env:
+  - TEST_DIR=test\unit
+script: cd $TEST_DIR && npm install && npm test
