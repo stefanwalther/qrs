@@ -54,15 +54,15 @@ describe( 'qrs', function () {
 
 		// Default
 		qrs2.setConfig( {useSSL: false, host: 'myHost', xrfkey: '123456789ABCDEFG', virtualProxy: ''} );
-		expect(qrs2.getUrl( 'ssl/ping' ) ).to.be.equal( 'http://myHost/qrs/ssl/ping/?xrfkey=123456789ABCDEFG' );
+		expect(qrs2.getUrl( 'qrs/about' ) ).to.be.equal( 'http://myHost/qrs/about/?xrfkey=123456789ABCDEFG' );
 
 		// SSL
 		qrs2.setConfig( {useSSL: true, host: 'myHost', xrfkey: '123456789ABCDEFG', virtualProxy: ''} );
-		expect(qrs2.getUrl( 'ssl/ping' ) ).to.be.equal( 'https://myHost/qrs/ssl/ping/?xrfkey=123456789ABCDEFG' );
+		expect(qrs2.getUrl( 'qrs/about' ) ).to.be.equal( 'https://myHost/qrs/about/?xrfkey=123456789ABCDEFG' );
 
 		// Virtual Proxy
 		qrs2.setConfig( {useSSL: false, host: 'myHost', xrfkey: '123456789ABCDEFG', virtualProxy: 'sso'} );
-		expect(qrs2.getUrl( 'ssl/ping' ) ).to.be.equal( 'http://myHost/sso/qrs/ssl/ping/?xrfkey=123456789ABCDEFG' );
+		expect(qrs2.getUrl( 'qrs/about' ) ).to.be.equal( 'http://myHost/sso/qrs/about/?xrfkey=123456789ABCDEFG' );
 
 		// Port
 		qrs2.setConfig( {
@@ -72,7 +72,7 @@ describe( 'qrs', function () {
 			xrfkey: '123456789ABCDEFG',
 			virtualProxy: 'sso'
 		} );
-		expect(qrs2.getUrl( 'ssl/ping' ) ).to.be.equal( 'http://myHost:4242/sso/qrs/ssl/ping/?xrfkey=123456789ABCDEFG' );
+		expect(qrs2.getUrl( 'qrs/about' ) ).to.be.equal( 'http://myHost:4242/sso/qrs/about/?xrfkey=123456789ABCDEFG' );
 	} );
 
 } );

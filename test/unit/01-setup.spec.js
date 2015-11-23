@@ -58,7 +58,7 @@ describe( 'qrs object', function () {
 
 	describe( 'qrs.getUrl', function () {
 
-		it.only( 'should properly return URLs', function () {
+		it( 'should properly return URLs', function () {
 
 			// Default
 			qrs.setConfig( {useSSL: false, host: 'myHost', xrfkey: '123456789ABCDEFG', virtualProxy: ''} );
