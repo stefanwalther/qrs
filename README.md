@@ -1,4 +1,6 @@
-# qrs [![NPM version](https://badge.fury.io/js/qrs.svg)](http://badge.fury.io/js/qrs) [![Build Status](https://travis-ci.org/stefanwalther/qrs.svg)](https://travis-ci.org/stefanwalther/qrs)
+[![NPM version](https://badge.fury.io/js/qrs.svg)](http://badge.fury.io/js/qrs) [![Build Status](https://travis-ci.org/stefanwalther/qrs.svg)](https://travis-ci.org/stefanwalther/qrs) [![dependencies](https://david-dm.org/stefanwalther/qrs.svg)](https://david-dm.org/stefanwalther/qrs)
+
+# qrs
 
 > Node.js library to communicate with Qlik Sense Repository Service (QRS) API.
 
