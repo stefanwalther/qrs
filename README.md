@@ -25,7 +25,6 @@ $ npm i qrs --save
 * [Server Setup](#server-setup)
 * [API](#api)
 * [Plugins](#plugins)
-  - [Plugin "Extension"](#plugin--extension-)
   - [Plugin "Mime"](#plugin--mime-)
 * [Running tests](#running-tests)
 * [Contributing](#contributing)
@@ -389,50 +388,9 @@ The list of built-in plugins is probably and hopefully a growing one (and hopefu
 
 The following plugins are available with the current version of `qrs`:
 
-### Plugin "Extension"
-
-### [Extension](lib%5Csugar%5Cep-extension.js#L12)
-
-Extension plugin.
-
-**Params**
-
-* **{qrs}**: base - Base class, instance of `qrs`.
-
-### [.getInstalled](lib%5Csugar%5Cep-extension.js#L37)
-
-Return all installed extensions. Optionally pass in a filter, to get only returned those extensions matching the given filter.
-
-**Params**
-
-* **{String[]}**: Optional. Filter installed extensions by `type`. Example: filter = `['visualization', 'visualization-type']` will only return visualization extensions and visualization extension templates.
-* `returns` **{promise}**
-
-### [.getInstalledVis](lib%5Csugar%5Cep-extension.js#L58)
-
-Same as getInstalled but only returns visualization extensions (type `visualization`).
-
-* `returns` **{promise}**
-
-### [.getInstalledVisTemplates](lib%5Csugar%5Cep-extension.js#L67)
-
-Same as `getInstalled` but only returns extensions of type `visualization-template`, which are the templates for the Extension editor in Dev Hub.
-
-* `returns` **{promise}**
-
-### [.getInstalledMashups](lib%5Csugar%5Cep-extension.js#L76)
-
-Same as `getInstalled` but only returns extensions of type `mashup`.
-
-* `returns` **{promise}**
-
-### [.getInstalledMashupTemplates](lib%5Csugar%5Cep-extension.js#L85)
-
-Same as `getInstalled` but only returns extensions of type `mashup`.
-
-* `returns` **{promise}**
-
-***
+<!--### Plugin "Extension"-->
+<!--{%= apidocs("lib/sugar/ep-extension.js") %}-->
+<!------->
 
 ### Plugin "Mime"
 
