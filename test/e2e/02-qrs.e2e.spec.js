@@ -5,9 +5,9 @@
 var chai = require( 'chai' );
 var expect = chai.expect;
 var assert = chai.assert;
-var QRS = new require( './../lib/qrs' );
+var QRS = new require( './../../lib/qrs' );
 var extend = require( 'extend-shallow' );
-var testSetup = require( './testSetup' );
+var testSetup = require( './../testSetup' );
 
 var qrs;
 var globalConfig = testSetup.globalConfig;

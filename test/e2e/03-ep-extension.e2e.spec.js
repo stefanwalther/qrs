@@ -4,13 +4,13 @@
 
 var chai = require( 'chai' );
 var expect = chai.expect;
-var QRS = new require( './../lib/qrs' );
+var QRS = new require( './../../lib/qrs' );
 var extend = require( 'extend-shallow' );
 var fsUtils = require( 'fs-utils' );
 var path = require( 'path' );
-var testSetup = require( './testSetup' );
+var testSetup = require( './../testSetup' );
 var async = require( 'async' );
-var extensionSetup = require( './03-ep-extension.setup' )();
+var extensionSetup = require( './../03-ep-extension.setup' )();
 
 var qrs;
 
