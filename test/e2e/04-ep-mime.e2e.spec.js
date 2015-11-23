@@ -56,7 +56,6 @@ describe( 'sugar-plugin: ep-mime', function () {
 				qrs.mime.get()
 						.then( function ( data ) {
 							expect( data ).to.exist;
-							expect( data ).to.not.be.empy;
 							expect( data ).to.be.an.array;
 						} )
 						.done( function () {
