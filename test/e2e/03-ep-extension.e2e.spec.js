@@ -18,7 +18,7 @@ chai.use( chaiAsPromised );
 var qrs;
 
 var globalConfig = testSetup.globalConfig;
-describe( 'qrs.extension', function () {
+describe.skip( 'qrs.extension', function () {
 
 	it( 'should be an object', function () {
 		qrs = new QRS( globalConfig );
