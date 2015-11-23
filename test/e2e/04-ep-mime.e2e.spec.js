@@ -1,5 +1,7 @@
-'use strict';
+/*global describe,it,beforeEach,after*/
 /*jshint -W030,-W117*/
+'use strict';
+
 var chai = require( 'chai' );
 var expect = chai.expect;
 var assert = chai.assert;

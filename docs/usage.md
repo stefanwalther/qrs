@@ -12,7 +12,7 @@ var config = {
 var qrs = new QRS( config );
 
 // Now run your command like
-qrs.get('about', function( data ) {
+qrs.get('qrs/about', function( data ) {
 	
 	// do something with the result
 	

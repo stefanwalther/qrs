@@ -1,4 +1,4 @@
-/*global describe,it,beforeEach,before,after,afterEach*/
+/*global describe,it,beforeEach,before,after*/
 /* jshint -W030 */
 'use strict';
 
@@ -15,7 +15,7 @@ var extensionSetup = require( './../03-ep-extension.setup' )();
 var qrs;
 
 var globalConfig = testSetup.globalConfig;
-describe( 'qrs.extension', function () {
+describe.skip( 'qrs.extension', function () {
 
 	it( 'should be an object', function () {
 		qrs = new QRS( globalConfig );
@@ -87,7 +87,7 @@ describe( 'qrs.extension', function () {
 						} );
 			} );
 
-			//Todo: Improve the test
+			//Todo: Improve the test => move to unit tests
 			it( 'should return only extensions of type <visualization>', function ( done ) {
 				qrs.extension.getInstalledVis()
 						.then( function ( data ) {
@@ -101,7 +101,7 @@ describe( 'qrs.extension', function () {
 						} );
 			} );
 
-			//Todo: Improve the test
+			//Todo: Improve the test => move to unit tests
 			it( 'should return only extensions of type <visualization-template>', function ( done ) {
 				qrs.extension.getInstalledVisTemplates()
 						.then( function ( data ) {
@@ -115,7 +115,7 @@ describe( 'qrs.extension', function () {
 						} );
 			} );
 
-			//Todo: Improve the test
+			//Todo: Improve the test ==> move to unit tests
 			it( 'should return only extensions of type <mashup>', function ( done ) {
 				qrs.extension.getInstalledMashups()
 						.then( function ( data ) {
@@ -129,7 +129,7 @@ describe( 'qrs.extension', function () {
 						} );
 			} );
 
-			//Todo: Improve the test
+			//Todo: Improve the test ==> move to unit tests
 			it( 'should return only extensions of type <mashup-template>', function ( done ) {
 				qrs.extension.getInstalledMashupTemplates()
 						.then( function ( data ) {

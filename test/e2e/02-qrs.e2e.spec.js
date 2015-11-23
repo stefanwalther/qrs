@@ -1,7 +1,7 @@
 /*global describe, it, beforeEach*/
+/*jshint -W030,-W117*/
 
 'use strict';
-
 var chai = require( 'chai' );
 var expect = chai.expect;
 var assert = chai.assert;
@@ -32,7 +32,7 @@ describe( 'qrs', function () {
 
 			it( 'should return something for /about', function ( done ) {
 
-				qrs.get( 'about' )
+				qrs.get( 'qrs/about' )
 					.then( function ( data ) {
 						expect( data ).to.exist;
 						expect( data ).to.be.an.object;
@@ -45,13 +45,14 @@ describe( 'qrs', function () {
 					} );
 			} );
 
+			//Todo: Ping doesn't work
 			it.skip( 'should return something if pinging', function ( done ) {
 				qrs.get( 'ssl/ping' )
 					.then( function ( data ) {
 						console.log( 'ping => result', data );
 						data.should.not.be.empty;
 					} )
-					.catch( function ( /*data*/ ) {
+					.catch( function ( data ) {
 						assert( false, 'ping does not work' );
 					} )
 					.done( function () {
