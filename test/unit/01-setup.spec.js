@@ -4,17 +4,14 @@
 
 var chai = require( 'chai' );
 var assert = chai.assert;
-var should = chai.should();
 var expect = chai.expect;
-var QRS = new require( './../lib/qrs' );
-var fsUtils = require( 'fs-utils' );
-var path = require( 'path' );
-var testSetup = require( './testSetup' );
+var QRS = new require( './../../lib/qrs' );
+var testSetup = require( './../testSetup' );
 
 var qrs;
 var globalConfig = testSetup.globalConfig;
 
-describe.only( 'qrs object', function () {
+describe( 'qrs object', function () {
 
 	/**
 	 * Reset the configuration before each test.
