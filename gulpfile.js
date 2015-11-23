@@ -22,5 +22,4 @@ senseGo.init( gulp, userConfig, function () {
 			.pipe( gulpVerb( {dest: './README.md'}))
 			.pipe( gulp.dest( './'));
 	});
-
 } );
