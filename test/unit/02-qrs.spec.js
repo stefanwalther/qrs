@@ -1,4 +1,5 @@
-/*global describe, it, beforeEach*/
+/*global describe,beforeEach,it*/
+/*jshint -W030,-W117*/
 
 'use strict';
 
