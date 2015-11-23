@@ -5,11 +5,8 @@
 var chai = require( 'chai' );
 var expect = chai.expect;
 var assert = chai.assert;
-var should = chai.should();
 var QRS = new require( './../lib/qrs' );
 var extend = require( 'extend-shallow' );
-var fsUtils = require( 'fs-utils' );
-var path = require( 'path' );
 var testSetup = require( './testSetup' );
 
 var qrs;
@@ -20,7 +17,7 @@ describe( 'qrs', function () {
 	var testConfig = null;
 	testSetup.testLoop.forEach( function ( testLoopConfig ) {
 
-		describe( 'with ' + testLoopConfig.name, function (  ) {
+		describe( 'with ' + testLoopConfig.name, function () {
 
 			/**
 			 * Reset the configuration before each test.
@@ -44,7 +41,7 @@ describe( 'qrs', function () {
 
 				var qrs2 = new QRS( {host: 'testhost'} );
 				var cfg = qrs2.getConfig();
-				should.exist( cfg );
+				expect( cfg ).to.exist;
 				qrs2.getConfig().should.have.property( 'host', 'testhost' );
 				done();
 			} );
@@ -86,32 +83,32 @@ describe( 'qrs', function () {
 			it( 'should return something for /about', function ( done ) {
 
 				qrs.get( 'about' )
-						.then( function ( data ) {
-							expect( data ).to.exist;
-							expect( data ).to.be.an.object;
-							expect( data ).to.have.a.property( 'schemaPath', 'About' );
-						}, function ( err ) {
-							expect( err ).to.not.exist;
-						} )
-						.done( function () {
-							done();
-						} );
+					.then( function ( data ) {
+						expect( data ).to.exist;
+						expect( data ).to.be.an.object;
+						expect( data ).to.have.a.property( 'schemaPath', 'About' );
+					}, function ( err ) {
+						expect( err ).to.not.exist;
+					} )
+					.done( function () {
+						done();
+					} );
 			} );
 
 			it.skip( 'should return something if pinging', function ( done ) {
 				qrs.get( 'ssl/ping' )
-						.then( function ( data ) {
-							console.log( 'ping => result', data );
-							data.should.not.be.empty;
-						} )
-						.catch( function ( /*data*/ ) {
-							assert( false, 'ping does not work' );
-						} )
-						.done( function () {
-							done();
-						} );
+					.then( function ( data ) {
+						console.log( 'ping => result', data );
+						data.should.not.be.empty;
+					} )
+					.catch( function ( /*data*/ ) {
+						assert( false, 'ping does not work' );
+					} )
+					.done( function () {
+						done();
+					} );
 			} );
 
-		});
-	})
+		} );
+	} )
 } );

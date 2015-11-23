@@ -1,4 +1,5 @@
-/*global describe,before,beforeEach,it*/
+/*global describe,beforeEach,it*/
+/*jshint -W030,-W117*/
 'use strict';
 
 var chai = require( 'chai' );
@@ -13,7 +14,7 @@ var testSetup = require( './testSetup' );
 var qrs;
 var globalConfig = testSetup.globalConfig;
 
-describe( 'qrs object', function () {
+describe.only( 'qrs object', function () {
 
 	/**
 	 * Reset the configuration before each test.
@@ -28,7 +29,7 @@ describe( 'qrs object', function () {
 	it( 'should be properly set up', function ( done ) {
 		assert( typeof(qrs) === 'object' );
 		assert( typeof(qrs.set) === 'function' );
-		qrs.getConfig().should.not.be.empty;
+		expect(qrs.getConfig() ).to.not.be.empty;
 		done();
 	} );
 
@@ -45,19 +46,17 @@ describe( 'qrs object', function () {
 		expect( c ).to.have.property( 'virtualProxy', '' );
 	} );
 
-	it( 'should receive startup params', function ( done ) {
+	it( 'should receive startup params', function (  ) {
 		var qrs2 = new QRS( {host: 'testhost'} );
 		var cfg = qrs2.getConfig();
-		should.exist( cfg );
-		qrs2.getConfig().should.have.property( 'host', 'testhost' );
-		done();
+		expect( cfg ).to.exist;
+		expect( qrs2.getConfig() ).to.have.property('host', 'testhost');
 	} );
 
-	it( 'should allow to change params', function ( done ) {
+	it( 'should allow to change params', function ( ) {
 		var qrs2 = new QRS( {host: 'testhost'} );
 		qrs2.set( 'host', 'testhost2' );
-		qrs2.getConfig().should.have.property( 'host', 'testhost2' );
-		done();
+		expect(qrs2.getConfig() ).to.have.property('host', 'testhost2');
 	} );
 
 	describe( 'qrs.getUrl', function () {
@@ -66,19 +65,19 @@ describe( 'qrs object', function () {
 
 			// Default
 			qrs.setConfig( {useSSL: false, host: 'myHost', xrfkey: '123456789ABCDEFG', virtualProxy: ''} );
-			qrs.getUrl( 'ssl/ping' ).should.equal( 'http://myHost/qrs/ssl/ping/?xrfkey=123456789ABCDEFG' );
+			expect(qrs.getUrl( 'ssl/ping' ) ).to.be.equal( 'http://myHost/qrs/ssl/ping/?xrfkey=123456789ABCDEFG' );
 
 			// SSL
 			qrs.setConfig( {useSSL: true, host: 'myHost', xrfkey: '123456789ABCDEFG', virtualProxy: ''} );
-			qrs.getUrl( 'ssl/ping' ).should.equal( 'https://myHost/qrs/ssl/ping/?xrfkey=123456789ABCDEFG' );
+			expect(qrs.getUrl( 'ssl/ping' ) ).to.be.equal( 'https://myHost/qrs/ssl/ping/?xrfkey=123456789ABCDEFG' );
 
 			// Virtual Proxy
 			qrs.setConfig( {useSSL: false, host: 'myHost', xrfkey: '123456789ABCDEFG', virtualProxy: 'sso'} );
-			qrs.getUrl( 'ssl/ping' ).should.equal( 'http://myHost/sso/qrs/ssl/ping/?xrfkey=123456789ABCDEFG' );
+			expect(qrs.getUrl( 'ssl/ping' ) ).to.be.equal( 'http://myHost/sso/qrs/ssl/ping/?xrfkey=123456789ABCDEFG' );
 
 			// Empty Virtual Proxy
 			qrs.setConfig( {useSSL: false, host: 'myHost', xrfkey: '123456789ABCDEFG', virtualProxy: ''} );
-			qrs.getUrl( 'ssl/ping' ).should.equal( 'http://myHost/qrs/ssl/ping/?xrfkey=123456789ABCDEFG' );
+			expect(qrs.getUrl( 'ssl/ping' ) ).to.be.equal( 'http://myHost/qrs/ssl/ping/?xrfkey=123456789ABCDEFG' );
 
 			// Port
 			qrs.setConfig( {
@@ -88,7 +87,7 @@ describe( 'qrs object', function () {
 				xrfkey: '123456789ABCDEFG',
 				virtualProxy: 'sso'
 			} );
-			qrs.getUrl( 'ssl/ping' ).should.equal( 'http://myHost:4242/sso/qrs/ssl/ping/?xrfkey=123456789ABCDEFG' );
+			expect(qrs.getUrl( 'ssl/ping' ) ).to.be.equal( 'http://myHost:4242/sso/qrs/ssl/ping/?xrfkey=123456789ABCDEFG' );
 
 		} );
 
@@ -100,7 +99,7 @@ describe( 'qrs object', function () {
 				xrfkey: '123456789ABCDEFG',
 				virtualProxy: 'sso'
 			} );
-			qrs.getUrl( 'ssl/ping' ).should.equal( 'http://myHost:4242/sso/qrs/ssl/ping/?xrfkey=123456789ABCDEFG' );
+			expect(qrs.getUrl( 'ssl/ping' ) ).to.be.equal( 'http://myHost:4242/sso/qrs/ssl/ping/?xrfkey=123456789ABCDEFG' );
 
 			qrs.setConfig( {
 				useSSL: false,
@@ -109,7 +108,7 @@ describe( 'qrs object', function () {
 				xrfkey: '123456789ABCDEFG',
 				virtualProxy: 'sso'
 			} );
-			qrs.getUrl( 'ssl/ping' ).should.equal( 'http://myHost:4242/sso/qrs/ssl/ping/?xrfkey=123456789ABCDEFG' );
+			expect(qrs.getUrl( 'ssl/ping' ) ).to.be.equal( 'http://myHost:4242/sso/qrs/ssl/ping/?xrfkey=123456789ABCDEFG' );
 		} );
 
 		it( 'should revert to default values if port is not a number', function () {
@@ -120,7 +119,7 @@ describe( 'qrs object', function () {
 				xrfkey: '123456789ABCDEFG',
 				virtualProxy: 'sso'
 			} );
-			qrs.getUrl( 'ssl/ping' ).should.equal( 'http://myHost/sso/qrs/ssl/ping/?xrfkey=123456789ABCDEFG' );
+			expect(qrs.getUrl( 'ssl/ping' ) ).to.be.equal( 'http://myHost/sso/qrs/ssl/ping/?xrfkey=123456789ABCDEFG' );
 		} );
 
 		it( 'should handle URL params when creating the URL', function () {

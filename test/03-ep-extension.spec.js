@@ -146,7 +146,7 @@ describe( 'qrs.extension', function () {
 			describe( 'qrs.extension.upload', function () {
 
 
-				it.only( 'doesn\'t allow upload of non existing files', function ( done ) {
+				it( 'doesn\'t allow upload of non existing files', function ( done ) {
 					qrs.extension.upload( path.join(__dirname, './fixtures/extensions/qrs-ABCDEFGHIJKLMNOPQ.zip'))
 							.then( function ( data ) {
 								expect( data ).to.not.exist;
