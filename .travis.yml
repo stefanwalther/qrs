@@ -6,5 +6,5 @@ git:
   depth: 10
 install: npm install
 env:
-  - TEST_DIR=test\unit
+  - TEST_DIR=test/unit
 script: cd $TEST_DIR && npm install && npm test
