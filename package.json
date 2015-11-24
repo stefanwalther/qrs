@@ -1,6 +1,6 @@
 {
   "name": "qrs",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Node.js library to communicate with Qlik Sense Repository Service (QRS) API.",
   "main": "index.js",
   "scripts": {

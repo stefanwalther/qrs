@@ -1,3 +1,8 @@
+v2.0.2:
+  date: "2015-11-24"
+  enhacements:
+  - "Fix several smaller issues in qrs-mime"
+  - "Add gulp-mocha + gulp-istanbul"
 v2.0.1:
   date: "2015-11-24"
   enhancements:
