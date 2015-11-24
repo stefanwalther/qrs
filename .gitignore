@@ -17,3 +17,4 @@ vendor
 /test/mimetypes_single.json
 /test/fixtures/extensions/*.zip
 /test/fixtures/extensions/*.7z
+/coverage
