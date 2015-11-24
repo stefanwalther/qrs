@@ -196,7 +196,7 @@ describe.skip( 'qrs.extension', function () {
 				} );
 			} );
 
-			it.skip( 'should refuse to upload an exetension if already existing, even with another type', function ( done ) {
+			it.skip( 'should refuse to upload an extension if already existing, even with another type', function ( done ) {
 				expect( true ).to.equal( false );
 				done();
 			} );
