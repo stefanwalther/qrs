@@ -11,7 +11,7 @@ var testSetup = require( './../testSetup' );
 var qrs;
 var globalConfig = testSetup.globalConfig;
 
-describe( 'qrs object', function () {
+describe( 'qrs setup', function () {
 
 	/**
 	 * Reset the configuration before each test.
@@ -23,11 +23,10 @@ describe( 'qrs object', function () {
 
 	} );
 
-	it( 'should be properly set up', function ( done ) {
+	it( 'should be properly set up', function ( ) {
 		assert( typeof(qrs) === 'object' );
 		assert( typeof(qrs.set) === 'function' );
 		expect(qrs.getConfig() ).to.not.be.empty;
-		done();
 	} );
 
 	it( 'should have default options', function () {
