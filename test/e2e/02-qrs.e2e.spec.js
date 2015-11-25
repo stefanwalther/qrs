@@ -8,6 +8,9 @@ var assert = chai.assert;
 var QRS = new require( './../../lib/qrs' );
 var extend = require( 'extend-shallow' );
 var testSetup = require( './../testSetup' );
+var chaiAsPromised = require('chai-as-promised');
+
+chai.use(chaiAsPromised);
 
 var qrs;
 var globalConfig = testSetup.globalConfig;
@@ -30,34 +33,10 @@ describe( 'qrs', function () {
 
 			} );
 
-			it( 'should return something for /about', function ( done ) {
+			it.only( 'should return something for /about', function (  ) {
 
-				qrs.get( 'qrs/about' )
-					.then( function ( data ) {
-						expect( data ).to.exist;
-						expect( data ).to.be.an.object;
-						expect( data ).to.have.a.property( 'schemaPath', 'About' );
-					}, function ( err ) {
-						expect( err ).to.not.exist;
-					} )
-					.done( function () {
-						done();
-					} );
-			} );
+				return expect( qrs.get('/qrs/about') ).to.eventually.have.property('schemaPath', 'About');
 
-			//Todo: Ping doesn't work
-			it.skip( 'should return something if pinging', function ( done ) {
-				qrs.get( 'ssl/ping' )
-					.then( function ( data ) {
-						console.log( 'ping => result', data );
-						data.should.not.be.empty;
-					} )
-					.catch( function ( data ) {
-						assert( false, 'ping does not work' );
-					} )
-					.done( function () {
-						done();
-					} );
 			} );
 
 		} );
