@@ -1,5 +1,5 @@
 host: qssingle
-port: 0                                             ## Leave the port blank or set it to 0 if you don't want to specify a port
+port: 0                                                 ## Leave the port blank or set it to 0 if you don't want to specify a port
 useSSL: true
 xrfkey: ABCDEFG123456789
 fiddler: false
@@ -9,15 +9,15 @@ authentication:
     useSSL: false
     virtualProxy: hdr
     headerKey: hdr-usr
-    headerValue: QSSINGLE\swr                          ## Note: use only a single backslash hare, not Javascript encoding is necessary in YML
+    headerValue: QSSINGLE\swr                           ## Note: use only a single backslash hare, not Javascript encoding is necessary in YML
   ntlm:
     enabled: false
     virtualProxy:
   certificates:
-    enabled: false
+    enabled: true
     virtualProxy:
-    cert: D:\CertStore\qrs-test\client.pem			  # Do not escape backslash in yml !
-    key: D:\CertStore\qrs-test\client_key.pem		  # Do not escape backslash in yml !
+    cert: D:\CertStore\qrs-test\client.pem			    # Do not escape backslash in yml !
+    key: D:\CertStore\qrs-test\client_key.pem		    # Do not escape backslash in yml !
     ca: D:\CertStore\qrs-test\root.pem				    # Do not escape backslash in yml !
     passphrase:
     port: 4242

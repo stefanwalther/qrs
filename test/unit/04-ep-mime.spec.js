@@ -10,7 +10,7 @@ var testSetup = require( './../testSetup' );
 var qrs;
 var globalConfig = testSetup.globalConfig;
 
-describe( 'sugar-plugin: ep-mime', function () {
+describe( 'Unit: ep-mime', function () {
 
 	beforeEach( function ( done ) {
 		qrs = new QRS( globalConfig );

@@ -18,7 +18,7 @@ chai.use( chaiAsPromised );
 var qrs;
 
 var globalConfig = testSetup.globalConfig;
-describe.skip( 'qrs.extension', function () {
+describe( 'qrs.extension', function () {
 
 	it( 'should be an object', function () {
 		qrs = new QRS( globalConfig );
@@ -45,12 +45,10 @@ describe.skip( 'qrs.extension', function () {
 			} );
 
 			beforeEach( function ( done ) {
-				console.log( 'beforeEach\n' );
 				qrs = new QRS( testConfig );
 				async.map( extensionSetup.extensions, function ( ext, cb ) {
-					console.log( 'delete ' + ext.name );
 					qrs.extension.delete( ext.name )
-						.then( function ( data ) {
+						.then( function ( /*data*/ ) {
 							//cb( null );
 						}, function ( err ) {
 							cb( err );
@@ -63,13 +61,12 @@ describe.skip( 'qrs.extension', function () {
 				} );
 			} );
 
-			it( 'should return all installed extensions', function ( ) {
+			it( 'should return all installed extensions', function () {
 
 				expect( qrs.extension.getInstalled() ).to.be.fulfilled.and.to.be.an.array;
 
 			} );
 
-			// Todo: To make the test repeatable & reliebable we have to upload first, then we can check the test.
 			it( 'should allow a filter to only return specific types', function () {
 
 				expect( qrs.extension.getInstalled( ['visualization-template'] ) ).to.be.fulfilled.and.to.be.an.array;
@@ -134,41 +131,27 @@ describe.skip( 'qrs.extension', function () {
 
 			describe( 'qrs.extension.upload', function () {
 
-				it( 'doesn\'t allow upload of non existing files', function ( done ) {
-					qrs.extension.upload( path.join( __dirname, './fixtures/extensions/qrs-ABCDEFGHIJKLMNOPQ.zip' ) )
-						.then( function ( data ) {
-							expect( data ).to.not.exist;
-						}, function ( err ) {
-							expect( err ).to.exist;
-							expect( err ).contains( 'File does not exist.' );
-						} )
-						.done( function () {
-							done();
-						} );
+				it( 'doesn\'t allow upload of non existing files', function () {
+
+					var extPath = path.join( __dirname, './fixtures/extensions/qrs-ABCDEFGHIJKLMNOPQ.zip' );
+					return expect( qrs.extension.upload( extPath ) ).to.eventually.be.rejectedWith( 'File does not exist: ' + extPath );
 
 				} );
 
-				it( 'doesn\'t allow upload of an extension with a different type than .zip', function ( done ) {
+				it( 'doesn\'t allow upload of an extension with a different type than .zip', function () {
 
-					qrs.extension.upload( path.join( __dirname, './fixtures/extensions/qrs-sample.7z' ) )
-						.then( function ( data ) {
-							expect( data ).to.not.exist;
-						}, function ( err ) {
-							expect( err ).to.exist;
-							expect( err ).contains( 'Only .zip files can be uploaded.' )
-						} )
-						.done( function () {
-							done();
-						} );
+					var extPath = path.join( __dirname, './../fixtures/extensions/qrs-sample.7z' );
+					return expect( qrs.extension.upload( extPath ) ).to.eventually.be.rejectedWith( 'Only .zip files can be uploaded.' );
+
 				} );
 			} );
 
 			/**
 			 * @todo: Returns "bad request" if extension is already existing.
 			 */
-			it( 'should allow upload of an extension with absolute path', function ( done ) {
-				var extFilePath = path.join( __dirname, './fixtures/extensions/qrs-sample.zip' );
-				qrs.extension.upload( extFilePath )
+			it.skip( 'should allow upload of an extension with absolute path', function ( done ) {
+				var extPath = path.join( __dirname, './../fixtures/extensions/qrs-sample.zip' );
+				qrs.extension.upload( extPath )
 					.then( function ( data ) {
 						expect( data ).to.exist;
 					}, function ( err ) {

@@ -13,7 +13,7 @@ var nock = require( 'nock' );
 chai.use(chaiAsPromised);
 
 
-describe( 'qrs', function () {
+describe( 'Unit: qrs', function () {
 
 	var qrs;
 

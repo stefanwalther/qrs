@@ -33,7 +33,7 @@ describe( 'qrs', function () {
 
 			} );
 
-			it.only( 'should return something for /about', function (  ) {
+			it( 'should return something for /about', function (  ) {
 
 				return expect( qrs.get('/qrs/about') ).to.eventually.have.property('schemaPath', 'About');
 

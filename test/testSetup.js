@@ -63,7 +63,8 @@ var TestSetup = function () {
 			host: testConfig.host,
 			useSSL: testConfig.useSSL,
 			xrfkey: testConfig.xrfkey,
-			fiddler: testConfig.fiddler
+			fiddler: testConfig.fiddler,
+			port: 0
 		};
 	};
 
