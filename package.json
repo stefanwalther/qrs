@@ -54,7 +54,6 @@
     "sinon": "^1.17.2",
     "template": "^0.17.4",
     "template-helper-apidocs": "^0.4.4",
-    "verb": "verbose/verb",
     "verb-readme-includes": "^0.2.4"
   },
   "files": [
