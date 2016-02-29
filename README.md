@@ -125,7 +125,7 @@ There are several options to ensure that communication between this node.js modu
 
 ## API
 
-### [qrs](lib%5Cqrs.js#L37)
+### [qrs](lib/qrs.js#L37)
 
 Work with Qlik Sense's REST based Repository API (qrs) from within node.js.
 
@@ -144,7 +144,7 @@ var config =  {
 var qrs = new QRS( config );
 ```
 
-### [.request](lib%5Cqrs.js#L82)
+### [.request](lib/qrs.js#L82)
 
 (Internal) generic method to send requests to QRS. Typically this method is only used internally, use `get`, `post`, `put` or `delete`.
 
@@ -175,7 +175,7 @@ qrs.request( 'GET', 'qrs/about', null, null)
         });
 ```
 
-### [.get](lib%5Cqrs.js#L173)
+### [.get](lib/qrs.js#L173)
 
 Same as `request()` but with `method: 'GET'`.
 
@@ -196,7 +196,7 @@ qrs.get( 'qrs/about')
         });
 ```
 
-### [.post](lib%5Cqrs.js#L186)
+### [.post](lib/qrs.js#L186)
 
 Same as `request()` but with `method: 'POST'`.
 
@@ -207,7 +207,7 @@ Same as `request()` but with `method: 'POST'`.
 * `jsonBody` **{Object}**: Body to be posted, defined as JSON object.
 * `returns` **{promise}**: Returns a promise.
 
-### [.postFile](lib%5Cqrs.js#L199)
+### [.postFile](lib/qrs.js#L199)
 
 Post a file, actually same as `post()`, instead of posting a JSON body, posts a file buffer.
 
@@ -218,15 +218,15 @@ Post a file, actually same as `post()`, instead of posting a JSON body, posts a 
 * **{String}**: filePath Absolute or relative file path.
 * `returns` **{promise}**: Returns a promise.
 
-### [.put](lib%5Cqrs.js#L214)
+### [.put](lib/qrs.js#L215)
 
 Same as `request()` but with `method: 'PUT'`.
 
-### [.delete](lib%5Cqrs.js#L224)
+### [.delete](lib/qrs.js#L225)
 
 Same as `request()` but with `method: 'DELETE'`.
 
-### [.getUrl](lib%5Cqrs.js#L239)
+### [.getUrl](lib/qrs.js#L240)
 
 Return the Url for the REST call considering the given configuration options
 
@@ -238,7 +238,7 @@ Return the Url for the REST call considering the given configuration options
 * `urlParam.value` **{Object}**: Value.
 * `returns` **{String}**: The constructed Url.
 
-### [.setConfig](lib%5Cqrs.js#L296)
+### [.setConfig](lib/qrs.js#L297)
 
 Set global configurations options for qrs. Can be used to change the configuration options after `qrs` has been initialized.
 
@@ -275,7 +275,7 @@ qrs.get('qrs/about', function( result ) {
 });
 ```
 
-### [.getConfig](lib%5Cqrs.js#L319)
+### [.getConfig](lib/qrs.js#L320)
 
 Return the current configuration options.
 
@@ -293,7 +293,7 @@ var host = qrs.getConfig( 'host' );
 console.log(host); //<== 'myserver.domain.com'
 ```
 
-### [.set](lib%5Cqrs.js#L347)
+### [.set](lib/qrs.js#L348)
 
 Change a single configuration property.
 
@@ -321,7 +321,7 @@ qrs.get('qrs/about', function( result ) {
 });
 ```
 
-### [.getConfigValue](lib%5Cqrs.js#L358)
+### [.getConfigValue](lib/qrs.js#L359)
 
 Retrieve a single configuration property.
 
@@ -330,11 +330,11 @@ Retrieve a single configuration property.
 * `key` **{String}**: Key of the property
 * `returns` **{Object}**: Value of the requested property, otherwise undefined.
 
-### [.plugins](lib%5Cqrs.js#L372)
+### [.plugins](lib/qrs.js#L373)
 
 Returns an array of loaded plugins. Use `registerPlugin()` to load a plugin.
 
-### [.registerPlugin](lib%5Cqrs.js#L422)
+### [.registerPlugin](lib/qrs.js#L423)
 
 Register a plugin to work with the base class of `qrs`. Have a look at some of the already existing plugins like `./lib/sugar/ep-mime.js`
 
@@ -398,7 +398,7 @@ The following plugins are available with the current version of `qrs`:
 
 Mime type definition
 
-### [Mime](lib%5Csugar%5Cep-mime.js#L24)
+### [Mime](lib/sugar/ep-mime.js#L24)
 
 Handle Mime types in QRS.
 
@@ -406,7 +406,7 @@ Handle Mime types in QRS.
 
 * **{qrs}**: base - Base class, instance of `qrs`.
 
-### [add](lib%5Csugar%5Cep-mime.js#L91)
+### [add](lib/sugar/ep-mime.js#L91)
 
 Adds a mime type.
 
@@ -473,7 +473,7 @@ qrs.mime.add( mimeType )
 });
 ```
 
-### [get](lib%5Csugar%5Cep-mime.js#L144)
+### [get](lib/sugar/ep-mime.js#L144)
 
 Returns a list of existing mime types.
 
@@ -496,7 +496,7 @@ getMimeTypes( 'html')
     })
 ```
 
-### [addMultiple](lib%5Csugar%5Cep-mime.js#L161)
+### [addMultiple](lib/sugar/ep-mime.js#L161)
 
 Adds an array of mime types
 (See `add` for more information about `mimeTypeDef`).
@@ -506,7 +506,7 @@ Adds an array of mime types
 * **{mimeTypeDef[]}**: mimeTypeDefs - Array of mime type definitions.
 * `returns` **{promise}**
 
-### [addFromFile](lib%5Csugar%5Cep-mime.js#L206)
+### [addFromFile](lib/sugar/ep-mime.js#L206)
 
 Add mime types defined in a file. Every line in the file is defined by the following entries, delimited by a semi-colon (;): - extensions - {string} file extension, multiple values separated by a comma, e.g. "md,markdown" - mime - {string} Mime type - additionalHeaders - {boolean} Additional defined headers, leave blank if unsure - binary - {boolean} Whether this is a binary format or not.
 
@@ -522,7 +522,7 @@ yml;text/yml;;false
 woff2;application/font-woff2;;true
 ```
 
-### [deleteById](lib%5Csugar%5Cep-mime.js#L240)
+### [deleteById](lib/sugar/ep-mime.js#L240)
 
 Delete a mime entry from the Qlik Sense Repository by its given Id.
 
@@ -531,7 +531,7 @@ Delete a mime entry from the Qlik Sense Repository by its given Id.
 * **{String}**: id
 * `returns` **{promise}**
 
-### [getUpdateOrInsert](lib%5Csugar%5Cep-mime.js#L308)
+### [getUpdateOrInsert](lib/sugar/ep-mime.js#L308)
 
 Returns whether the mime type already exists or not.
 
@@ -565,9 +565,9 @@ Pull requests and stars are always welcome. For bugs and feature requests, [plea
 
 ## License
 
-Copyright © 2015 Stefan Walther
+Copyright © 2016 Stefan Walther
 Released under the MIT license.
 
 ***
 
-_This file was generated by [verb-cli](https://github.com/assemble/verb-cli) on November 24, 2015._
+_This file was generated by [verb-cli](https://github.com/assemble/verb-cli) on February 29, 2016._
