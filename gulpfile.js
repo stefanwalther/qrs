@@ -25,18 +25,21 @@ senseGo.init( gulp, userConfig, function () {
 			.pipe( gulp.dest( './' ) );
 	} );
 
-	gulp.task('pre-test', function () {
-		return gulp.src(['./lib/**/*.js'])
-				// Covering files
-				.pipe(istanbul())
-				// Force `require` to return covered files
-				.pipe(istanbul.hookRequire());
+	gulp.task( 'test:unit', function (  ) {
+		return gulp.src(['./test/unit/**/*.spec.js'])
+			.pipe( mocha( {reporter: 'spec'} ) );
 	});
-	gulp.task( 'test', function () {
-		return gulp.src( ['./test/unit/*.spec.js'])
-			.pipe( mocha( {reporter: 'spec'} ) )
+
+	gulp.task( 'istanbul:pre-test', function () {
+		return gulp.src( ['./lib/**/*.js'] )
+			.pipe( istanbul() )
+			.pipe( istanbul.hookRequire() );
+	} );
+	gulp.task( 'istanbul:unit', function () {
+		return gulp.src( ['./test/unit/**/*.spec.js'] )
+			.pipe( mocha( ) )
 			.pipe( istanbul.writeReports() );
 			//.pipe( istanbul.enforceThresholds( {thresholds: {global: 90}} ) );
 	} );
-	gulp.task('test:unit', gulp.series('pre-test', 'test'));
+	gulp.task( 'coverage:unit', gulp.series( 'istanbul:pre-test', 'istanbul:unit' ) );
 } );

@@ -6,7 +6,9 @@
   "scripts": {
     "test": "mocha test/unit",
     "test:unit": "mocha test/unit",
-    "test:e2e": "mocha test/e2e"
+    "coverage:unit": "gulp coverage:unit",
+    "test:e2e": "mocha test/e2e",
+    "preinstall": "npm install istanbul -g"
   },
   "repository": {
     "type": "git",
@@ -29,11 +31,12 @@
   "homepage": "https://github.com/stefanwalther/qrs",
   "dependencies": {
     "async": "^1.5.0",
+    "brace-expansion": "^1.1.2",
     "camelcase": "^2.0.1",
     "extend-shallow": "^2.0.1",
     "fs-utils": "^0.7.0",
     "glob": "^6.0.1",
-    "httpreq": "^0.4.13",
+    "httpreq": "^0.4.16",
     "lodash": "^3.10.1",
     "q": "^1.4.1",
     "request": "^2.67.0",
@@ -60,7 +63,8 @@
     "index.js",
     "lib/logger.js",
     "lib/qrs.js",
-    "lib/sugar/ep-mime.js"
+    "lib/sugar/ep-mime.js",
+    "lib/sugar/ep-extension.js"
   ],
   "engines": {
     "node": ">=0.10.0"

@@ -54,7 +54,7 @@ describe( 'Unit: setup', function () {
 		expect( qrs2.getConfig() ).to.have.property( 'host', 'testhost2' );
 	} );
 
-	describe.only( 'qrs.getUrl', function () {
+	describe( 'qrs.getUrl', function () {
 
 		it( 'should properly return URLs: default', function () {
 			qrs.setConfig( {useSSL: false, host: 'myHost', xrfkey: '123456789ABCDEFG', virtualProxy: ''} );

@@ -102,7 +102,7 @@ describe( 'Unit: qrs', function () {
 
 		} );
 
-		it.skip( 'should reject if parameters are missing', function (  ) {
+		it.skip( 'should reject if config parameters are missing', function (  ) {
 
 			nock( 'http://mock-host:4242/' )
 					.get( '/qrs/about/?xrfkey=123456789ABCDEFG' )
@@ -126,7 +126,25 @@ describe( 'Unit: qrs', function () {
 			} );
 			return expect( qrs.get('qrs/about' ) ).to.eventually.be.equal('Hello World');
 		} );
+	} );
 
+	describe( 'qrs.post', function () {
+
+		it( 'should resolve for /qrs/whatever', function (  ) {
+
+			nock( 'http://mock-host:4242/' )
+				.post( '/qrs/whatever/?xrfkey=123456789ABCDEFG' )
+				.reply( 200, 'Hello World' );
+
+			qrs.setConfig( {
+				port: 4242,
+				host: 'mock-host',
+				xrfkey: '123456789ABCDEFG',
+				virtualProxy: ''
+			} );
+			return expect( qrs.post('qrs/whatever' ) ).to.eventually.be.equal('Hello World');
+
+		} );
 
 	} );
 
