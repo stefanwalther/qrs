@@ -27,7 +27,7 @@ var config = {
 	ca: 'C:\\CertStore\\root.pem',
 	port: 4242,
 	headerKey: 'X-Qlik-User',
-	headerValue: 'UserDirectory:Internal;UserId:sa_repository'
+	headerValue: 'UserDirectory=Internal;UserId=sa_repository'
 };
 ```
 
