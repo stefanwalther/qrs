@@ -3,7 +3,7 @@
 var QRS = require('{%= name %}');
 var config = {
 	"host": 'qsSingle',
-	"isSSL": false,	
+	"useSSL": false,	
 	"xrfkey": 'ABCDEFG123456789',
 	"authentication": "header",
 	"headerKey": 'hdr-usr',
@@ -12,7 +12,7 @@ var config = {
 var qrs = new QRS( config );
 
 // Now run your command like
-qrs.get('about', function( data ) {
+qrs.get('qrs/about', function( data ) {
 	
 	// do something with the result
 	

@@ -1,10 +1,14 @@
 {
   "name": "qrs",
-  "version": "0.1.6",
+  "version": "2.0.2",
   "description": "Node.js library to communicate with Qlik Sense Repository Service (QRS) API.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test"
+    "test": "mocha test/unit",
+    "test:unit": "mocha test/unit",
+    "coverage:unit": "gulp coverage:unit",
+    "test:e2e": "mocha test/e2e",
+    "preinstall": "npm install istanbul -g"
   },
   "repository": {
     "type": "git",
@@ -25,13 +29,33 @@
     "url": "https://github.com/stefanwalther/qrs/issues"
   },
   "homepage": "https://github.com/stefanwalther/qrs",
+  "dependencies": {
+    "async": "^1.5.0",
+    "brace-expansion": "^1.1.2",
+    "camelcase": "^2.0.1",
+    "extend-shallow": "^2.0.1",
+    "fs-utils": "^0.7.0",
+    "glob": "^6.0.1",
+    "httpreq": "^0.4.16",
+    "lodash": "^3.10.1",
+    "q": "^1.4.1",
+    "request": "^2.67.0",
+    "string": "^3.3.1",
+    "validate.js": "^0.9.0",
+    "winston": "^2.1.1"
+  },
   "devDependencies": {
+    "chai": "^3.4.1",
+    "chai-as-promised": "^5.1.0",
     "gulp": "git://github.com/gulpjs/gulp#4.0",
-    "helper-apidocs": "^0.4.1",
-    "leche": "^2.1.1",
-    "mocha": "^2.2.1",
+    "gulp-istanbul": "^0.10.3",
+    "gulp-mocha": "^2.2.0",
+    "gulp-verb": "^0.3.0",
+    "mocha": "^2.3.4",
+    "nock": "^3.3.0",
     "sense-go": "^0.5.10",
-    "should": "*",
+    "sinon": "^1.17.2",
+    "template": "^0.17.4",
     "template-helper-apidocs": "^0.4.4",
     "verb": "^0.8.10",
     "verb-readme-includes": "^0.2.4"
@@ -40,23 +64,14 @@
     "index.js",
     "lib/logger.js",
     "lib/qrs.js",
-    "lib/sugar/ep-mime.js"
+    "lib/sugar/ep-mime.js",
+    "lib/sugar/ep-extension.js"
   ],
   "engines": {
     "node": ">=0.10.0"
   },
-  "dependencies": {
-    "agentkeepalive": "^1.2.0",
-    "async": "^0.9.0",
-    "chai": "^2.1.1",
-    "config-cache": "^1.2.0",
-    "extend-shallow": "^2.0.1",
-    "fs-utils": "^0.6.0",
-    "httpreq": "^0.4.6",
-    "lodash": "^3.10.1",
-    "q": "^1.4.1",
-    "request": "^2.64.0",
-    "string": "^3.0.0",
-    "winston": "^0.9.0"
+  "verb": {
+    "baseUrl": "https://github.com/stefanwalther/qrs/blob/master/",
+    "baseImgUrl": "https://raw.githubusercontent.com/stefanwalther/qrs/master/"
   }
 }
