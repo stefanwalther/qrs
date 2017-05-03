@@ -2,6 +2,8 @@
 
 # qrs
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/stefanwalther/qrs.svg)](https://greenkeeper.io/)
+
 > Node.js library to communicate with Qlik Sense Repository Service (QRS) API.
 
 [![](http://serve.mod.bz/branch/)](https://github.com/stefanwalther/qrs)
