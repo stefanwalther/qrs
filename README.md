@@ -15,6 +15,16 @@ $ npm install --save qrs
 ```
 
 ---
+## Table of Contents
+- [Usage](#usage)
+- [Configuration Options](#configuration-options)
+- [Server Setup](#server-setup)
+- [API](#api)
+- [Plugins](#plugins)
+- [Running tests](#running-tests)
+- [Contributing](#contributing)
+- [Author](#author)
+- [License](#license) 
 
 ---
 

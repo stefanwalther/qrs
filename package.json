@@ -1,6 +1,6 @@
 {
   "name": "qrs",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Node.js library to communicate with Qlik Sense Repository Service (QRS) API.",
   "main": "index.js",
   "scripts": {
@@ -31,33 +31,31 @@
   },
   "homepage": "https://github.com/stefanwalther/qrs",
   "dependencies": {
-    "async": "^1.5.0",
-    "brace-expansion": "^1.1.2",
-    "camelcase": "^2.0.1",
-    "extend-shallow": "^2.0.1",
+    "async": "^2.6.0",
+    "brace-expansion": "^1.1.8",
+    "camelcase": "^4.1.0",
+    "extend-shallow": "^3.0.2",
     "fs-utils": "^0.7.0",
-    "glob": "^6.0.1",
-    "httpreq": "^0.4.16",
-    "lodash": "^3.10.1",
-    "q": "^1.4.1",
-    "request": "^2.67.0",
-    "string": "^3.3.1",
-    "validate.js": "^0.9.0",
-    "winston": "^2.1.1"
+    "glob": "^7.1.2",
+    "httpreq": "^0.4.24",
+    "lodash": "^4.17.4",
+    "q": "^1.5.1",
+    "request": "^2.83.0",
+    "string": "^3.3.3",
+    "validate.js": "^0.12.0",
+    "winston": "^2.4.0"
   },
   "devDependencies": {
-    "chai": "^3.4.1",
-    "chai-as-promised": "^5.1.0",
+    "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
     "gulp": "git://github.com/gulpjs/gulp#4.0",
-    "gulp-istanbul": "^0.10.3",
-    "gulp-mocha": "^2.2.0",
+    "gulp-istanbul": "^1.1.3",
+    "gulp-mocha": "^5.0.0",
     "gulp-verb": "^0.3.0",
-    "mocha": "^2.3.4",
-    "nock": "^3.3.0",
-    "sense-go": "^0.5.10",
-    "sinon": "^1.17.2",
-    "template": "^0.17.4",
-    "template-helper-apidocs": "^0.4.4"
+    "mocha": "^5.0.0",
+    "nock": "^9.1.6",
+    "sinon": "^4.2.0",
+    "template": "^0.17.5"
   },
   "files": [
     "index.js",
@@ -67,10 +65,25 @@
     "lib/sugar/ep-extension.js"
   ],
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=0.8.0"
   },
   "verb": {
     "baseUrl": "https://github.com/stefanwalther/qrs/blob/master/",
-    "baseImgUrl": "https://raw.githubusercontent.com/stefanwalther/qrs/master/"
+    "baseImgUrl": "https://raw.githubusercontent.com/stefanwalther/qrs/master/",
+    "run": true,
+    "toc": {
+      "render": true,
+      "method": "preWrite",
+      "maxdepth": 2,
+      "footer": " "
+    },
+    "layout": "empty",
+    "tasks": [
+      "readme"
+    ],
+    "data": {
+      "twitter": "waltherstefan",
+      "travis_url": "stefanwalther"
+    }
   }
 }
