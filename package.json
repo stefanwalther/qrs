@@ -8,7 +8,8 @@
     "test:unit": "mocha test/unit",
     "coverage:unit": "gulp coverage:unit",
     "test:e2e": "mocha test/e2e",
-    "preinstall": "npm install istanbul -g"
+    "preinstall": "npm install istanbul -g",
+    "docs": "docker run --rm -v ${PWD}:/opt/verb stefanwalther/verb"
   },
   "repository": {
     "type": "git",
@@ -56,9 +57,7 @@
     "sense-go": "^0.5.10",
     "sinon": "^1.17.2",
     "template": "^0.17.4",
-    "template-helper-apidocs": "^0.4.4",
-    "verb": "^0.8.10",
-    "verb-readme-includes": "^0.2.4"
+    "template-helper-apidocs": "^0.4.4"
   },
   "files": [
     "index.js",
