@@ -2,6 +2,7 @@ v2.0.3:
   date: "2018-01-21"
   enhancements:
     - "Update dependencies"
+    - "Remove codeship.io"
 v2.0.2:
   date: "2015-11-24"
   enhacements:
