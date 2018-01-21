@@ -1,7 +1,7 @@
 sudo: false
 language: node_js
 node_js:
-  - "0.12"
+  - "8.9.4"
 git:
   depth: 10
 install: npm install
